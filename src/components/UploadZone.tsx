@@ -45,7 +45,7 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
         </svg>
-        <span className="text-[12px] text-blue-600">Генерирую документ...</span>
+        <span className="text-[12px] text-blue-600">Generating document...</span>
       </div>
     )
   }
@@ -58,7 +58,7 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           onClick={onOpenDoc}
           className="text-[12px] font-medium text-blue-600 hover:text-blue-700 whitespace-nowrap flex-shrink-0"
         >
-          Открыть документ →
+          Open Document →
         </button>
       </div>
     )
@@ -76,13 +76,13 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           dragOver ? "border-blue-400 bg-blue-50" : "border-blue-200 bg-white hover:border-blue-300 hover:bg-blue-50/30"
         )}
       >
-        <p className="text-[12px] text-gray-500 mb-1">📎 Перетащите файл или</p>
-        <span className="text-[12px] text-blue-600 font-medium hover:underline">Выбрать файл</span>
+        <p className="text-[12px] text-gray-500 mb-1">📎 Drag a file here or</p>
+        <span className="text-[12px] text-blue-600 font-medium hover:underline">Browse</span>
         <p className="text-[10px] text-gray-400 mt-1">.xlsx .xls .pdf</p>
         <input ref={fileRef} type="file" accept=".xlsx,.xls,.pdf" className="hidden" onChange={handleFileChange} />
       </div>
 
-      <p className="text-[11px] text-blue-800/60">или вставьте ссылку на Google Таблицу:</p>
+      <p className="text-[11px] text-blue-800/60">or paste a Google Sheets link:</p>
       <div className="flex gap-2">
         <input
           type="text"
@@ -98,11 +98,11 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           onClick={handleLinkUpload}
           className="text-[11px] bg-blue-600 text-white rounded-md px-3 py-1.5 hover:bg-blue-700 whitespace-nowrap"
         >
-          Загрузить →
+          Load from link →
         </button>
       </div>
       {linkError && (
-        <p className="text-[11px] text-red-500 -mt-1">Укажите ссылку на Google Таблицу</p>
+        <p className="text-[11px] text-red-500 -mt-1">Please enter a valid Google Sheets link</p>
       )}
     </div>
   )

@@ -12,22 +12,22 @@ interface CreateProjectModalProps {
   onOpenCreateDoc?: (client: string, project: string, managerDO: string) => void
 }
 
-const CLIENTS = ["Альфа Медиа", "Туту.ру", "СберМаркет", "Яндекс"]
-const DIRECTIONS = ["Инфлюенс", "Медиабаинг", "SMM", "Контент", "Разработка", "PR"]
-const KAMS = ["Анна Смирнова", "Борис Коваль", "Мария Ким"]
-const MANAGERS = ["Инна Михрабова", "Дмитрий Ларин"]
+const CLIENTS = ["Alpha Media", "Tutu.ru", "SberMarket", "Yandex"]
+const DIRECTIONS = ["Influence", "Media Buying", "SMM", "Content", "Development", "PR"]
+const KAMS = ["Anna Smirnova", "Boris Koval", "Maria Kim"]
+const MANAGERS = ["Inna Mikhrabova", "Dmitry Larin"]
 const EXISTING_COUNTS: Record<string, number> = {
-  "Альфа Медиа": 2,
-  "Яндекс": 1,
-  "Туту.ру": 0,
-  "СберМаркет": 0,
+  "Alpha Media": 2,
+  "Yandex": 1,
+  "Tutu.ru": 0,
+  "SberMarket": 0,
 }
 
 const CLIENT_PREFIX_MAP: Record<string, string> = {
-  "Альфа Медиа": "ALF",
-  "Яндекс": "YAN",
-  "Туту.ру": "TUT",
-  "СберМаркет": "SBR",
+  "Alpha Media": "ALF",
+  "Yandex": "YAN",
+  "Tutu.ru": "TUT",
+  "SberMarket": "SBR",
 }
 
 function generateCode(client: string): string {
@@ -37,12 +37,12 @@ function generateCode(client: string): string {
 }
 
 const DOC_TYPES = [
-  { id: "contract", label: "Договор / Заказ", badge: "обязательный", req: true, disabled: true, on: true },
-  { id: "appendix", label: "Приложение / Смета", badge: "обязательный", req: true, disabled: true, on: true },
-  { id: "invoice", label: "Счёт", badge: "по умолчанию", req: false, disabled: false, on: true },
-  { id: "act", label: "Акт", badge: "по умолчанию", req: false, disabled: false, on: true },
-  { id: "ds", label: "ДС", badge: "", req: false, disabled: false, on: false },
-  { id: "upd", label: "УПД", badge: "", req: false, disabled: false, on: false },
+  { id: "contract", label: "Contract / Order", badge: "required", req: true, disabled: true, on: true },
+  { id: "appendix", label: "Annex / Estimate", badge: "required", req: true, disabled: true, on: true },
+  { id: "invoice", label: "Invoice", badge: "default", req: false, disabled: false, on: true },
+  { id: "act", label: "Acceptance Act", badge: "default", req: false, disabled: false, on: true },
+  { id: "ds", label: "Addendum", badge: "", req: false, disabled: false, on: false },
+  { id: "upd", label: "UPD", badge: "", req: false, disabled: false, on: false },
 ]
 
 export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreateProjectModalProps) {
@@ -76,18 +76,18 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-[520px] p-0 gap-0 overflow-hidden">
         <DialogHeader className="px-6 pt-5 pb-4 border-b border-gray-100">
-          <DialogTitle className="text-[15px] font-semibold text-gray-900">Новый проект</DialogTitle>
-          <p className="text-xs text-gray-500 mt-0.5">Создание карточки проекта — основы для документооборота</p>
+          <DialogTitle className="text-[15px] font-semibold text-gray-900">New Project</DialogTitle>
+          <p className="text-xs text-gray-500 mt-0.5">Create a project card — the foundation for document workflow</p>
         </DialogHeader>
 
         <div className="px-6 py-5 overflow-y-auto max-h-[70vh]">
-          <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-2.5">Клиент и проект</p>
+          <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-2.5">Client &amp; Project</p>
           <div className="grid grid-cols-2 gap-2.5 mb-2.5">
             <div className="flex flex-col gap-1">
-              <label className="text-xs text-gray-500">Клиент *</label>
+              <label className="text-xs text-gray-500">Client *</label>
               <Select value={clientId} onValueChange={handleClientChange}>
                 <SelectTrigger className="h-[34px] text-[13px]">
-                  <SelectValue placeholder="Выбрать клиента" />
+                  <SelectValue placeholder="Select client" />
                 </SelectTrigger>
                 <SelectContent>
                   {CLIENTS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
@@ -95,7 +95,7 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
               </Select>
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-xs text-gray-500">Код проекта *</label>
+              <label className="text-xs text-gray-500">Project Code *</label>
               <Input
                 value={projectCode}
                 onChange={(e) => setProjectCode(e.target.value)}
@@ -111,19 +111,19 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
           )}>
             <div className="border-t border-gray-100 pt-4 flex flex-col gap-2.5">
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Название проекта</label>
+                <label className="text-xs text-gray-500">Project Name</label>
                 <Input
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
-                  placeholder="Инфлюенс-кампания Март 2025"
+                  placeholder="Influence Campaign March 2025"
                   className="h-[34px] text-[13px]"
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Направление</label>
+                <label className="text-xs text-gray-500">Service Line</label>
                 <Select value={direction} onValueChange={setDirection}>
                   <SelectTrigger className="h-[34px] text-[13px]">
-                    <SelectValue placeholder="Выбрать" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
                     {DIRECTIONS.map((d) => <SelectItem key={d} value={d}>{d}</SelectItem>)}
@@ -131,13 +131,13 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
                 </Select>
               </div>
 
-              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mt-1">Команда</p>
+              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mt-1">Team</p>
               <div className="grid grid-cols-2 gap-2.5">
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-gray-500">КАМ</label>
+                  <label className="text-xs text-gray-500">KAM</label>
                   <Select value={kam} onValueChange={setKam}>
                     <SelectTrigger className="h-[34px] text-[13px]">
-                      <SelectValue placeholder="Выбрать" />
+                      <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
                       {KAMS.map((k) => <SelectItem key={k} value={k}>{k}</SelectItem>)}
@@ -145,10 +145,10 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
                   </Select>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-xs text-gray-500">Менеджер ДО</label>
+                  <label className="text-xs text-gray-500">Doc Manager</label>
                   <Select value={managerDO} onValueChange={setManagerDO}>
                     <SelectTrigger className="h-[34px] text-[13px]">
-                      <SelectValue placeholder="Выбрать" />
+                      <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
                       {MANAGERS.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}
@@ -157,8 +157,8 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
                 </div>
               </div>
 
-              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mt-1">Документы по умолчанию</p>
-              <p className="text-[11px] text-gray-400 -mt-1.5">Будут добавлены в проект автоматически</p>
+              <p className="text-[11px] font-medium text-gray-400 uppercase tracking-wider mt-1">Default Documents</p>
+              <p className="text-[11px] text-gray-400 -mt-1.5">Will be added to the project automatically</p>
               <div className="flex flex-col gap-1">
                 {DOC_TYPES.map((dt) => (
                   <div key={dt.id} className="flex items-center gap-2.5 py-1.5 px-2.5 border border-gray-100 rounded-md bg-gray-50">
@@ -187,8 +187,8 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
         </div>
 
         <div className="px-6 py-3.5 border-t border-gray-100 flex items-center justify-end gap-2">
-          <Button variant="ghost" size="sm" onClick={onClose}>Отмена</Button>
-          <Button variant="outline" size="sm" onClick={onClose}>Готово</Button>
+          <Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" size="sm" onClick={onClose}>Done</Button>
           <Button
             size="sm"
             disabled={!canCreate}
@@ -198,7 +198,7 @@ export function CreateProjectModal({ open, onClose, onOpenCreateDoc }: CreatePro
               onOpenCreateDoc?.(clientId, projectCode, managerDO)
             }}
           >
-            Создать документ →
+            Create Document →
           </Button>
         </div>
       </DialogContent>

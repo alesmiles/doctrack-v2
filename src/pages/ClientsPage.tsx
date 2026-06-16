@@ -163,10 +163,10 @@ export function ClientsPage() {
   return (
     <div>
       <div className="flex items-center justify-between px-8 pt-8 pb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Клиенты</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
         {hasAnyFilter && (
           <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 hover:bg-gray-100" onClick={resetFilters}>
-            <span className="mr-1">×</span> Сбросить всё
+            <span className="mr-1">×</span> Reset all
           </Button>
         )}
       </div>
@@ -177,7 +177,7 @@ export function ClientsPage() {
           <div className="relative flex-shrink-0">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <Input
-              placeholder="Поиск..."
+              placeholder="Search..."
               className="pl-9 h-9 text-sm bg-gray-50 border-gray-200 w-52"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -187,11 +187,11 @@ export function ClientsPage() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", clientFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {clientFilter || "Клиент"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                {clientFilter || "Client"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setClientFilter("")}>Все клиенты</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setClientFilter("")}>All clients</DropdownMenuItem>
               {clientOptions.map(c => <DropdownMenuItem key={c} onClick={() => setClientFilter(c)}>{c}</DropdownMenuItem>)}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -199,11 +199,11 @@ export function ClientsPage() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", kamFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {kamFilter || "КАМ"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                {kamFilter || "KAM"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setKamFilter("")}>Все КАМы</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setKamFilter("")}>All KAMs</DropdownMenuItem>
               {kamOptions.map(k => <DropdownMenuItem key={k} onClick={() => setKamFilter(k)}>{k}</DropdownMenuItem>)}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -211,11 +211,11 @@ export function ClientsPage() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", docTypeFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {docTypeFilter || "Тип документа"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                {docTypeFilter || "Doc Type"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
-              <DropdownMenuItem onClick={() => setDocTypeFilter("")}>Все типы</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setDocTypeFilter("")}>All types</DropdownMenuItem>
               {activeDocTypes.map(t => (
                 <div key={t} className="flex items-center justify-between pr-1 pl-2 py-1.5 text-sm cursor-pointer hover:bg-gray-100 rounded-sm" onClick={() => setDocTypeFilter(t)}>
                   <span>{t}</span>
@@ -225,7 +225,7 @@ export function ClientsPage() {
               {getAvailableToAdd().length > 0 && (
                 <>
                   <DropdownMenuSeparator />
-                  <DropdownMenuLabel className="text-xs text-gray-400">Добавить</DropdownMenuLabel>
+                  <DropdownMenuLabel className="text-xs text-gray-400">Add</DropdownMenuLabel>
                   {getAvailableToAdd().map(t => (
                     <DropdownMenuItem key={t} className="text-gray-400" onClick={() => restoreDocType(t)}>
                       <span className="mr-1">+</span> {t}
@@ -239,11 +239,11 @@ export function ClientsPage() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", statusFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {statusFilter || "Статус"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                {statusFilter || "Status"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setStatusFilter("")}>Все статусы</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setStatusFilter("")}>All statuses</DropdownMenuItem>
               {STATUSES.map(s => (
                 <DropdownMenuItem key={s} onClick={() => setStatusFilter(s)}>
                   <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: (STATUS_COLORS as any)?.[s] ?? "#999" }} />{s}
@@ -256,11 +256,11 @@ export function ClientsPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", directionFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {directionFilter || "Направление"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  {directionFilter || "Direction"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setDirectionFilter("")}>Все направления</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setDirectionFilter("")}>All directions</DropdownMenuItem>
                 {directionOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDirectionFilter(d)}>{d}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -270,11 +270,11 @@ export function ClientsPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", yearFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {yearFilter || "Год"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  {yearFilter || "Year"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setYearFilter("")}>Все годы</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setYearFilter("")}>All years</DropdownMenuItem>
                 {yearOptions.map(y => <DropdownMenuItem key={y} onClick={() => setYearFilter(y)}>{y}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -284,11 +284,11 @@ export function ClientsPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", monthFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {monthFilter || "Месяц"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  {monthFilter || "Month"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setMonthFilter("")}>Все месяцы</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setMonthFilter("")}>All months</DropdownMenuItem>
                 {monthOptions.map(m => <DropdownMenuItem key={m} onClick={() => setMonthFilter(m)}>{m}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -298,11 +298,11 @@ export function ClientsPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", doManagerFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {doManagerFilter || "Менеджер ДО"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  {doManagerFilter || "Doc Manager"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setDoManagerFilter("")}>Все</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setDoManagerFilter("")}>All</DropdownMenuItem>
                 {doManagerOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDoManagerFilter(d)}>{d}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -315,7 +315,7 @@ export function ClientsPage() {
               className={cn("h-9 text-sm bg-gray-50 border-gray-200", showOverdueOnly && "text-red-700 border-red-300 bg-red-50")}
               onClick={() => setShowOverdueOnly(o => !o)}
             >
-              Просроченные
+              Overdue
             </Button>
           )}
 
@@ -326,11 +326,11 @@ export function ClientsPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52">
-              <DropdownMenuLabel className="text-xs text-gray-400">Настройка фильтров</DropdownMenuLabel>
+              <DropdownMenuLabel className="text-xs text-gray-400">Filter settings</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {(["direction", "year", "month", "doManager", "overdue"] as Array<keyof typeof visibleFilters>).map((key) => {
                 const labels: Record<keyof typeof visibleFilters, string> = {
-                  direction: "Направление", year: "Год", month: "Месяц", doManager: "Менеджер ДО", overdue: "Просроченные",
+                  direction: "Direction", year: "Year", month: "Month", doManager: "Doc Manager", overdue: "Overdue",
                 };
                 return (
                   <DropdownMenuCheckboxItem key={key} checked={visibleFilters[key]} onCheckedChange={() => toggleFilter(key)}>
@@ -348,18 +348,18 @@ export function ClientsPage() {
         <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
           <div className="px-8 py-2" style={{ display: "grid", gridTemplateColumns: PROJECT_COL_TEMPLATE, alignItems: "center" }}>
             <div className="w-4" />
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Клиент</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">ID проекта</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Client</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Project ID</span>
             <button type="button" className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider transition-colors hover:text-gray-600" onClick={() => setMonthSortDir(prev => prev === null ? "asc" : prev === "asc" ? "desc" : null)}>
-              Месяц
+              Month
               {monthSortDir === "asc" && <ArrowUp className="w-3.5 h-3.5" />}
               {monthSortDir === "desc" && <ArrowDown className="w-3.5 h-3.5" />}
             </button>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Направление</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">КАМ</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Менеджер ДО</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Прогресс</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Сумма</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Direction</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">KAM</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Doc Manager</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Progress</span>
+            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Amount</span>
             <div className="w-6" />
           </div>
         </div>
@@ -369,8 +369,8 @@ export function ClientsPage() {
             <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
               <Search className="w-10 h-10 text-gray-300" />
               <div>
-                <p className="text-gray-700 font-medium text-base">Ничего не найдено</p>
-                <p className="text-gray-400 text-sm mt-1">Попробуйте изменить фильтры</p>
+                <p className="text-gray-700 font-medium text-base">No results found</p>
+                <p className="text-gray-400 text-sm mt-1">Try adjusting your filters</p>
               </div>
             </div>
           ) : (
@@ -419,14 +419,14 @@ export function ClientsPage() {
                           <div className="sticky top-0 z-20 bg-white">
                             <div className="grid text-[10px] uppercase text-gray-400 tracking-wider" style={{ gridTemplateColumns: DOC_COL_TEMPLATE, alignItems: "center" }}>
                               <span className="pl-3">&nbsp;</span>
-                              <span className="px-3 py-2 font-medium">Тип</span>
-                              <span className="px-3 py-2 font-medium">Статус</span>
-                              <span className="px-3 py-2 text-right font-medium">Сумма</span>
-                              <span className="px-3 py-2 font-medium">Документ №</span>
-                              <span className="px-3 py-2 font-medium">Оплата план</span>
-                              <span className="px-3 py-2 font-medium">Оплата факт</span>
-                              <span className="px-3 py-2 font-medium">Смета</span>
-                              <span className="px-3 py-2 font-medium">Комментарий</span>
+                              <span className="px-3 py-2 font-medium">Type</span>
+                              <span className="px-3 py-2 font-medium">Status</span>
+                              <span className="px-3 py-2 text-right font-medium">Amount</span>
+                              <span className="px-3 py-2 font-medium">Doc No.</span>
+                              <span className="px-3 py-2 font-medium">Payment Plan</span>
+                              <span className="px-3 py-2 font-medium">Payment Fact</span>
+                              <span className="px-3 py-2 font-medium">Estimate</span>
+                              <span className="px-3 py-2 font-medium">Comment</span>
                             </div>
                           </div>
                           <div className="space-y-1">
@@ -442,7 +442,7 @@ export function ClientsPage() {
                   {isExpanded && (
                     <div className="pl-8 pt-1 pb-2">
                       <button className="text-xs text-gray-400 hover:text-gray-600 transition-colors py-1" onClick={(e) => { e.stopPropagation(); console.log("add doc", project.id); }}>
-                        + Добавить документ
+                        + Add document
                       </button>
                     </div>
                   )}
@@ -467,138 +467,138 @@ export default ClientsPage;
 // ─── RAW_PROJECTS data ────────────────────────────────────────────────────────
 const RAW_PROJECTS = [
   {
-    id: 1, client: "Яндекс", code: "YAN-1", period: "Март 2026", direction: "Медиа",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 1, client: "Yandex", code: "YAN-1", period: "March 2026", direction: "Media",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 4500000, link: "12", datePlan: "01.02.2026", dateFact: "28.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
-      { id: 2, type: "Приложение", status: "Подписан ОРИГ", sum: 4500000, link: "13", datePlan: "01.02.2026", dateFact: "30.01.2026", estimate: 4200000, comment: "", createdAt: "22.01.2026" },
-      { id: 3, type: "Счёт", status: "Отправлен ЭДО", sum: 4500000, link: "201", datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "", createdAt: "15.02.2026" },
-      { id: 4, type: "УПД", status: "Не создан", sum: null, link: null, datePlan: "15.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 5, type: "Акт", status: "Не создан", sum: null, link: null, datePlan: "31.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 4500000, link: "12", datePlan: "01.02.2026", dateFact: "28.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
+      { id: 2, type: "Annex", status: "Signed ORIG", sum: 4500000, link: "13", datePlan: "01.02.2026", dateFact: "30.01.2026", estimate: 4200000, comment: "", createdAt: "22.01.2026" },
+      { id: 3, type: "Invoice", status: "Sent EDO", sum: 4500000, link: "201", datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "", createdAt: "15.02.2026" },
+      { id: 4, type: "UPD", status: "Not Created", sum: null, link: null, datePlan: "15.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 5, type: "Act", status: "Not Created", sum: null, link: null, datePlan: "31.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 2, client: "Яндекс", code: "YAN-2", period: "Апрель 2026", direction: "Инфлюенс",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 2, client: "Yandex", code: "YAN-2", period: "April 2026", direction: "Influence",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор", status: "На согласовании", sum: 2800000, link: null, datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "Ожидаем правки от клиента", createdAt: "25.05.2026" },
-      { id: 2, type: "Приложение", status: "Не создан", sum: null, link: null, datePlan: "10.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 3, type: "Счёт", status: "Не создан", sum: null, link: null, datePlan: "01.04.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Under Review", sum: 2800000, link: null, datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "Awaiting client edits", createdAt: "25.05.2026" },
+      { id: 2, type: "Annex", status: "Not Created", sum: null, link: null, datePlan: "10.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 3, type: "Invoice", status: "Not Created", sum: null, link: null, datePlan: "01.04.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 3, client: "Яндекс", code: "YAN-3", period: "Февраль 2026", direction: "Контекст",
-    kam: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 3, client: "Yandex", code: "YAN-3", period: "February 2026", direction: "Context",
+    kam: { initials: "AS", name: "Alina S.", color: "bg-zinc-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 1200000, link: "8", datePlan: "15.01.2026", dateFact: "14.01.2026", estimate: null, comment: "", createdAt: "10.01.2026" },
-      { id: 2, type: "Приложение", status: "Подписан ОРИГ", sum: 3600000, link: "9", datePlan: "15.01.2026", dateFact: "15.01.2026", estimate: 3600000, comment: "", createdAt: "12.01.2026" },
-      { id: 3, type: "Счёт", status: "Отправлен ЭДО", sum: 3600000, link: "210", datePlan: "25.05.2026", dateFact: null, estimate: null, comment: "", createdAt: "20.05.2026" },
-      { id: 4, type: "Акт", status: "Отправлен ОРИГ", sum: 3600000, link: "44", datePlan: "28.02.2026", dateFact: null, estimate: null, comment: "", createdAt: "01.06.2026" },
-      { id: 5, type: "УПД", status: "Не создан", sum: null, link: null, datePlan: "01.02.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 1200000, link: "8", datePlan: "15.01.2026", dateFact: "14.01.2026", estimate: null, comment: "", createdAt: "10.01.2026" },
+      { id: 2, type: "Annex", status: "Signed ORIG", sum: 3600000, link: "9", datePlan: "15.01.2026", dateFact: "15.01.2026", estimate: 3600000, comment: "", createdAt: "12.01.2026" },
+      { id: 3, type: "Invoice", status: "Sent EDO", sum: 3600000, link: "210", datePlan: "25.05.2026", dateFact: null, estimate: null, comment: "", createdAt: "20.05.2026" },
+      { id: 4, type: "Act", status: "Sent ORIG", sum: 3600000, link: "44", datePlan: "28.02.2026", dateFact: null, estimate: null, comment: "", createdAt: "01.06.2026" },
+      { id: 5, type: "UPD", status: "Not Created", sum: null, link: null, datePlan: "01.02.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 4, client: "Сбер", code: "SBR-1", period: "Январь 2026", direction: "Медиа",
-    kam: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
+    id: 4, client: "Sber", code: "SBR-1", period: "January 2026", direction: "Media",
+    kam: { initials: "AS", name: "Alina S.", color: "bg-zinc-400" },
+    doManager: { initials: "PV", name: "Polina V.", color: "bg-neutral-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 8900000, link: "3", datePlan: "01.12.2025", dateFact: "28.11.2025", estimate: null, comment: "", createdAt: "20.11.2025" },
-      { id: 2, type: "Приложение", status: "Подписан ОРИГ", sum: 8900000, link: "4", datePlan: "01.12.2025", dateFact: "30.11.2025", estimate: 8500000, comment: "", createdAt: "22.11.2025" },
-      { id: 3, type: "Заказ", status: "Подписан ОРИГ", sum: 8900000, link: "5", datePlan: "15.12.2025", dateFact: "14.12.2025", estimate: null, comment: "", createdAt: "10.12.2025" },
-      { id: 4, type: "Акт", status: "Подписан ЭДО", sum: 8900000, link: "21", datePlan: "31.01.2026", dateFact: "30.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
-      { id: 5, type: "Отчёт комитента", status: "Подписан ЭДО", sum: null, link: "6", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 8900000, link: "3", datePlan: "01.12.2025", dateFact: "28.11.2025", estimate: null, comment: "", createdAt: "20.11.2025" },
+      { id: 2, type: "Annex", status: "Signed ORIG", sum: 8900000, link: "4", datePlan: "01.12.2025", dateFact: "30.11.2025", estimate: 8500000, comment: "", createdAt: "22.11.2025" },
+      { id: 3, type: "Order", status: "Signed ORIG", sum: 8900000, link: "5", datePlan: "15.12.2025", dateFact: "14.12.2025", estimate: null, comment: "", createdAt: "10.12.2025" },
+      { id: 4, type: "Act", status: "Signed EDO", sum: 8900000, link: "21", datePlan: "31.01.2026", dateFact: "30.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
+      { id: 5, type: "Principal Report", status: "Signed EDO", sum: null, link: "6", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 5, client: "Сбер", code: "SBR-2", period: "Март 2026", direction: "Инфлюенс",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
+    id: 5, client: "Sber", code: "SBR-2", period: "March 2026", direction: "Influence",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "PV", name: "Polina V.", color: "bg-neutral-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 6800000, link: "15", datePlan: "01.02.2026", dateFact: "29.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
-      { id: 2, type: "Приложение", status: "На согласовании", sum: 6800000, link: null, datePlan: "10.02.2026", dateFact: null, estimate: 6800000, comment: "На подписи у клиента", createdAt: "01.06.2026" },
-      { id: 3, type: "Счёт", status: "Отправлен ЭДО", sum: 6800000, link: "305", datePlan: "01.06.2026", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
-      { id: 4, type: "Акт", status: "Не создан", sum: null, link: null, datePlan: "31.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 6800000, link: "15", datePlan: "01.02.2026", dateFact: "29.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
+      { id: 2, type: "Annex", status: "Under Review", sum: 6800000, link: null, datePlan: "10.02.2026", dateFact: null, estimate: 6800000, comment: "Pending client signature", createdAt: "01.06.2026" },
+      { id: 3, type: "Invoice", status: "Sent EDO", sum: 6800000, link: "305", datePlan: "01.06.2026", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
+      { id: 4, type: "Act", status: "Not Created", sum: null, link: null, datePlan: "31.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 6, client: "Сбер", code: "SBR-3", period: "Декабрь 2025", direction: "ТВ",
-    kam: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 6, client: "Sber", code: "SBR-3", period: "December 2025", direction: "TV",
+    kam: { initials: "AS", name: "Alina S.", color: "bg-zinc-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 15000000, link: "1", datePlan: "01.11.2025", dateFact: "30.10.2025", estimate: null, comment: "", createdAt: "20.10.2025" },
-      { id: 2, type: "Заказ", status: "Подписан ОРИГ", sum: 15000000, link: "2", datePlan: "15.11.2025", dateFact: "14.11.2025", estimate: null, comment: "", createdAt: "10.11.2025" },
-      { id: 3, type: "Акт", status: "Отправлен ОРИГ", sum: 15000000, link: "88", datePlan: "31.12.2025", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
-      { id: 4, type: "Отчёт комитента", status: "Не создан", sum: null, link: null, datePlan: "31.12.2025", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 15000000, link: "1", datePlan: "01.11.2025", dateFact: "30.10.2025", estimate: null, comment: "", createdAt: "20.10.2025" },
+      { id: 2, type: "Order", status: "Signed ORIG", sum: 15000000, link: "2", datePlan: "15.11.2025", dateFact: "14.11.2025", estimate: null, comment: "", createdAt: "10.11.2025" },
+      { id: 3, type: "Act", status: "Sent ORIG", sum: 15000000, link: "88", datePlan: "31.12.2025", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
+      { id: 4, type: "Principal Report", status: "Not Created", sum: null, link: null, datePlan: "31.12.2025", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 7, client: "Авито", code: "AVI-1", period: "Февраль 2026", direction: "Инфлюенс",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
+    id: 7, client: "Avito", code: "AVI-1", period: "February 2026", direction: "Influence",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "PV", name: "Polina V.", color: "bg-neutral-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 6700000, link: "7", datePlan: "15.01.2026", dateFact: "14.01.2026", estimate: null, comment: "", createdAt: "10.01.2026" },
-      { id: 2, type: "Приложение", status: "Подписан ОРИГ", sum: 6700000, link: "8", datePlan: "15.01.2026", dateFact: "15.01.2026", estimate: 6400000, comment: "", createdAt: "12.01.2026" },
-      { id: 3, type: "ДС", status: "Подписан ЭДО", sum: null, link: "9", datePlan: "20.01.2026", dateFact: "19.01.2026", estimate: null, comment: "", createdAt: null },
-      { id: 4, type: "Счёт", status: "Подписан ОРИГ", sum: 6700000, link: "312", datePlan: "28.02.2026", dateFact: "27.02.2026", estimate: null, comment: "", createdAt: "20.02.2026" },
-      { id: 5, type: "УПД", status: "Подписан ЭДО", sum: 6700000, link: "41", datePlan: "28.02.2026", dateFact: "28.02.2026", estimate: null, comment: "", createdAt: null },
-      { id: 6, type: "Акт", status: "Подписан ЭДО", sum: null, link: "18", datePlan: "28.02.2026", dateFact: "28.02.2026", estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 6700000, link: "7", datePlan: "15.01.2026", dateFact: "14.01.2026", estimate: null, comment: "", createdAt: "10.01.2026" },
+      { id: 2, type: "Annex", status: "Signed ORIG", sum: 6700000, link: "8", datePlan: "15.01.2026", dateFact: "15.01.2026", estimate: 6400000, comment: "", createdAt: "12.01.2026" },
+      { id: 3, type: "Addendum", status: "Signed EDO", sum: null, link: "9", datePlan: "20.01.2026", dateFact: "19.01.2026", estimate: null, comment: "", createdAt: null },
+      { id: 4, type: "Invoice", status: "Signed ORIG", sum: 6700000, link: "312", datePlan: "28.02.2026", dateFact: "27.02.2026", estimate: null, comment: "", createdAt: "20.02.2026" },
+      { id: 5, type: "UPD", status: "Signed EDO", sum: 6700000, link: "41", datePlan: "28.02.2026", dateFact: "28.02.2026", estimate: null, comment: "", createdAt: null },
+      { id: 6, type: "Act", status: "Signed EDO", sum: null, link: "18", datePlan: "28.02.2026", dateFact: "28.02.2026", estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 8, client: "Авито", code: "AVI-2", period: "Март 2026", direction: "Медиа",
-    kam: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 8, client: "Avito", code: "AVI-2", period: "March 2026", direction: "Media",
+    kam: { initials: "AS", name: "Alina S.", color: "bg-zinc-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Подписан ОРИГ", sum: 2100000, link: "19", datePlan: "01.02.2026", dateFact: "30.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
-      { id: 2, type: "Приложение", status: "На согласовании", sum: 2100000, link: null, datePlan: "10.02.2026", dateFact: null, estimate: 2100000, comment: "", createdAt: "29.05.2026" },
-      { id: 3, type: "Счёт", status: "Не создан", sum: 2100000, link: null, datePlan: "20.05.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 4, type: "ДС", status: "На согласовании", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "30.05.2026" },
+      { id: 1, type: "Contract", status: "Signed ORIG", sum: 2100000, link: "19", datePlan: "01.02.2026", dateFact: "30.01.2026", estimate: null, comment: "", createdAt: "20.01.2026" },
+      { id: 2, type: "Annex", status: "Under Review", sum: 2100000, link: null, datePlan: "10.02.2026", dateFact: null, estimate: 2100000, comment: "", createdAt: "29.05.2026" },
+      { id: 3, type: "Invoice", status: "Not Created", sum: 2100000, link: null, datePlan: "20.05.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 4, type: "Addendum", status: "Under Review", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "30.05.2026" },
     ],
   },
   {
-    id: 9, client: "Авито", code: "AVI-3", period: "Апрель 2026", direction: "Контекст",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
+    id: 9, client: "Avito", code: "AVI-3", period: "April 2026", direction: "Context",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "PV", name: "Polina V.", color: "bg-neutral-400" },
     documents: [
-      { id: 1, type: "Договор", status: "Не создан", sum: null, link: null, datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 2, type: "Приложение", status: "Не создан", sum: null, link: null, datePlan: "10.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Contract", status: "Not Created", sum: null, link: null, datePlan: "01.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 2, type: "Annex", status: "Not Created", sum: null, link: null, datePlan: "10.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 10, client: "Альфа-Банк ТГ", code: "ALF-8", period: "Декабрь 2025", direction: "Инфлюенс",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 10, client: "Alfa-Bank TG", code: "ALF-8", period: "December 2025", direction: "Influence",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Заказ", status: "Отправлен ОРИГ", sum: 200000000, link: "8", datePlan: "31.05.2025", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
-      { id: 2, type: "ДС", status: "Подписан ЭДО", sum: null, link: "1", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 3, type: "Отчёт комитента", status: "Подписан ЭДО", sum: null, link: "7", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 4, type: "Договор агентский", status: "Подписан ОРИГ", sum: 190416190, link: null, datePlan: "31.12.2025", dateFact: "26.12.2025", estimate: null, comment: "", createdAt: "20.12.2025" },
-      { id: 5, type: "Счёт", status: "Подписан ОРИГ", sum: 3711472, link: "598", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 6, type: "Акт", status: "Не создан", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Order", status: "Sent ORIG", sum: 200000000, link: "8", datePlan: "31.05.2025", dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
+      { id: 2, type: "Addendum", status: "Signed EDO", sum: null, link: "1", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 3, type: "Principal Report", status: "Signed EDO", sum: null, link: "7", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 4, type: "Agency Contract", status: "Signed ORIG", sum: 190416190, link: null, datePlan: "31.12.2025", dateFact: "26.12.2025", estimate: null, comment: "", createdAt: "20.12.2025" },
+      { id: 5, type: "Invoice", status: "Signed ORIG", sum: 3711472, link: "598", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 6, type: "Act", status: "Not Created", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
   {
-    id: 11, client: "Альфа-Банк ТГ", code: "ALF-9", period: "Февраль 2026", direction: "Инфлюенс",
-    kam: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 11, client: "Alfa-Bank TG", code: "ALF-9", period: "February 2026", direction: "Influence",
+    kam: { initials: "KP", name: "Kirill P.", color: "bg-slate-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Заказ", status: "Не создан", sum: null, link: null, datePlan: "27.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 2, type: "ДС", status: "На согласовании", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "29.05.2026" },
-      { id: 3, type: "Договор агентский", status: "Подписан ОРИГ", sum: 190416190, link: null, datePlan: "27.03.2026", dateFact: "01.04.2026", estimate: null, comment: "ОУТ | Отзывная реклама 2.0", createdAt: "20.03.2026" },
-      { id: 4, type: "Счёт", status: "Отправлен ЭДО", sum: 2746446, link: "38", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
+      { id: 1, type: "Order", status: "Not Created", sum: null, link: null, datePlan: "27.03.2026", dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 2, type: "Addendum", status: "Under Review", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "29.05.2026" },
+      { id: 3, type: "Agency Contract", status: "Signed ORIG", sum: 190416190, link: null, datePlan: "27.03.2026", dateFact: "01.04.2026", estimate: null, comment: "OUT | Retargeting 2.0", createdAt: "20.03.2026" },
+      { id: 4, type: "Invoice", status: "Sent EDO", sum: 2746446, link: "38", datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: "25.05.2026" },
     ],
   },
   {
-    id: 12, client: "Альфа-Банк ТГ", code: "ALF-10", period: "Март 2026", direction: "Медиа",
-    kam: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
+    id: 12, client: "Alfa-Bank TG", code: "ALF-10", period: "March 2026", direction: "Media",
+    kam: { initials: "PV", name: "Polina V.", color: "bg-neutral-400" },
+    doManager: { initials: "IM", name: "Inna M.", color: "bg-stone-400" },
     documents: [
-      { id: 1, type: "Договор агентский", status: "Не создан", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 2, type: "Счёт", status: "Не создан", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
-      { id: 3, type: "Акт", status: "Не создан", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 1, type: "Agency Contract", status: "Not Created", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 2, type: "Invoice", status: "Not Created", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
+      { id: 3, type: "Act", status: "Not Created", sum: null, link: null, datePlan: null, dateFact: null, estimate: null, comment: "", createdAt: null },
     ],
   },
 ].map((p) => ({ ...p, progress: computeProgress(p.documents as Doc[]), sum: computeSum(p.documents as Doc[]) })) as Project[];

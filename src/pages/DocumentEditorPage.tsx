@@ -9,10 +9,10 @@ interface DocumentEditorPageProps {
 }
 
 const ISSUES: Issue[] = [
-  { id: "rim", type: "error", title: "Вид РИМ — нужна разбивка", description: "«пост / репост / кружок» — укажите количество каждого типа из 15 размещений", formulation: "пост — 10, репост — 3, кружок — 2" },
-  { id: "period", type: "warning", title: "Период — слишком широкий", description: "Уточните конкретный период для контроля исполнения", formulation: "март — май 2025 года" },
-  { id: "acceptance", type: "error", title: "Критерии приёмки отсутствуют", description: "Без критериев нельзя закрыть акт и спросить с исполнителя", formulation: "факт публикации + скриншот с охватом в течение 48 часов с момента публикации" },
-  { id: "content", type: "warning", title: "Согласование контента", description: "Рекомендуется указать кто и за сколько часов согласует материал перед публикацией", formulation: "за 48 часов до публикации; срок ответа Заказчика — 24 часа; молчание считается согласием" },
+  { id: "rim", type: "error", title: "Ad Format Breakdown Required", description: '"post / repost / story" — specify the count for each type out of 15 placements', formulation: "post — 10, repost — 3, story — 2" },
+  { id: "period", type: "warning", title: "Period Too Broad", description: "Specify an exact period for delivery tracking", formulation: "March — May 2025" },
+  { id: "acceptance", type: "error", title: "Acceptance Criteria Missing", description: "Without criteria the acceptance act can't be signed and the contractor can't be held accountable", formulation: "proof of publication + reach screenshot within 48 hours of posting" },
+  { id: "content", type: "warning", title: "Content Approval", description: "Specify who approves content and how many hours before publishing", formulation: "48 hours before publishing; Client response time — 24 hours; silence = approval" },
 ]
 
 const PROGRESS_W = ["w-0", "w-1/4", "w-1/2", "w-3/4", "w-full"] as const
@@ -77,12 +77,12 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
       <div className="h-12 bg-white border-b border-gray-200 flex items-center justify-between px-5 flex-shrink-0">
         <div className="flex items-center gap-3">
           <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700">
-            ← Назад
+            ← Back
           </button>
           <span className="text-gray-200 select-none">|</span>
-          <span className="text-sm font-medium text-gray-900">Приложение ALF-9-03</span>
+          <span className="text-sm font-medium text-gray-900">Annex ALF-9-03</span>
           <span className="text-xs bg-blue-50 text-blue-600 border border-blue-200 rounded-full px-2.5 py-0.5">
-            ✦ ИИ заполнил
+            ✦ AI filled
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -90,23 +90,23 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
             onClick={() => setShowPreview(true)}
             className="h-[30px] px-3.5 text-xs font-medium border border-gray-200 rounded-md bg-white text-gray-600 hover:bg-gray-50"
           >
-            Предпросмотр
+            Preview
           </button>
           <div className="flex flex-col items-end">
-            <span title={!allDone ? "Исправьте все замечания, чтобы создать документ" : undefined}>
+            <span title={!allDone ? "Resolve all issues to export the document" : undefined}>
               <button
-                onClick={() => allDone && toast("Документ создан")}
+                onClick={() => allDone && toast("Document exported")}
                 className={cn(
                   "h-[30px] px-3.5 text-xs font-medium rounded-md bg-blue-600 text-white border border-blue-600",
                   allDone ? "hover:bg-blue-700" : "opacity-50 cursor-not-allowed pointer-events-none"
                 )}
               >
-                Создать .docx
+                Export .docx
               </button>
             </span>
             {!allDone && (
               <p className="text-[10px] text-gray-400 text-right mt-1">
-                Станет доступно после согласования всех замечаний
+                Available after all issues are resolved
               </p>
             )}
           </div>
@@ -125,9 +125,9 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
 
         <div className="w-[248px] flex-shrink-0 border-l border-gray-200 bg-white flex flex-col">
           <div className="p-4 border-b border-gray-100 flex-shrink-0">
-            <div className="text-[13px] font-semibold text-gray-900">Замечания</div>
+            <div className="text-[13px] font-semibold text-gray-900">Issues</div>
             <div className="text-[11px] text-gray-400 mt-0.5">
-              {total - resolved > 0 ? `${total - resolved} требуют внимания` : "Всё готово"}
+              {total - resolved > 0 ? `${total - resolved} need attention` : "All done"}
             </div>
           </div>
 
@@ -157,8 +157,8 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
 
           <div className="p-4 border-t border-gray-100 flex-shrink-0">
             <div className="flex justify-between text-[11px] text-gray-400 mb-1.5">
-              <span>Готовность</span>
-              <span>{resolved} из {total}</span>
+              <span>Progress</span>
+              <span>{resolved} of {total}</span>
             </div>
             <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
               <div className={cn("h-full bg-green-400 rounded-full transition-all duration-300", PROGRESS_W[resolved])} />
@@ -171,7 +171,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg w-full max-w-[680px] max-h-[90vh] flex flex-col overflow-hidden shadow-xl">
             <div className="flex items-center justify-between px-6 py-3 border-b border-gray-100 flex-shrink-0">
-              <span className="text-sm font-medium text-gray-900">Предпросмотр документа</span>
+              <span className="text-sm font-medium text-gray-900">Document Preview</span>
               <button
                 onClick={() => setShowPreview(false)}
                 className="text-gray-400 hover:text-gray-700 text-xl leading-none"
@@ -193,7 +193,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
                 onClick={() => setShowPreview(false)}
                 className="text-sm text-gray-600 hover:text-gray-800 border border-gray-200 rounded-md px-4 py-1.5 hover:bg-gray-50"
               >
-                Закрыть предпросмотр
+                Close preview
               </button>
             </div>
           </div>

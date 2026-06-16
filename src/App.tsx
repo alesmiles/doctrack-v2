@@ -46,7 +46,7 @@ export default function App() {
       default:
         return (
           <div className="flex items-center justify-center h-full">
-            <p className="text-gray-400 text-sm">Раздел в разработке</p>
+            <p className="text-gray-400 text-sm">Section in development</p>
           </div>
         )
     }

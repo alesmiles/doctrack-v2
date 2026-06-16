@@ -61,66 +61,66 @@ export function DocumentBody({ resolvedIds, resolvedTexts, activeMarkId, onMarkC
   return (
     <div className="max-w-[640px] mx-auto bg-white border border-gray-200 rounded-sm px-14 py-12 min-h-[600px] text-[12px] leading-relaxed text-gray-700">
       <div className="text-right font-semibold text-gray-900 mb-6 leading-6">
-        <p>ООО «Альфа Медиа»</p>
-        <p>ИНН 7701234567</p>
-        <p>г. Москва, ул. Тверская, 12</p>
+        <p>Alpha Media LLC</p>
+        <p>TIN 7701234567</p>
+        <p>12 Tverskaya St., Moscow</p>
       </div>
 
       <div className="flex justify-between font-medium text-gray-900 mb-5">
-        <span>г. Москва</span>
-        <span>«__» _______ 2025 г.</span>
+        <span>Moscow</span>
+        <span>___ _________ 2025</span>
       </div>
 
-      <p className="text-center font-semibold text-gray-900 mb-0.5">ПРИЛОЖЕНИЕ № 3</p>
-      <p className="text-center mb-0.5">к Договору об оказании услуг № 47/2024</p>
-      <p className="text-center mb-6">от 10 января 2024 г.</p>
+      <p className="text-center font-semibold text-gray-900 mb-0.5">ANNEX NO. 3</p>
+      <p className="text-center mb-0.5">to the Service Agreement No. 47/2024</p>
+      <p className="text-center mb-6">dated January 10, 2024</p>
 
       <p className="mb-4">
-        ООО «Агентство», именуемое в дальнейшем «Исполнитель», и ООО «Альфа Медиа»,
-        именуемое в дальнейшем «Заказчик», договорились о нижеследующем:
+        Agency LLC, hereinafter referred to as the "Service Provider", and Alpha Media LLC,
+        hereinafter referred to as the "Client", have agreed as follows:
       </p>
 
       <div className="mb-4">
-        <p className="font-semibold text-gray-900 mb-1">1. ПРЕДМЕТ</p>
+        <p className="font-semibold text-gray-900 mb-1">1. SCOPE OF WORK</p>
         <p className="mb-1">
-          1.1. Исполнитель обязуется оказать услуги по размещению рекламных интеграций
-          у блогеров в рамках рекламной кампании Заказчика.
+          1.1. The Service Provider undertakes to arrange advertising integrations
+          with bloggers as part of the Client's advertising campaign.
         </p>
-        <p className="mb-1">Количество размещений: 15 (пятнадцать).</p>
+        <p className="mb-1">Number of placements: 15 (fifteen).</p>
         <p>
-          Вид РИМ: {m("rim", "error", "пост / репост / кружок")} — указать разбивку по типам.
+          Ad Format: {m("rim", "error", "post / repost / story")} — specify breakdown by type.
         </p>
       </div>
 
       <div className="mb-4">
-        <p className="font-semibold text-gray-900 mb-1">2. СРОКИ</p>
+        <p className="font-semibold text-gray-900 mb-1">2. TIMELINE</p>
         <p className="mb-1">
-          2.1. Начало оказания услуг: с момента подписания настоящего Приложения сторонами.
+          2.1. Service commencement: upon signing of this Annex by both parties.
         </p>
         <p>
-          2.2. Срок оказания услуг:{" "}
-          {m("period", "warning", "март — июнь 2025 г.")}{" "}
-          Рекомендуется уточнить конкретный период.
+          2.2. Service period:{" "}
+          {m("period", "warning", "March — June 2025")}{" "}
+          An exact period is recommended for delivery tracking.
         </p>
       </div>
 
       <div className="mb-4">
-        <p className="font-semibold text-gray-900 mb-1">3. ПРИЁМКА</p>
+        <p className="font-semibold text-gray-900 mb-1">3. ACCEPTANCE</p>
         <p className="mb-1">
-          3.1. {m("acceptance", "error", "Критерии приёмки не указаны.")}{" "}
-          Необходимо добавить критерии для закрытия акта.
+          3.1. {m("acceptance", "error", "Acceptance criteria not specified.")}{" "}
+          Criteria must be added to enable act signing.
         </p>
         <p>
-          3.2. {m("content", "warning", "Порядок согласования контента не определён.")}{" "}
-          Рекомендуется добавить сроки и порядок согласования.
+          3.2. {m("content", "warning", "Content approval procedure not defined.")}{" "}
+          It is recommended to specify deadlines and approval procedure.
         </p>
       </div>
 
       <div className="mb-4">
-        <p className="font-semibold text-gray-900 mb-1">4. СТОИМОСТЬ</p>
+        <p className="font-semibold text-gray-900 mb-1">4. FEES</p>
         <p>
-          4.1. Стоимость услуг составляет 394 000 (триста девяносто четыре тысячи) рублей,
-          включая НДС 20%.
+          4.1. The total fee for the services amounts to 394,000 (three hundred ninety-four thousand) rubles,
+          inclusive of 20% VAT.
         </p>
       </div>
     </div>

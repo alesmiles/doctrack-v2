@@ -81,7 +81,7 @@ export function IssueCard({
       {isExpanded && !isResolved && (
         <div className="px-3 pb-3">
           <p className="text-[11px] text-gray-500 leading-relaxed mb-3">{issue.description}</p>
-          <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Формулировка</p>
+          <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Suggested text</p>
 
           {!editing ? (
             <>
@@ -93,19 +93,19 @@ export function IssueCard({
                   onClick={() => handleAccept(issue.formulation)}
                   className="bg-blue-600 text-white text-[11px] rounded-md px-3 py-1.5 hover:bg-blue-700"
                 >
-                  Принять
+                  Accept
                 </button>
                 <button
                   onClick={handleEdit}
                   className="border border-gray-200 text-gray-600 text-[11px] rounded-md px-3 py-1.5 hover:bg-gray-50"
                 >
-                  Редактировать
+                  Edit
                 </button>
                 <button
                   onClick={onDismiss}
                   className="text-gray-400 text-[11px] px-2 py-1.5 hover:text-gray-600"
                 >
-                  Отменить
+                  Dismiss
                 </button>
               </div>
             </>
@@ -116,6 +116,7 @@ export function IssueCard({
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
                 rows={3}
+                placeholder="Enter custom value..."
                 className="w-full text-[11px] border border-blue-300 rounded-md p-2 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 mb-3"
               />
               <div className="flex items-center gap-1.5">
@@ -123,13 +124,13 @@ export function IssueCard({
                   onClick={() => handleAccept(editText)}
                   className="bg-blue-600 text-white text-[11px] rounded-md px-3 py-1.5 hover:bg-blue-700"
                 >
-                  Принять правку
+                  Apply edit
                 </button>
                 <button
                   onClick={handleCancelEdit}
                   className="text-gray-400 text-[11px] px-2 py-1.5 hover:text-gray-600"
                 >
-                  Отмена
+                  Cancel
                 </button>
               </div>
             </>

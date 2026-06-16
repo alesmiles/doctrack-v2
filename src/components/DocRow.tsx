@@ -33,7 +33,7 @@ export default function SortableDocRow({
     setEditComment(false);
     onCommentChange(projectId, doc.id, commentVal);
   };
-  const isApplication = doc.type === "Приложение";
+  const isApplication = doc.type === "Annex";
 
   return (
     <div
@@ -88,7 +88,7 @@ export default function SortableDocRow({
         <div className="inline-flex items-center gap-1.5 whitespace-nowrap">
           <span>{doc.datePlan ?? "—"}</span>
           {paymentOverdue && days != null && (
-            <span className="text-[11px] text-red-500">+{days} дн.</span>
+            <span className="text-[11px] text-red-500">+{days} days</span>
           )}
         </div>
       </div>
@@ -119,7 +119,7 @@ export default function SortableDocRow({
             className="cursor-pointer hover:bg-gray-100 rounded px-1.5 py-0.5 -mx-1.5 inline-block min-h-[24px] min-w-[40px] transition-colors"
             onClick={() => { setCommentVal(doc.comment); setEditComment(true); setTimeout(() => commentRef.current?.focus(), 0); }}
           >
-            {doc.comment || <span className="text-gray-300 italic">Добавить...</span>}
+            {doc.comment || <span className="text-gray-300 italic">Add...</span>}
           </span>
         )}
       </div>

@@ -31,15 +31,15 @@ interface CreateClientDocModalProps {
   initialManagerDO?: string
 }
 
-const CLIENTS = ["Альфа Медиа", "Туту.ру", "СберМаркет", "Яндекс"]
+const CLIENTS = ["Alpha Media", "Tutu.ru", "SberMarket", "Yandex"]
 const PROJECTS: Record<string, string[]> = {
-  "Альфа Медиа": ["ALF-9 · Март 2025", "ALF-10 · Апрель 2025"],
-  "Туту.ру": ["TTU-3 · Март 2025"],
-  "СберМаркет": ["SBR-1 · Апрель 2025"],
-  "Яндекс": ["YND-5 · Май 2025"],
+  "Alpha Media": ["ALF-9 · March 2025", "ALF-10 · April 2025"],
+  "Tutu.ru": ["TTU-3 · March 2025"],
+  "SberMarket": ["SBR-1 · April 2025"],
+  "Yandex": ["YND-5 · May 2025"],
 }
-const DOC_TYPES = ["Приложение", "Акт", "Счёт", "Счёт-фактура", "ДС", "УПД", "Договор"]
-const MANAGERS = ["Инна Михрабова", "Дмитрий Ларин"]
+const DOC_TYPES = ["Annex", "Act", "Invoice", "Tax Invoice", "Addendum", "UPD", "Contract"]
+const MANAGERS = ["Inna Mikhrabova", "Dmitry Larin"]
 
 const SL = "text-[11px] font-medium text-gray-400 uppercase tracking-wider mb-2.5"
 const ERR = "text-[11px] text-red-500 mt-1"
@@ -49,7 +49,7 @@ function generateDocNum(): string {
   const d = new Date()
   const mm = String(d.getMonth() + 1).padStart(2, "0")
   const dd = String(d.getDate()).padStart(2, "0")
-  return `ДО-${d.getFullYear()}-${mm}${dd}`
+  return `DO-${d.getFullYear()}-${mm}${dd}`
 }
 
 export function CreateClientDocModal({
@@ -136,22 +136,22 @@ export function CreateClientDocModal({
                 onClick={onBack}
                 className="text-sm text-gray-500 hover:text-gray-700 flex items-center gap-1 mt-0.5 flex-shrink-0"
               >
-                ← Назад
+                ← Back
               </button>
             )}
             <div className="flex-1 min-w-0">
-              <DialogTitle className="text-[15px] font-semibold text-gray-900">Клиентский документ</DialogTitle>
-              <p className="text-xs text-gray-500 mt-0.5">Создание или регистрация документа по проекту с клиентом</p>
+              <DialogTitle className="text-[15px] font-semibold text-gray-900">Client Document</DialogTitle>
+              <p className="text-xs text-gray-500 mt-0.5">Create or register a document for a client project</p>
             </div>
           </div>
         </DialogHeader>
 
         <div className="px-6 py-5 overflow-y-auto max-h-[70vh] flex flex-col gap-4">
           <div>
-            <p className={SL}>Привязка к проекту</p>
+            <p className={SL}>Project Link</p>
             <div className="grid grid-cols-2 gap-2.5">
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Клиент</label>
+                <label className="text-xs text-gray-500">Client</label>
                 {initialClient ? (
                   <Input value={initialClient} readOnly className="h-[34px] text-[13px] bg-gray-50 text-gray-600" />
                 ) : (
@@ -161,16 +161,16 @@ export function CreateClientDocModal({
                       onValueChange={(v) => { setClient(v); setProject(""); clearError("client") }}
                     >
                       <SelectTrigger className={cn("h-[34px] text-[13px]", errors.client && ERR_RING)}>
-                        <SelectValue placeholder="Выбрать" />
+                        <SelectValue placeholder="Select" />
                       </SelectTrigger>
                       <SelectContent>{CLIENTS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
                     </Select>
-                    {errors.client && <p className={ERR}>Обязательное поле</p>}
+                    {errors.client && <p className={ERR}>Required field</p>}
                   </>
                 )}
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Проект</label>
+                <label className="text-xs text-gray-500">Project</label>
                 {initialProject ? (
                   <Input value={initialProject} readOnly className="h-[34px] text-[13px] bg-gray-50 text-gray-600" />
                 ) : (
@@ -181,11 +181,11 @@ export function CreateClientDocModal({
                       disabled={!client}
                     >
                       <SelectTrigger className={cn("h-[34px] text-[13px]", errors.project && ERR_RING)}>
-                        <SelectValue placeholder="Выбрать" />
+                        <SelectValue placeholder="Select" />
                       </SelectTrigger>
                       <SelectContent>{(PROJECTS[client] ?? []).map((p) => <SelectItem key={p} value={p}>{p}</SelectItem>)}</SelectContent>
                     </Select>
-                    {errors.project && <p className={ERR}>Обязательное поле</p>}
+                    {errors.project && <p className={ERR}>Required field</p>}
                   </>
                 )}
               </div>
@@ -193,35 +193,35 @@ export function CreateClientDocModal({
           </div>
 
           <div>
-            <p className={SL}>Тип и параметры</p>
+            <p className={SL}>Type &amp; Parameters</p>
             <div className="flex flex-col gap-2.5">
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Тип документа</label>
+                <label className="text-xs text-gray-500">Document Type</label>
                 <Select value={docType} onValueChange={(v) => { setDocType(v); clearError("docType") }}>
                   <SelectTrigger className={cn("h-[34px] text-[13px]", errors.docType && ERR_RING)}>
-                    <SelectValue placeholder="Выбрать" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>{DOC_TYPES.map((d) => <SelectItem key={d} value={d}>{d}</SelectItem>)}</SelectContent>
                 </Select>
-                {errors.docType && <p className={ERR}>Обязательное поле</p>}
+                {errors.docType && <p className={ERR}>Required field</p>}
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Плановая дата подписания</label>
+                <label className="text-xs text-gray-500">Planned Signing Date</label>
                 <Input
                   type="date"
                   value={signDate}
                   onChange={(e) => { setSignDate(e.target.value); clearError("signDate") }}
                   className={cn("h-[34px] text-[13px]", errors.signDate && ERR_RING)}
                 />
-                {errors.signDate && <p className={ERR}>Обязательное поле</p>}
+                {errors.signDate && <p className={ERR}>Required field</p>}
               </div>
             </div>
           </div>
 
           <div>
-            <p className={SL}>ИИ-генерация документа</p>
+            <p className={SL}>AI Document Generation</p>
             <p className="text-[11px] text-blue-700 -mt-1.5 mb-2.5">
-              ✦ Загрузите смету — ИИ сформирует приложение за 2 минуты
+              ✦ Upload your estimate — AI will generate the annex in 2 minutes
             </p>
             <UploadZone
               uploadState={uploadState}
@@ -233,15 +233,15 @@ export function CreateClientDocModal({
           </div>
 
           <div>
-            <p className={SL}>Реквизиты документа</p>
+            <p className={SL}>Document Details</p>
             <div className="grid grid-cols-2 gap-2.5 mb-2.5">
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Номер документа</label>
+                <label className="text-xs text-gray-500">Document Number</label>
                 <Input
                   value={docNum}
                   onChange={(e) => uploadState !== "idle" && setDocNum(e.target.value)}
                   readOnly={uploadState === "idle"}
-                  placeholder={uploadState === "idle" ? "Заполнится после загрузки" : ""}
+                  placeholder={uploadState === "idle" ? "Auto-filled after upload" : ""}
                   className={cn(
                     "h-[34px] text-[13px]",
                     uploadState === "idle" && "bg-gray-50 text-gray-400 cursor-not-allowed"
@@ -249,35 +249,35 @@ export function CreateClientDocModal({
                 />
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-xs text-gray-500">Менеджер ДО</label>
+                <label className="text-xs text-gray-500">Doc Manager</label>
                 <Select value={manager} onValueChange={(v) => { setManager(v); clearError("manager") }}>
                   <SelectTrigger className={cn("h-[34px] text-[13px]", errors.manager && ERR_RING)}>
-                    <SelectValue placeholder="Выбрать" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>{MANAGERS.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent>
                 </Select>
-                {errors.manager && <p className={ERR}>Обязательное поле</p>}
+                {errors.manager && <p className={ERR}>Required field</p>}
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-xs text-gray-500">Комментарий</label>
+              <label className="text-xs text-gray-500">Comment</label>
               <Textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="Условия, договорённости, контекст..."
+                placeholder="Conditions, agreements, context..."
                 rows={3}
                 className="text-[13px] resize-none"
               />
               <p className="text-[10px] text-gray-400 mt-0.5">
-                Например: «клиент просит два оригинала», «согласовано перенести срок на 20е», «ждём подписи директора». Сохраняется в карточке документа.
+                E.g. "client needs two originals", "agreed to postpone to the 20th", "waiting for director's signature". Saved in the document card.
               </p>
             </div>
           </div>
         </div>
 
         <div className="px-6 py-3.5 border-t border-gray-100 flex justify-end gap-2">
-          <Button variant="ghost" size="sm" onClick={onClose}>Отмена</Button>
-          <Button size="sm" onClick={handleCreate}>Создать документ</Button>
+          <Button variant="ghost" size="sm" onClick={onClose}>Cancel</Button>
+          <Button size="sm" onClick={handleCreate}>Create Document</Button>
         </div>
       </DialogContent>
     </Dialog>
