@@ -27,7 +27,7 @@ To add a new page:
 - Main content: flex-1 overflow-y-auto min-w-0
 
 ## Key reference file
-clients-reference.tsx in project root — full UI reference for the Clients page. Read before building any list or table views.
+docs/clients-reference.tsx — full UI reference for the Clients page. Read before building any list or table views.
 
 ## Sidebar navigation structure
 ЗАЯВКИ: Заявка ДО / Создать проект / ДО в работе
