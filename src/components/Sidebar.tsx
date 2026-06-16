@@ -8,9 +8,12 @@ interface SidebarProps {
   onToggle: () => void;
   activePage: string;
   onNavigate: (page: string) => void;
+  onCreateProject: () => void;
+  onCreateClientDoc: () => void;
+  onCreateVendorDoc: () => void;
 }
 
-export function Sidebar({ collapsed, onToggle, activePage, onNavigate }: SidebarProps) {
+export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateProject, onCreateClientDoc, onCreateVendorDoc }: SidebarProps) {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isContractorsOpen, setIsContractorsOpen] = useState(false);
   const sections: Array<{ title: string; items: Array<{ id: string; icon: any; label: string; badge?: number }> }> = [
@@ -87,9 +90,9 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate }: Sidebar
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="start" className="w-48">
-              <DropdownMenuItem onClick={() => console.log("create project")}>Проект</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => console.log("create document client")}>Документ клиента</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => console.log("create document contractor")}>Документ подрядчика</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateProject}>Проект</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateClientDoc}>Документ клиента</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateVendorDoc}>Документ подрядчика</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
