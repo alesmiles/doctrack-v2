@@ -19,18 +19,12 @@ and any B2B company managing large volumes of contracts, acts, and invoices.
 
 ## What is implemented
 
-- **Clients section** — project list with expandable document rows,
-  filters by client / KAM / doc type / status / year,
-  optional filters (direction, month, doc manager, overdue),
-  drag-and-drop reordering of documents within a project,
-  progress bar per project, overdue payment indicators
-- **Contractors section** — two tabs: client contractors and internal contractors,
-  document tracking per contractor project
-- **Receivables section** — accounts receivable tracking by project and payment,
-  overdue payment highlighting, dynamics tab with charts
-- **Document editor page** — basic document editing view
-- **Create project modal** — multi-step form for creating a new project
-- **Create document modals** — forms for client and vendor documents
+- Clients section — project list with expandable document rows, filters, drag-and-drop, progress bar, overdue indicators
+- Contractors section — two tabs: client contractors and internal contractors
+- Receivables section — accounts receivable tracking, overdue highlighting, dynamics charts
+- Document editor page
+- Create project modal
+- Create document modals for client and vendor documents
 
 ## What is not implemented (mock only)
 
@@ -57,4 +51,3 @@ npm run dev
 ## Working with Claude Code
 
 Read CLAUDE.md before making any changes.
-It contains routing conventions, UI standards, and the sidebar navigation structure.
