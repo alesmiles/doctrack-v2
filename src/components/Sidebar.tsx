@@ -18,33 +18,33 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
   const [isContractorsOpen, setIsContractorsOpen] = useState(false);
   const sections: Array<{ title: string; items: Array<{ id: string; icon: any; label: string; badge?: number }> }> = [
     {
-      title: "DOCUMENT FLOW",
+      title: "ДОКУМЕНТООБОРОТ",
       items: [
-        { id: "do-inwork", icon: FileText, label: "In Progress", badge: 12 },
-        { id: "clients", icon: Users, label: "Clients" },
+        { id: "do-inwork", icon: FileText, label: "В работе", badge: 12 },
+        { id: "clients", icon: Users, label: "Клиенты" },
       ],
     },
     {
-      title: "PAYMENTS",
+      title: "ПЛАТЕЖИ",
       items: [
-        { id: "receivables", icon: RussianRuble, label: "Receivables" },
-        { id: "topay", icon: MailCheck, label: "For Payment" },
+        { id: "receivables", icon: RussianRuble, label: "Дебиторка" },
+        { id: "topay", icon: MailCheck, label: "К оплате" },
       ],
     },
     {
-      title: "DIRECTORY",
+      title: "БАЗА",
       items: [
-        { id: "base-clients", icon: Building, label: "Clients" },
-        { id: "base-contractors", icon: HardHat, label: "Contractors" },
-        { id: "employees", icon: UserCog, label: "Employees" },
+        { id: "base-clients", icon: Building, label: "Клиенты" },
+        { id: "base-contractors", icon: HardHat, label: "Подрядчики" },
+        { id: "employees", icon: UserCog, label: "Сотрудники" },
       ],
     },
     {
-      title: "SYSTEM",
+      title: "СИСТЕМА",
       items: [
-        { id: "archive", icon: Archive, label: "Archive" },
-        { id: "settings-nav", icon: Settings, label: "Settings" },
-        { id: "admin", icon: ShieldCheck, label: "Access" },
+        { id: "archive", icon: Archive, label: "Архив" },
+        { id: "settings-nav", icon: Settings, label: "Настройки" },
+        { id: "admin", icon: ShieldCheck, label: "Доступ" },
       ],
     },
   ];
@@ -59,7 +59,7 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
         <button
           onClick={onToggle}
           className="rounded-lg w-7 h-7 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          title={collapsed ? "Развернуть боковую панель" : "Свернуть боковую панель"}
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
@@ -68,7 +68,7 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
       <nav className="flex-1 overflow-y-auto py-3 px-2">
         <div className="mb-4">
           {!collapsed && (
-            <div className="px-2 mb-1.5 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">DOCUMENT FLOW</div>
+            <div className="px-2 mb-1.5 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">ДОКУМЕНТООБОРОТ</div>
           )}
 
           <DropdownMenu open={isCreateOpen} onOpenChange={setIsCreateOpen}>
@@ -78,21 +78,21 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
                   "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                   collapsed && "justify-center px-0 w-auto"
                 )}
-                title={collapsed ? "Create" : undefined}
+                title={collapsed ? "Создать" : undefined}
               >
                 <PlusCircle className="w-4 h-4 flex-shrink-0" />
                 {!collapsed && (
                   <>
-                    <span className="truncate">Create</span>
+                    <span className="truncate">Создать</span>
                     <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", isCreateOpen && "rotate-180")} />
                   </>
                 )}
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="start" className="w-48">
-              <DropdownMenuItem onClick={onCreateProject}>Project</DropdownMenuItem>
-              <DropdownMenuItem onClick={onCreateClientDoc}>Client Document</DropdownMenuItem>
-              <DropdownMenuItem onClick={onCreateVendorDoc}>Vendor Document</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateProject}>Проект</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateClientDoc}>Документ клиента</DropdownMenuItem>
+              <DropdownMenuItem onClick={onCreateVendorDoc}>Документ подрядчика</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -103,10 +103,10 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
               collapsed && "justify-center px-0"
             )}
             onClick={() => onNavigate("clients")}
-            title={collapsed ? "Clients" : undefined}
+            title={collapsed ? "Клиенты" : undefined}
           >
             <Users className={cn("w-4 h-4 flex-shrink-0", activePage === "clients" && "text-blue-600")} />
-            {!collapsed && <span className="truncate">Clients</span>}
+            {!collapsed && <span className="truncate">Клиенты</span>}
           </button>
 
           {/* Contractors flyout */}
@@ -120,12 +120,12 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
                     : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                   collapsed && "justify-center px-0"
                 )}
-                title={collapsed ? "Contractors" : undefined}
+                title={collapsed ? "Подрядчики" : undefined}
               >
                 <Handshake className={cn("w-4 h-4 flex-shrink-0", (activePage === "contractors-client" || activePage === "contractors-internal") && "text-blue-600")} />
                 {!collapsed && (
                   <>
-                    <span className="truncate">Contractors</span>
+                    <span className="truncate">Подрядчики</span>
                     <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", isContractorsOpen && "rotate-180")} />
                   </>
                 )}
@@ -136,13 +136,13 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
                 onClick={() => onNavigate("contractors-client")}
                 className={cn(activePage === "contractors-client" && "bg-blue-50 text-blue-700 font-medium")}
               >
-                Client
+                Клиент
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => onNavigate("contractors-internal")}
                 className={cn(activePage === "contractors-internal" && "bg-blue-50 text-blue-700 font-medium")}
               >
-                Internal
+                Внутренний
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -188,7 +188,7 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
         {!collapsed && (
           <div className="min-w-0">
             <div className="text-sm font-medium text-gray-900 truncate">Inna Mikhrabova</div>
-            <div className="text-xs text-gray-400 truncate">Doc Manager</div>
+            <div className="text-xs text-gray-400 truncate">Менеджер документов</div>
           </div>
         )}
       </div>

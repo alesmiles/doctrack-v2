@@ -6,17 +6,21 @@ import SortableDocRow from "@/components/DocRow";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { computeProgress, fmt, getMonthOnly, getYearOnly, isOverduePayment } from "../lib/docUtils";
+import { computeProgress, fmt, getMonthOnly, isOverduePayment } from "../lib/docUtils";
 import { RAW_PROJECTS } from "../mocks/projects";
-import { PROJECT_COL_TEMPLATE, DOC_COL_TEMPLATE, MONTH_ORDER, STATUSES, CLIENT_DOC_TYPES, DOC_TYPE_ORDER, STATUS_COLORS } from "../constants";
+import { PROJECT_COL_TEMPLATE, DOC_COL_TEMPLATE, MONTH_ORDER, MONTH_RU, STATUSES, CLIENT_DOC_TYPES, DOC_TYPE_ORDER, STATUS_COLORS } from "../constants";
 import { Project } from "../types";
 import { cn } from "@/lib/utils";
 import AIPanel from "@/components/AIPanel";
+import { KanbanBoard } from "@/components/KanbanBoard";
+import { ViewSwitcher } from "@/components/ViewSwitcher";
 
 export function ClientsPage() {
   const [projects, setProjects] = useState<Project[]>(() => RAW_PROJECTS.slice());
   const [expanded, setExpanded] = useState<Set<number>>(new Set([1]));
   const [aiOpen, setAiOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"kanban" | "table">("kanban");
+  const [groupByProject, setGroupByProject] = useState(false);
 
   const [search, setSearch] = useState("");
   const [clientFilter, setClientFilter] = useState("");
@@ -24,36 +28,19 @@ export function ClientsPage() {
   const [docTypeFilter, setDocTypeFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [directionFilter, setDirectionFilter] = useState("");
-  const [yearFilter, setYearFilter] = useState(String(new Date().getFullYear()));
   const [monthFilter, setMonthFilter] = useState("");
   const [monthSortDir, setMonthSortDir] = useState<null | "asc" | "desc">(null);
   const [doManagerFilter, setDoManagerFilter] = useState("");
-  const [visibleFilters, setVisibleFilters] = useState({ direction: false, year: true, month: false, doManager: false, overdue: false });
   const [showOverdueOnly, setShowOverdueOnly] = useState(false);
+  const [visibleFilters, setVisibleFilters] = useState({ direction: false, month: false, doManager: false });
   const [deletedDocTypes, setDeletedDocTypes] = useState<Record<string, Set<string>>>({});
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
-
-  const toggleFilter = (key: keyof typeof visibleFilters) => {
-    const wasOn = visibleFilters[key];
-    setVisibleFilters(prev => ({ ...prev, [key]: !prev[key] }));
-    if (wasOn) {
-      if (key === "direction") setDirectionFilter("");
-      if (key === "year") setYearFilter("");
-      if (key === "month") setMonthFilter("");
-      if (key === "doManager") setDoManagerFilter("");
-      if (key === "overdue") setShowOverdueOnly(false);
-    }
-  };
 
   const clientOptions = Array.from(new Set(projects.map((p) => p.client)));
   const kamOptions = Array.from(new Set(projects.map((p) => p.kam.name)));
   const doManagerOptions = Array.from(new Set(projects.map((p) => p.doManager.name)));
   const directionOptions = Array.from(new Set(projects.map((p) => p.direction)));
-  const monthOptions = Array.from(new Set(projects.map((p) => getMonthOnly(p.period))));
-  monthOptions.sort((a, b) => MONTH_ORDER.indexOf(a) - MONTH_ORDER.indexOf(b));
-  const yearOptions = Array.from(new Set(projects.map((p) => getYearOnly(p.period))))
-    .sort((a, b) => Number(b) - Number(a));
 
   const getActiveDocTypes = () => {
     const base = clientFilter && CLIENT_DOC_TYPES[clientFilter]
@@ -73,25 +60,33 @@ export function ClientsPage() {
 
   const activeDocTypes = getActiveDocTypes();
 
+  const toggleFilterVisibility = (key: keyof typeof visibleFilters) => {
+    const wasVisible = visibleFilters[key];
+    setVisibleFilters((prev) => ({ ...prev, [key]: !prev[key] }));
+    if (wasVisible) {
+      if (key === "direction") setDirectionFilter("");
+      if (key === "month") setMonthFilter("");
+      if (key === "doManager") setDoManagerFilter("");
+    }
+  };
+
   const hasAnyFilter = !!(search || clientFilter || kamFilter || docTypeFilter || statusFilter
-    || (visibleFilters.direction && directionFilter)
-    || (visibleFilters.year && yearFilter)
-    || (visibleFilters.month && monthFilter)
-    || (visibleFilters.doManager && doManagerFilter)
-    || showOverdueOnly);
+    || directionFilter || monthFilter || doManagerFilter
+    || showOverdueOnly || groupByProject);
 
   const resetFilters = () => {
     setSearch(""); setClientFilter(""); setKamFilter(""); setDocTypeFilter(""); setStatusFilter("");
-    setDirectionFilter(""); setYearFilter(""); setMonthFilter(""); setDoManagerFilter(""); setShowOverdueOnly(false);
+    setDirectionFilter(""); setMonthFilter(""); setDoManagerFilter(""); setShowOverdueOnly(false);
+    setGroupByProject(false);
+    setVisibleFilters({ direction: false, month: false, doManager: false });
   };
 
   const filteredProjects = projects.filter((p) => {
     if (clientFilter && p.client !== clientFilter) return false;
     if (kamFilter && p.kam.name !== kamFilter) return false;
-    if (visibleFilters.doManager && doManagerFilter && p.doManager.name !== doManagerFilter) return false;
-    if (visibleFilters.direction && directionFilter && p.direction !== directionFilter) return false;
-    if (visibleFilters.year && yearFilter && getYearOnly(p.period) !== yearFilter) return false;
-    if (visibleFilters.month && monthFilter && getMonthOnly(p.period) !== monthFilter) return false;
+    if (doManagerFilter && p.doManager.name !== doManagerFilter) return false;
+    if (directionFilter && p.direction !== directionFilter) return false;
+    if (monthFilter && getMonthOnly(p.period) !== monthFilter) return false;
     if (search) {
       const q = search.toLowerCase();
       if (!p.client.toLowerCase().includes(q) && !p.code.toLowerCase().includes(q) && !p.documents.some((d) => d.type.toLowerCase().includes(q))) return false;
@@ -142,15 +137,6 @@ export function ClientsPage() {
     }));
   }, []);
 
-  const removeDocType = (type: string) => {
-    setDeletedDocTypes((prev) => {
-      const key = clientFilter || "__all__";
-      const existing = prev[key] ?? new Set<string>();
-      return { ...prev, [key]: new Set([...existing, type]) };
-    });
-    if (docTypeFilter === type) setDocTypeFilter("");
-  };
-
   const restoreDocType = (type: string) => {
     setDeletedDocTypes((prev) => {
       const key = clientFilter || "__all__";
@@ -163,296 +149,316 @@ export function ClientsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between px-8 pt-8 pb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Clients</h1>
-        {hasAnyFilter && (
-          <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 hover:bg-gray-100" onClick={resetFilters}>
-            <span className="mr-1">×</span> Reset all
-          </Button>
-        )}
-      </div>
-
-      <div className="px-8 pb-3">
-        <div className="flex items-center gap-2 flex-wrap">
-
-          <div className="relative flex-shrink-0">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-            <Input
-              placeholder="Search..."
-              className="pl-9 h-9 text-sm bg-gray-50 border-gray-200 w-52"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+      <div>
+        <div className="flex flex-wrap items-center justify-between gap-3 px-8 pt-8 pb-4">
+          <h1 className="text-2xl font-bold text-gray-900">Клиенты</h1>
+          <div className="flex items-center gap-2">
+            <ViewSwitcher value={viewMode} onChange={setViewMode} />
           </div>
+        </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", clientFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {clientFilter || "Client"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setClientFilter("")}>All clients</DropdownMenuItem>
-              {clientOptions.map(c => <DropdownMenuItem key={c} onClick={() => setClientFilter(c)}>{c}</DropdownMenuItem>)}
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <div className="px-8 pb-3">
+          <div className="flex items-center gap-2 flex-wrap">
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", kamFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {kamFilter || "KAM"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setKamFilter("")}>All KAMs</DropdownMenuItem>
-              {kamOptions.map(k => <DropdownMenuItem key={k} onClick={() => setKamFilter(k)}>{k}</DropdownMenuItem>)}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            <div className="relative flex-shrink-0">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <Input
+                placeholder="Поиск…"
+                className="pl-9 h-9 text-sm bg-gray-50 border-gray-200 w-52"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", docTypeFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {docTypeFilter || "Doc Type"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuItem onClick={() => setDocTypeFilter("")}>All types</DropdownMenuItem>
-              {activeDocTypes.map(t => (
-                <div key={t} className="flex items-center justify-between pr-1 pl-2 py-1.5 text-sm cursor-pointer hover:bg-gray-100 rounded-sm" onClick={() => setDocTypeFilter(t)}>
-                  <span>{t}</span>
-                  <button className="p-0.5 rounded hover:bg-gray-200 text-gray-400 hover:text-gray-600" onClick={(e) => { e.stopPropagation(); removeDocType(t); }} onMouseDown={(e) => e.stopPropagation()}><span>×</span></button>
-                </div>
-              ))}
-              {getAvailableToAdd().length > 0 && (
-                <>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel className="text-xs text-gray-400">Add</DropdownMenuLabel>
-                  {getAvailableToAdd().map(t => (
-                    <DropdownMenuItem key={t} className="text-gray-400" onClick={() => restoreDocType(t)}>
-                      <span className="mr-1">+</span> {t}
-                    </DropdownMenuItem>
-                  ))}
-                </>
-              )}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", statusFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                {statusFilter || "Status"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => setStatusFilter("")}>All statuses</DropdownMenuItem>
-              {STATUSES.map(s => (
-                <DropdownMenuItem key={s} onClick={() => setStatusFilter(s)}>
-                  <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: (STATUS_COLORS as any)?.[s] ?? "#999" }} />{s}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {visibleFilters.direction && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", directionFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {directionFilter || "Direction"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                  {clientFilter || "Клиент"}
+                  <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setDirectionFilter("")}>All directions</DropdownMenuItem>
-                {directionOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDirectionFilter(d)}>{d}</DropdownMenuItem>)}
+                <DropdownMenuItem onClick={() => setClientFilter("")}>Все клиенты</DropdownMenuItem>
+                {clientOptions.map(c => <DropdownMenuItem key={c} onClick={() => setClientFilter(c)}>{c}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
-          )}
 
-          {visibleFilters.year && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", yearFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {yearFilter || "Year"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                  {kamFilter || "КАМ"}
+                  <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setYearFilter("")}>All years</DropdownMenuItem>
-                {yearOptions.map(y => <DropdownMenuItem key={y} onClick={() => setYearFilter(y)}>{y}</DropdownMenuItem>)}
+                <DropdownMenuItem onClick={() => setKamFilter("")}>Все КАМ</DropdownMenuItem>
+                {kamOptions.map(k => <DropdownMenuItem key={k} onClick={() => setKamFilter(k)}>{k}</DropdownMenuItem>)}
               </DropdownMenuContent>
             </DropdownMenu>
-          )}
 
-          {visibleFilters.month && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", monthFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {monthFilter || "Month"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                  {docTypeFilter || "Тип"}
+                  <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setMonthFilter("")}>All months</DropdownMenuItem>
-                {monthOptions.map(m => <DropdownMenuItem key={m} onClick={() => setMonthFilter(m)}>{m}</DropdownMenuItem>)}
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuItem onClick={() => setDocTypeFilter("")}>Все типы</DropdownMenuItem>
+                    {activeDocTypes.map(t => (
+                      <DropdownMenuItem key={t} onClick={() => setDocTypeFilter(t)}>{t}</DropdownMenuItem>
+                    ))}
+                {getAvailableToAdd().length > 0 && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel className="text-xs text-gray-400">Добавить</DropdownMenuLabel>
+                    {getAvailableToAdd().map(t => (
+                      <DropdownMenuItem key={t} className="text-gray-400" onClick={() => restoreDocType(t)}>
+                        <span className="mr-1">+</span> {t}
+                      </DropdownMenuItem>
+                    ))}
+                  </>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
-          )}
 
-          {visibleFilters.doManager && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", doManagerFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
-                  {doManagerFilter || "Doc Manager"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setDoManagerFilter("")}>All</DropdownMenuItem>
-                {doManagerOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDoManagerFilter(d)}>{d}</DropdownMenuItem>)}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-
-          {visibleFilters.overdue && (
             <Button
+              type="button"
               variant="outline"
               size="sm"
-              className={cn("h-9 text-sm bg-gray-50 border-gray-200", showOverdueOnly && "text-red-700 border-red-300 bg-red-50")}
-              onClick={() => setShowOverdueOnly(o => !o)}
+              className="h-9 text-sm bg-gray-50 border-gray-200"
+              onClick={() => setGroupByProject((v) => !v)}
             >
-              Overdue
+              Группировка
             </Button>
-          )}
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-400 flex-shrink-0">
-                <Settings className="w-4 h-4" />
+            {visibleFilters.direction && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                    {directionFilter || "Направление"}
+                    <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setDirectionFilter("")}>Все направления</DropdownMenuItem>
+                  {directionOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDirectionFilter(d)}>{d}</DropdownMenuItem>)}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            {visibleFilters.month && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                    {monthFilter ? MONTH_RU[monthFilter] : "Месяц"}
+                    <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setMonthFilter("")}>Все месяцы</DropdownMenuItem>
+                  {MONTH_ORDER.map(m => <DropdownMenuItem key={m} onClick={() => setMonthFilter(m)}>{MONTH_RU[m]}</DropdownMenuItem>)}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            {visibleFilters.doManager && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                    {doManagerFilter || "МенДО"}
+                    <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setDoManagerFilter("")}>Все</DropdownMenuItem>
+                  {doManagerOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDoManagerFilter(d)}>{d}</DropdownMenuItem>)}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            {viewMode === "table" && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className={cn("h-9 text-sm bg-gray-50 border-gray-200", statusFilter && "text-blue-700 border-blue-300 bg-blue-50")}>
+                    {statusFilter || "Статус"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => setStatusFilter("")}>Все статусы</DropdownMenuItem>
+                  {STATUSES.map(s => (
+                    <DropdownMenuItem key={s} onClick={() => setStatusFilter(s)}>
+                      <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: (STATUS_COLORS as any)?.[s] ?? "#999" }} />{s}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-9 w-9 text-gray-400 flex-shrink-0 hover:bg-gray-100 hover:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 data-[state=open]:bg-gray-100 data-[state=open]:text-gray-600"
+                >
+                  <Settings className="w-4 h-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-52">
+                <DropdownMenuLabel className="text-xs text-gray-400">Настройки фильтров</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuCheckboxItem checked={showOverdueOnly} onCheckedChange={() => setShowOverdueOnly((v) => !v)}>
+                  Просрочено
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuCheckboxItem checked={visibleFilters.doManager} onCheckedChange={() => toggleFilterVisibility("doManager")}>
+                  МенДО
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuCheckboxItem checked={visibleFilters.direction} onCheckedChange={() => toggleFilterVisibility("direction")}>
+                  Направление
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuCheckboxItem checked={visibleFilters.month} onCheckedChange={() => toggleFilterVisibility("month")}>
+                  Месяц
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {hasAnyFilter && (
+              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700 hover:bg-gray-100" onClick={resetFilters}>
+                <span className="mr-1">×</span> Сбросить
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-52">
-              <DropdownMenuLabel className="text-xs text-gray-400">Filter settings</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {(["direction", "year", "month", "doManager", "overdue"] as Array<keyof typeof visibleFilters>).map((key) => {
-                const labels: Record<keyof typeof visibleFilters, string> = {
-                  direction: "Direction", year: "Year", month: "Month", doManager: "Doc Manager", overdue: "Overdue",
-                };
-                return (
-                  <DropdownMenuCheckboxItem key={key} checked={visibleFilters[key]} onCheckedChange={() => toggleFilter(key)}>
-                    {labels[key]}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
+            )}
 
-        </div>
-      </div>
-
-      <div className="pb-16">
-        <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
-          <div className="px-8 py-2" style={{ display: "grid", gridTemplateColumns: PROJECT_COL_TEMPLATE, alignItems: "center" }}>
-            <div className="w-4" />
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Client</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Project ID</span>
-            <button type="button" className="inline-flex items-center gap-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider transition-colors hover:text-gray-600" onClick={() => setMonthSortDir(prev => prev === null ? "asc" : prev === "asc" ? "desc" : null)}>
-              Month
-              {monthSortDir === "asc" && <ArrowUp className="w-3.5 h-3.5" />}
-              {monthSortDir === "desc" && <ArrowDown className="w-3.5 h-3.5" />}
-            </button>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Direction</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">KAM</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Doc Manager</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Progress</span>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Amount</span>
-            <div className="w-6" />
           </div>
         </div>
+      </div>
 
-        <div className="px-8 pt-2">
-          {filteredProjects.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-              <Search className="w-10 h-10 text-gray-300" />
-              <div>
-                <p className="text-gray-700 font-medium text-base">No results found</p>
-                <p className="text-gray-400 text-sm mt-1">Try adjusting your filters</p>
-              </div>
+      {viewMode === "kanban" ? (
+        <KanbanBoard
+          search={search}
+          clientFilter={clientFilter}
+          kamFilter={kamFilter}
+          menDoFilter={doManagerFilter}
+          typeFilter={docTypeFilter}
+          directionFilter={directionFilter}
+          monthFilter={monthFilter}
+          showOverdueOnly={showOverdueOnly}
+          groupByProject={groupByProject}
+        />
+      ) : (
+        <div className="pb-16">
+          <div className="sticky top-0 z-10 border-b border-gray-100 bg-white">
+            <div className="px-8 py-2" style={{ display: "grid", gridTemplateColumns: PROJECT_COL_TEMPLATE, alignItems: "center" }}>
+              <div className="w-4" />
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>КЛИЕНТ</span>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>ПРОЕКТ</span>
+              <button type="button" className="inline-flex items-center gap-1 text-xs font-medium text-gray-400 uppercase tracking-wide transition-colors hover:text-gray-600" onClick={() => setMonthSortDir(prev => prev === null ? "asc" : prev === "asc" ? "desc" : null)} style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>
+                МЕСЯЦ
+                {monthSortDir === "asc" && <ArrowUp className="w-3.5 h-3.5" />}
+                {monthSortDir === "desc" && <ArrowDown className="w-3.5 h-3.5" />}
+              </button>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>НАПРАВЛЕНИЕ</span>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>КАМ</span>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>МенДО</span>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'left'}}>ПРОГРЕСС</span>
+              <span className="text-xs font-medium text-gray-400 uppercase tracking-wide" style={{padding: '8px 12px', fontSize: 11, letterSpacing: '0.04em', textAlign: 'right'}}>СУММА</span>
+              <div className="w-6" />
             </div>
-          ) : (
-            sortedProjects.map((project) => {
-              const docs = getFilteredDocs(project);
-              const isExpanded = expanded.has(project.id);
-              const { done, total } = project.progress;
-              const pct = total > 0 ? (done / total) * 100 : 0;
-              const overduePaymentCount = project.documents.filter(isOverduePayment).length;
+          </div>
 
-              return (
-                <div key={project.id} className="mb-1">
-                  <div className="px-4 py-3 bg-gray-50/80 rounded-lg cursor-pointer hover:bg-gray-100/70 transition-colors group" style={{ display: "grid", gridTemplateColumns: PROJECT_COL_TEMPLATE, alignItems: "center" }} onClick={() => toggleExpand(project.id)}>
-                    <ChevronDown className={cn("w-4 h-4 text-gray-400 transition-transform flex-shrink-0", !isExpanded && "-rotate-90")} />
-                    <span className="font-semibold text-sm text-gray-900 truncate">{project.client}</span>
-                    <span className="text-sm text-gray-700 font-medium">{project.code}</span>
-                    <span className="text-sm text-gray-500">{getMonthOnly(project.period)}</span>
-                    <span className="text-sm text-gray-500">{project.direction}</span>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded-full bg-slate-400 flex items-center justify-center text-[9px] font-semibold text-white flex-shrink-0">{project.kam.initials}</div>
-                      <span className="text-sm text-gray-600 truncate">{project.kam.name}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-5 h-5 rounded-full bg-slate-400 flex items-center justify-center text-[9px] font-semibold text-white flex-shrink-0">{project.doManager.initials}</div>
-                      <span className="text-sm text-gray-600 truncate">{project.doManager.name}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
-                        <div className="h-full bg-blue-500 rounded-full" style={{ width: `${pct}%` }} />
-                      </div>
-                      <span className="text-xs text-gray-500 tabular-nums">{done}/{total}</span>
-                    </div>
-                    {overduePaymentCount > 0 ? (
-                      <div className="flex items-center justify-center">
-                        <span className="inline-flex items-center justify-center h-5 w-5 text-red-500 bg-red-50 rounded-full"><AlertTriangle className="w-2.5 h-2.5" /></span>
-                      </div>
-                    ) : <div />}
-                    <span className="text-sm font-semibold text-gray-900 tabular-nums">{fmt(project.sum)}</span>
-                    <GripVertical className="w-4 h-4 text-gray-300 opacity-0 group-hover:opacity-60 transition-opacity flex-shrink-0" />
-                  </div>
+          <div className="px-8 pt-2">
+            {filteredProjects.length === 0 ? (
+              <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
+                <Search className="h-10 w-10 text-gray-300" />
+                <div>
+                  <p className="text-base font-medium text-gray-700">No results found</p>
+                  <p className="mt-1 text-sm text-gray-400">Try adjusting your filters</p>
+                </div>
+              </div>
+            ) : (
+              sortedProjects.map((project) => {
+                const docs = getFilteredDocs(project);
+                const isExpanded = expanded.has(project.id);
+                const { done, total } = project.progress;
+                const pct = total > 0 ? (done / total) * 100 : 0;
+                const overduePaymentCount = project.documents.filter(isOverduePayment).length;
 
-                  {isExpanded && docs.length > 0 && (
-                    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDocDragEnd}>
-                      <SortableContext items={docs.map((d) => `${project.id}-${d.id}`)} strategy={verticalListSortingStrategy}>
-                        <div className="w-full mt-1">
-                          <div className="sticky top-0 z-20 bg-white">
-                            <div className="grid text-[10px] uppercase text-gray-400 tracking-wider" style={{ gridTemplateColumns: DOC_COL_TEMPLATE, alignItems: "center" }}>
-                              <span className="pl-3">&nbsp;</span>
-                              <span className="px-3 py-2 font-medium">Type</span>
-                              <span className="px-3 py-2 font-medium">Status</span>
-                              <span className="px-3 py-2 text-right font-medium">Amount</span>
-                              <span className="px-3 py-2 font-medium">Doc No.</span>
-                              <span className="px-3 py-2 font-medium">Payment Plan</span>
-                              <span className="px-3 py-2 font-medium">Payment Fact</span>
-                              <span className="px-3 py-2 font-medium">Estimate</span>
-                              <span className="px-3 py-2 font-medium">Comment</span>
+                return (
+                  <div key={project.id} className="mb-1">
+                    <div className="group cursor-pointer rounded-lg bg-gray-50/80 px-4 py-3 transition-colors hover:bg-gray-100/70" style={{ display: "grid", gridTemplateColumns: PROJECT_COL_TEMPLATE, alignItems: "center" }} onClick={() => toggleExpand(project.id)}>
+                      <ChevronDown className={cn("h-4 w-4 flex-shrink-0 text-gray-400 transition-transform", !isExpanded && "-rotate-90")} />
+                      <span className="truncate text-sm font-semibold text-gray-900">{project.client}</span>
+                      <span className="text-sm font-medium text-gray-700">{project.code}</span>
+                      <span className="text-sm text-gray-500">{getMonthOnly(project.period)}</span>
+                      <span className="text-sm text-gray-500">{project.direction}</span>
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[9px] font-semibold" style={{background: 'var(--bg-accent)', color: 'var(--text-accent)'}}>{project.kam.initials}</div>
+                        <span className="truncate text-sm text-gray-600">{project.kam.name}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <div className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full text-[9px] font-semibold" style={{background: 'var(--fill-control)', color: 'var(--text-secondary)'}}>{project.doManager.initials}</div>
+                        <span className="truncate text-sm text-gray-600">{project.doManager.name}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="h-1.5 w-16 flex-shrink-0 overflow-hidden rounded-full bg-gray-200">
+                          <div className="h-full rounded-full bg-blue-500" style={{ width: `${pct}%` }} />
+                        </div>
+                        <span className="text-xs tabular-nums text-gray-500">{done}/{total}</span>
+                      </div>
+                      {overduePaymentCount > 0 ? (
+                        <div className="flex items-center justify-center">
+                          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-50 text-red-500"><AlertTriangle className="h-2.5 w-2.5" /></span>
+                        </div>
+                      ) : <div />}
+                      <span className="text-sm font-semibold tabular-nums text-gray-900">{fmt(project.sum)}</span>
+                      <GripVertical className="h-4 w-4 flex-shrink-0 text-gray-300 opacity-0 transition-opacity group-hover:opacity-60" />
+                    </div>
+
+                    {isExpanded && docs.length > 0 && (
+                      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDocDragEnd}>
+                        <SortableContext items={docs.map((d) => `${project.id}-${d.id}`)} strategy={verticalListSortingStrategy}>
+                          <div className="mt-1 w-full">
+                            <div className="sticky top-0 z-20 bg-white">
+                              <div className="grid text-[10px] uppercase tracking-wider text-gray-400" style={{ gridTemplateColumns: DOC_COL_TEMPLATE, alignItems: "center" }}>
+                                <span className="pl-3">&nbsp;</span>
+                                <span className="px-3 py-2 font-medium">Type</span>
+                                <span className="px-3 py-2 font-medium">Status</span>
+                                <span className="px-3 py-2 text-right font-medium">Amount</span>
+                                <span className="px-3 py-2 font-medium">Doc No.</span>
+                                <span className="px-3 py-2 font-medium">Payment Plan</span>
+                                <span className="px-3 py-2 font-medium">Payment Fact</span>
+                                <span className="px-3 py-2 font-medium">Estimate</span>
+                                <span className="px-3 py-2 font-medium">Comment</span>
+                              </div>
+                            </div>
+                            <div className="space-y-1">
+                              {docs.map((doc) => (
+                                <SortableDocRow key={doc.id} doc={doc} projectId={project.id} onStatusChange={handleStatusChange} onCommentChange={handleCommentChange} />
+                              ))}
                             </div>
                           </div>
-                          <div className="space-y-1">
-                            {docs.map((doc) => (
-                              <SortableDocRow key={doc.id} doc={doc} projectId={project.id} onStatusChange={handleStatusChange} onCommentChange={handleCommentChange} />
-                            ))}
-                          </div>
-                        </div>
-                      </SortableContext>
-                    </DndContext>
-                  )}
+                        </SortableContext>
+                      </DndContext>
+                    )}
 
-                  {isExpanded && (
-                    <div className="pl-8 pt-1 pb-2">
-                      <button className="text-xs text-gray-400 hover:text-gray-600 transition-colors py-1" onClick={(e) => { e.stopPropagation(); }}>
-                        + Add document
-                      </button>
-                    </div>
-                  )}
-                </div>
-              );
-            })
-          )}
+                    {isExpanded && (
+                      <div className="pb-2 pl-8 pt-1">
+                        <button className="py-1 text-xs text-gray-400 transition-colors hover:text-gray-600" onClick={(e) => { e.stopPropagation(); }}>
+                          + Add document
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       {aiOpen ? (
         <AIPanel onClose={() => setAiOpen(false)} />

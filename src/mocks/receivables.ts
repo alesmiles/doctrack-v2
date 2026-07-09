@@ -1,4 +1,4 @@
-// KAMs consistent with the Clients section: Kirill P. (KP), Alina S. (AS), Polina V. (PV)
+// KAMs consistent with the Clients section: Кирилл П. (KP), Алина С. (AS), Полина В. (PV)
 export interface ReceivablePayment {
   id: number;
   description: string;
@@ -18,9 +18,9 @@ export interface ReceivableProject {
   payments: ReceivablePayment[];
 }
 
-const KP = { initials: "KP", name: "Kirill P." };
-const AS = { initials: "AS", name: "Alina S." };
-const PV = { initials: "PV", name: "Polina V." };
+const KP = { initials: "KP", name: "Кирилл П." };
+const AS = { initials: "AS", name: "Алина С." };
+const PV = { initials: "PV", name: "Полина В." };
 
 // Exactly 3 projects with overdue payments (TODAY = 2026-06-12):
 // ALF-8 (pay1, plan 27.05), GEO-1 (pay4, plan 01.06), BRZ-3 (pay5, plan 04.06)

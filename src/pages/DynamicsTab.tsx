@@ -494,7 +494,7 @@ const TREND_SUBTITLE = "Nov 2025 → Jun 2026 · 8-month history";
 export function DynamicsTab() {
   const [selectedMonth, setSelectedMonth] = useState<MonthKey>('June 2026');
   const [selectedClient, setSelectedClient] = useState("Yandex");
-  const [selectedKam, setSelectedKam] = useState("Kirill P.");
+  const [selectedKam, setSelectedKam] = useState("Кирилл П.");
   const [clientShowAll, setClientShowAll] = useState(false);
   const [kamShowAll, setKamShowAll] = useState(false);
 

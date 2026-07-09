@@ -29,29 +29,40 @@ export const STATUS_BG: Record<string, string> = {
 };
 
 export const DOC_TYPE_ORDER = [
-  "Contract",
-  "Annex",
-  "Addendum",
-  "Order",
-  "Invoice",
-  "UPD",
-  "Act",
-  "Tax Invoice",
-  "Principal Report",
-  "Agency Contract",
+  "Договор",
+  "Приложение",
+  "Счёт",
+  "УПД",
+  "Акт",
+  "СФ",
 ];
 
 export const CLIENT_DOC_TYPES: Record<string, string[]> = {
-  Yandex:         ["Contract", "Annex", "Addendum", "Invoice", "UPD", "Act", "Tax Invoice"],
-  Sber:           ["Contract", "Annex", "Order", "Invoice", "Act", "Principal Report"],
-  Avito:          ["Contract", "Annex", "Addendum", "Invoice", "UPD", "Act"],
-  "Alfa-Bank TG": ["Order", "Addendum", "Agency Contract", "Invoice", "Tax Invoice", "Act", "UPD", "Principal Report"],
+  Yandex:         ["Договор", "Приложение", "Счёт", "УПД", "Акт", "СФ"],
+  Sber:           ["Договор", "Приложение", "Счёт", "Акт", "СФ"],
+  Avito:          ["Договор", "Приложение", "Счёт", "УПД", "Акт", "СФ"],
+  "Alfa-Bank TG": ["Договор", "Приложение", "Счёт", "УПД", "Акт", "СФ"],
 };
 
 export const MONTH_ORDER = [
   "January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December",
 ];
+
+export const MONTH_RU: Record<string, string> = {
+  January: "Январь",
+  February: "Февраль",
+  March: "Март",
+  April: "Апрель",
+  May: "Май",
+  June: "Июнь",
+  July: "Июль",
+  August: "Август",
+  September: "Сентябрь",
+  October: "Октябрь",
+  November: "Ноябрь",
+  December: "Декабрь",
+};
 
 export const PROJECT_COL_TEMPLATE = "32px minmax(160px, 16%) minmax(96px, 8%) minmax(88px, 7%) minmax(104px, 9%) minmax(120px, 11%) minmax(120px, 11%) minmax(130px, 12%) 24px minmax(135px, 12%) 24px";
 export const DOC_COL_TEMPLATE = "40px minmax(140px, 14%) minmax(170px, 16%) minmax(90px, 9%) minmax(100px, 10%) minmax(130px, 11%) minmax(110px, 11%) minmax(110px, 11%) minmax(180px, 13%)";

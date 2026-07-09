@@ -42,9 +42,9 @@ export const debtByClient = [
 ];
 
 export const debtByKam = [
-  { kam: "Kirill P.", total: 4_850_000, overdue: 1_590_000 },
-  { kam: "Alina S.",  total: 4_200_000, overdue: 1_350_000 },
-  { kam: "Polina V.", total: 3_350_000, overdue: 860_000 },
+  { kam: "Кирилл П.", total: 4_850_000, overdue: 1_590_000 },
+  { kam: "Алина С.",  total: 4_200_000, overdue: 1_350_000 },
+  { kam: "Полина В.", total: 3_350_000, overdue: 860_000 },
 ];
 
 export const aging = [
@@ -82,9 +82,9 @@ const debtByClient1y = [
 ];
 
 const debtByKam1y = [
-  { kam: "Kirill P.", total: 7_100_000, overdue: 2_200_000 },
-  { kam: "Alina S.",  total: 6_140_000, overdue: 1_850_000 },
-  { kam: "Polina V.", total: 4_960_000, overdue: 1_050_000 },
+  { kam: "Кирилл П.", total: 7_100_000, overdue: 2_200_000 },
+  { kam: "Алина С.",  total: 6_140_000, overdue: 1_850_000 },
+  { kam: "Полина В.", total: 4_960_000, overdue: 1_050_000 },
 ];
 
 // Aging 1y: sum ≈ 5_100_000, total clients = 19
@@ -152,9 +152,9 @@ const PV_DEBT = [300, 500, 800, 1200, 1800, 2400, 3000, 3350].map(v => v * 1000)
 const PV_DAYS = [0, 0, 5, 8, 12, 15, 16, 14];
 
 export const kamTrend: Record<string, { month: string; debt: number; days: number }[]> = {
-  "Kirill P.": ALL_MONTHS.map((m, i) => ({ month: m, debt: KP_DEBT[i], days: KP_DAYS[i] })),
-  "Alina S.":  ALL_MONTHS.map((m, i) => ({ month: m, debt: AS_DEBT[i], days: AS_DAYS[i] })),
-  "Polina V.": ALL_MONTHS.map((m, i) => ({ month: m, debt: PV_DEBT[i], days: PV_DAYS[i] })),
+  "Кирилл П.": ALL_MONTHS.map((m, i) => ({ month: m, debt: KP_DEBT[i], days: KP_DAYS[i] })),
+  "Алина С.":  ALL_MONTHS.map((m, i) => ({ month: m, debt: AS_DEBT[i], days: AS_DAYS[i] })),
+  "Полина В.": ALL_MONTHS.map((m, i) => ({ month: m, debt: PV_DEBT[i], days: PV_DAYS[i] })),
 };
 
 // ── Month-key types and per-month KPI ─────────────────────────────────────────
@@ -197,9 +197,9 @@ const debtByClientJul: ClientRow[] = [
   { client: "Briz",          total: 350_000,   overdue: 0 },
 ];
 const debtByKamJul: KamRow[] = [
-  { kam: "Kirill P.", total: 2_200_000, overdue: 0 },
-  { kam: "Alina S.",  total: 1_500_000, overdue: 0 },
-  { kam: "Polina V.", total: 1_500_000, overdue: 0 },
+  { kam: "Кирилл П.", total: 2_200_000, overdue: 0 },
+  { kam: "Алина С.",  total: 1_500_000, overdue: 0 },
+  { kam: "Полина В.", total: 1_500_000, overdue: 0 },
 ];
 const agingJul: AgingRow[] = [
   { bucket: "1–7 days",   amount: 0, clients: 0 },
@@ -224,9 +224,9 @@ const debtByClientAug: ClientRow[] = [
   { client: "Briz",    total: 350_000, overdue: 0 },
 ];
 const debtByKamAug: KamRow[] = [
-  { kam: "Alina S.",  total: 1_200_000, overdue: 0 },
-  { kam: "Kirill P.", total: 900_000,   overdue: 0 },
-  { kam: "Polina V.", total: 800_000,   overdue: 0 },
+  { kam: "Алина С.",  total: 1_200_000, overdue: 0 },
+  { kam: "Кирилл П.", total: 900_000,   overdue: 0 },
+  { kam: "Полина В.", total: 800_000,   overdue: 0 },
 ];
 const agingAug: AgingRow[] = [
   { bucket: "1–7 days",   amount: 0, clients: 0 },
@@ -260,9 +260,9 @@ const debtByClientAll: ClientRow[] = [
   { client: "EcoStroy",      total: 200_000,   overdue: 0 },
 ];
 const debtByKamAll: KamRow[] = [
-  { kam: "Kirill P.", total: 9_150_000, overdue: 1_590_000 },
-  { kam: "Alina S.",  total: 7_900_000, overdue: 1_350_000 },
-  { kam: "Polina V.", total: 6_150_000, overdue: 860_000 },
+  { kam: "Кирилл П.", total: 9_150_000, overdue: 1_590_000 },
+  { kam: "Алина С.",  total: 7_900_000, overdue: 1_350_000 },
+  { kam: "Полина В.", total: 6_150_000, overdue: 860_000 },
 ];
 
 export const barDataByMonth: Record<MonthKey, BarDataSet> = {
