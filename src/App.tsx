@@ -3,8 +3,12 @@ import { Toaster } from "sonner"
 import { Sidebar } from "./components/Sidebar"
 import { ClientsPage } from "./pages/ClientsPage"
 import { ContractorsPage } from "./pages/ContractorsPage"
+import { InternalContractorsPage } from "./pages/InternalContractorsPage"
 import { ReceivablesPage } from "./pages/ReceivablesPage"
 import { DocumentEditorPage } from "./pages/DocumentEditorPage"
+import { ClientsDirectoryPage } from "./pages/base/ClientsDirectoryPage"
+import { ContractorsDirectoryPage } from "./pages/base/ContractorsDirectoryPage"
+import { EmployeesDirectoryPage } from "./pages/base/EmployeesDirectoryPage"
 import { CreateProjectModal } from "./components/CreateProjectModal"
 import { CreateClientDocModal, type ClientDocFormData } from "./components/CreateClientDocModal"
 import { CreateVendorDocModal } from "./components/CreateVendorDocModal"
@@ -29,11 +33,17 @@ export default function App() {
       case "clients":
         return <ClientsPage />
       case "contractors-client":
-        return <ContractorsPage subPage="client" onNavigate={setActivePage} />
+        return <ContractorsPage onNavigate={setActivePage} />
       case "contractors-internal":
-        return <ContractorsPage subPage="internal" onNavigate={setActivePage} />
+        return <InternalContractorsPage />
       case "receivables":
         return <ReceivablesPage />
+      case "base-clients":
+        return <ClientsDirectoryPage />
+      case "base-contractors":
+        return <ContractorsDirectoryPage />
+      case "employees":
+        return <EmployeesDirectoryPage />
       case "document-editor":
         return (
           <DocumentEditorPage

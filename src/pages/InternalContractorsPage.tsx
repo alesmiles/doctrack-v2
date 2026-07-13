@@ -13,8 +13,8 @@ import {
   DropdownMenuLabel, DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { ViewSwitcher } from "@/components/ViewSwitcher";
-import { ContractorKanbanBoard } from "@/components/ContractorKanbanBoard";
-import { contractorKanbanDocuments } from "@/mocks/contractorsKanbanMockData";
+import { InternalContractorKanbanBoard } from "@/components/InternalContractorKanbanBoard";
+import { INTERNAL_CONTRACTORS, internalContractorKanbanDocuments } from "@/mocks/internalContractorsMockData";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -36,38 +36,32 @@ const CONTRACTOR_STATUS_BG: Record<ContractorDocStatus, string> = {
   "Signed EDO":   "bg-emerald-50 text-emerald-700",
 };
 
-const CONTRACTOR_COL = "32px minmax(160px,16%) minmax(90px,8%) minmax(88px,7%) minmax(110px,10%) minmax(110px,10%) minmax(120px,11%) minmax(120px,11%) minmax(130px,12%) minmax(120px,10%)";
+const INTERNAL_COL = "32px minmax(160px,16%) minmax(90px,8%) minmax(88px,7%) minmax(110px,10%) minmax(120px,11%) minmax(120px,11%) minmax(130px,12%) minmax(120px,10%)";
 const DOC_COL = "40px minmax(140px,14%) minmax(170px,16%) minmax(100px,10%) minmax(110px,10%) minmax(130px,12%) minmax(110px,11%) minmax(110px,11%) minmax(180px,13%)";
 
 const MONTH_ORDER_MAP = Object.fromEntries(MONTH_ORDER.map((m, i) => [m, i]));
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-interface ContractorsPageProps {
-  onNavigate?: (page: string) => void;
-}
-
-export function ContractorsPage(_props: ContractorsPageProps) {
-  const [contractors, setContractors] = useState<ContractorProject[]>(() => CLIENT_CONTRACTORS.slice());
+export function InternalContractorsPage() {
+  const [contractors, setContractors] = useState<ContractorProject[]>(() => INTERNAL_CONTRACTORS.slice());
 
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
   const [viewMode, setViewMode] = useState<"kanban" | "table">("kanban");
-  const [groupByProject, setGroupByProject] = useState(false);
+  const [groupByDirection, setGroupByDirection] = useState(false);
 
   const [search, setSearch] = useState("");
-  const [clientFilter, setClientFilter] = useState("");
   const [contractorFilter, setContractorFilter] = useState("");
   const [responsibleFilter, setResponsibleFilter] = useState("");
   const [docTypeFilter, setDocTypeFilter] = useState("");
-
   const [directionFilter, setDirectionFilter] = useState("");
+
   const [docManagerFilter, setDocManagerFilter] = useState("");
   const [showOverdueOnly, setShowOverdueOnly] = useState(false);
 
   const [contractorQuery, setContractorQuery] = useState("");
-  const [clientQuery, setClientQuery] = useState("");
 
-  const [visibleFilters, setVisibleFilters] = useState({ direction: false, docManager: false });
+  const [visibleFilters, setVisibleFilters] = useState({ docManager: false });
 
   const [monthSort, setMonthSort] = useState<null | "asc" | "desc">(null);
 
@@ -75,32 +69,26 @@ export function ContractorsPage(_props: ContractorsPageProps) {
     const wasOn = visibleFilters[key];
     setVisibleFilters(prev => ({ ...prev, [key]: !prev[key] }));
     if (wasOn) {
-      if (key === "direction") setDirectionFilter("");
       if (key === "docManager") setDocManagerFilter("");
     }
   };
 
-  const clientOptions = Array.from(new Set([
-    ...contractors.map(p => p.client).filter(Boolean) as string[],
-    ...contractorKanbanDocuments.map(d => d.clientName).filter(Boolean) as string[],
-  ]));
   const contractorOptions = Array.from(new Set([
     ...contractors.map(p => p.contractor),
-    ...contractorKanbanDocuments.map(d => d.contractorName),
+    ...internalContractorKanbanDocuments.map(d => d.contractorName),
   ]));
   const visibleContractorOptions = contractorOptions.filter(c => c.toLowerCase().includes(contractorQuery.toLowerCase()));
-  const visibleClientOptions = clientOptions.filter(c => c.toLowerCase().includes(clientQuery.toLowerCase()));
   const responsibleOptions = Array.from(new Set([
     ...contractors.map(p => p.responsible.name),
-    ...contractorKanbanDocuments.map(d => d.responsibleName).filter(Boolean) as string[],
+    ...internalContractorKanbanDocuments.map(d => d.responsibleName).filter(Boolean) as string[],
   ]));
   const directionOptions = Array.from(new Set([
-    ...contractors.map(p => p.direction),
-    ...contractorKanbanDocuments.map(d => d.direction).filter(Boolean) as string[],
+    ...contractors.map(p => p.direction).filter(Boolean) as string[],
+    ...internalContractorKanbanDocuments.map(d => d.direction).filter(Boolean) as string[],
   ]));
   const docManagerOptions = Array.from(new Set([
     ...contractors.map(p => p.doManager.name),
-    ...contractorKanbanDocuments.map(d => d.doManagerName).filter(Boolean) as string[],
+    ...internalContractorKanbanDocuments.map(d => d.doManagerName).filter(Boolean) as string[],
   ]));
   const docTypeOptions = Array.from(new Set([
     ...DOC_TYPE_ORDER,
@@ -121,10 +109,9 @@ export function ContractorsPage(_props: ContractorsPageProps) {
   });
 
   const filteredData = contractors.filter(p => {
-    if (clientFilter && p.client !== clientFilter) return false;
     if (contractorFilter && p.contractor !== contractorFilter) return false;
     if (responsibleFilter && p.responsible.name !== responsibleFilter) return false;
-    if (visibleFilters.direction && directionFilter && p.direction !== directionFilter) return false;
+    if (directionFilter && p.direction !== directionFilter) return false;
     if (visibleFilters.docManager && docManagerFilter && p.doManager.name !== docManagerFilter) return false;
     if (showOverdueOnly && !p.isOverdue) return false;
     if (search) {
@@ -148,14 +135,14 @@ export function ContractorsPage(_props: ContractorsPageProps) {
     return docs;
   };
 
-  const hasAnyFilter = !!(search || clientFilter || contractorFilter || responsibleFilter || docTypeFilter
-    || directionFilter || docManagerFilter || showOverdueOnly || groupByProject);
+  const hasAnyFilter = !!(search || contractorFilter || responsibleFilter || docTypeFilter
+    || directionFilter || docManagerFilter || showOverdueOnly || groupByDirection);
 
   const resetFilters = () => {
-    setSearch(""); setClientFilter(""); setContractorFilter(""); setResponsibleFilter(""); setDocTypeFilter("");
+    setSearch(""); setContractorFilter(""); setResponsibleFilter(""); setDocTypeFilter("");
     setDirectionFilter(""); setDocManagerFilter(""); setShowOverdueOnly(false);
-    setGroupByProject(false);
-    setVisibleFilters({ direction: false, docManager: false });
+    setGroupByDirection(false);
+    setVisibleFilters({ docManager: false });
   };
 
   return (
@@ -163,7 +150,7 @@ export function ContractorsPage(_props: ContractorsPageProps) {
       <div className="flex flex-wrap items-center justify-between gap-3 px-8 pt-8 pb-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Подрядчики</h1>
-          <p className="text-sm text-gray-500">по клиентским проектам</p>
+          <p className="text-sm text-gray-500">внутренние</p>
         </div>
         <div className="flex items-center gap-2">
           <ViewSwitcher value={viewMode} onChange={setViewMode} />
@@ -182,28 +169,6 @@ export function ContractorsPage(_props: ContractorsPageProps) {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-
-          <DropdownMenu onOpenChange={(open) => { if (!open) setClientQuery(""); }}>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
-                {clientFilter || "Клиент"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <div className="px-2 py-1.5" onKeyDown={(e) => e.stopPropagation()}>
-                <Input
-                  autoFocus
-                  placeholder="Поиск…"
-                  className="h-8 text-sm"
-                  value={clientQuery}
-                  onChange={(e) => setClientQuery(e.target.value)}
-                />
-              </div>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setClientFilter("")}>Все клиенты</DropdownMenuItem>
-              {visibleClientOptions.map(c => <DropdownMenuItem key={c} onClick={() => setClientFilter(c)}>{c}</DropdownMenuItem>)}
-            </DropdownMenuContent>
-          </DropdownMenu>
 
           <DropdownMenu onOpenChange={(open) => { if (!open) setContractorQuery(""); }}>
             <DropdownMenuTrigger asChild>
@@ -251,29 +216,27 @@ export function ContractorsPage(_props: ContractorsPageProps) {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
+                {directionFilter || "Направление"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => setDirectionFilter("")}>Все направления</DropdownMenuItem>
+              {directionOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDirectionFilter(d)}>{d}</DropdownMenuItem>)}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <Button
             type="button"
             variant="outline"
             size="sm"
             className="h-9 text-sm bg-gray-50 border-gray-200"
-            onClick={() => setGroupByProject((v) => !v)}
+            onClick={() => setGroupByDirection((v) => !v)}
           >
             Группировка
           </Button>
-
-          {visibleFilters.direction && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="h-9 text-sm bg-gray-50 border-gray-200">
-                  {directionFilter || "Направление"} <ChevronDown className="w-3.5 h-3.5 ml-1 opacity-50" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => setDirectionFilter("")}>Все направления</DropdownMenuItem>
-                {directionOptions.map(d => <DropdownMenuItem key={d} onClick={() => setDirectionFilter(d)}>{d}</DropdownMenuItem>)}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
 
           {visibleFilters.docManager && (
             <DropdownMenu>
@@ -310,10 +273,6 @@ export function ContractorsPage(_props: ContractorsPageProps) {
               <DropdownMenuCheckboxItem checked={visibleFilters.docManager} onCheckedChange={() => toggleFilter("docManager")}>
                 МенДО
               </DropdownMenuCheckboxItem>
-
-              <DropdownMenuCheckboxItem checked={visibleFilters.direction} onCheckedChange={() => toggleFilter("direction")}>
-                Направление
-              </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -327,21 +286,20 @@ export function ContractorsPage(_props: ContractorsPageProps) {
       </div>
 
       {viewMode === "kanban" ? (
-        <ContractorKanbanBoard
+        <InternalContractorKanbanBoard
           search={search}
-          clientFilter={clientFilter}
           contractorFilter={contractorFilter}
           responsibleFilter={responsibleFilter}
           typeFilter={docTypeFilter}
           directionFilter={directionFilter}
           doManagerFilter={docManagerFilter}
           showOverdueOnly={showOverdueOnly}
-          groupByProject={groupByProject}
+          groupByDirection={groupByDirection}
         />
       ) : (
       <div className="pb-16">
         <div className="sticky top-0 bg-white z-10 border-b border-gray-100">
-          <div className="px-8 py-2" style={{ display: "grid", gridTemplateColumns: CONTRACTOR_COL, alignItems: "center" }}>
+          <div className="px-8 py-2" style={{ display: "grid", gridTemplateColumns: INTERNAL_COL, alignItems: "center" }}>
             <div className="w-4" />
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Подрядчик</span>
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Код проекта</span>
@@ -354,7 +312,6 @@ export function ContractorsPage(_props: ContractorsPageProps) {
               {monthSort === "asc" && <ArrowUp className="w-3.5 h-3.5" />}
               {monthSort === "desc" && <ArrowDown className="w-3.5 h-3.5" />}
             </button>
-            <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Клиент</span>
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Направление</span>
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Ответственный</span>
             <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">МенДО</span>
@@ -382,15 +339,14 @@ export function ContractorsPage(_props: ContractorsPageProps) {
               <div key={project.id} className="mb-1">
                 <div
                   className="px-4 py-3 bg-gray-50/80 rounded-lg cursor-pointer hover:bg-gray-100/70 transition-colors group"
-                  style={{ display: "grid", gridTemplateColumns: CONTRACTOR_COL, alignItems: "center" }}
+                  style={{ display: "grid", gridTemplateColumns: INTERNAL_COL, alignItems: "center" }}
                   onClick={() => toggleExpand(project.id)}
                 >
                   <ChevronDown className={cn("w-4 h-4 text-gray-400 transition-transform flex-shrink-0", !isExpanded && "-rotate-90")} />
                   <span className="font-semibold text-sm text-gray-900 truncate">{project.contractor}</span>
                   <span className="text-sm text-gray-700 font-medium">{project.projectCode}</span>
                   <span className="text-sm text-gray-500">{project.month}</span>
-                  <span className="text-sm text-gray-500">{project.client || "—"}</span>
-                  <span className="text-sm text-gray-500 truncate">{project.direction}</span>
+                  <span className="text-sm text-gray-500 truncate">{project.direction || "—"}</span>
                   <div className="flex items-center gap-1.5">
                     <div className={cn("w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-semibold text-white flex-shrink-0", project.responsible.color)}>{project.responsible.initials}</div>
                     <span className="text-sm text-gray-600 truncate">{project.responsible.name}</span>
@@ -546,128 +502,4 @@ export function ContractorsPage(_props: ContractorsPageProps) {
   );
 }
 
-export default ContractorsPage;
-
-// ─── Mock data ────────────────────────────────────────────────────────────────
-
-export const CLIENT_CONTRACTORS: ContractorProject[] = [
-  {
-    id: 1,
-    contractor: "ИП Смирнов А.В.",
-    projectCode: "YAN-1",
-    month: "March",
-    year: 2026,
-    client: "Яндекс",
-    direction: "Media",
-    responsible: { initials: "КВ", name: "Кирилл В.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
-    progress: { done: 2, total: 5 },
-    sum: 1850000,
-    isOverdue: true,
-    documents: [
-      { id: 1, type: "Договор", status: "Signed ORIG", sum: 1850000, docNumber: "FC-44", datePlan: "01.03.2026", dateFact: "28.02.2026", hasFile: true, comment: "" },
-      { id: 2, type: "Акт",     status: "Received",    sum: 1850000, docNumber: "FA-44", datePlan: "01.03.2026", dateFact: null,         hasFile: false, comment: "", isOverdue: true, overdueDays: 103 },
-      { id: 3, type: "Счёт",    status: "Requested",   sum: 1850000, docNumber: null,    datePlan: "15.03.2026", dateFact: null,         hasFile: false, comment: "" },
-      { id: 4, type: "УПД",     status: "Not Created", sum: null,    docNumber: null,    datePlan: "31.03.2026", dateFact: null,         hasFile: false, comment: "" },
-      { id: 5, type: "Акт",     status: "Not Created", sum: null,    docNumber: null,    datePlan: "05.04.2026", dateFact: null,         hasFile: false, comment: "" },
-    ],
-  },
-  {
-    id: 2,
-    contractor: "ООО МедиаСервис",
-    projectCode: "SBR-1",
-    month: "January",
-    year: 2026,
-    client: "Сбер",
-    direction: "TV",
-    responsible: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
-    progress: { done: 4, total: 4 },
-    sum: 8400000,
-    isOverdue: false,
-    documents: [
-      { id: 1, type: "Договор", status: "Signed ORIG", sum: 8400000, docNumber: "C-118",  datePlan: "15.01.2026", dateFact: "12.01.2026", hasFile: true,  comment: "" },
-      { id: 2, type: "Счёт",    status: "Signed EDO",  sum: 8400000, docNumber: "I-554",  datePlan: "20.01.2026", dateFact: "18.01.2026", hasFile: false, comment: "" },
-      { id: 3, type: "Акт",     status: "Signed ORIG", sum: 8400000, docNumber: "A-89",   datePlan: "31.01.2026", dateFact: "29.01.2026", hasFile: false, comment: "TV placement February" },
-      { id: 4, type: "УПД",     status: "Signed EDO",  sum: 8400000, docNumber: "U-34",   datePlan: "05.02.2026", dateFact: "03.02.2026", hasFile: false, comment: "" },
-    ],
-  },
-  {
-    id: 3,
-    contractor: "ИП Горелова Т.С.",
-    projectCode: "AVI-2",
-    month: "March",
-    year: 2026,
-    client: "Авито",
-    direction: "Influence",
-    responsible: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
-    progress: { done: 1, total: 4 },
-    sum: 980000,
-    isOverdue: true,
-    documents: [
-      { id: 1, type: "Договор", status: "Signed ORIG", sum: 980000, docNumber: "FC-51", datePlan: "10.03.2026", dateFact: "08.03.2026", hasFile: true,  comment: "" },
-      { id: 2, type: "Акт",     status: "Requested",   sum: 980000, docNumber: null,    datePlan: "01.04.2026", dateFact: null,         hasFile: false, comment: "Waiting from blogger", isOverdue: true, overdueDays: 72 },
-      { id: 3, type: "Акт",     status: "Not Created", sum: null,   docNumber: null,    datePlan: "15.04.2026", dateFact: null,         hasFile: false, comment: "" },
-      { id: 4, type: "Счёт",    status: "Not Created", sum: null,   docNumber: null,    datePlan: "20.04.2026", dateFact: null,         hasFile: false, comment: "" },
-    ],
-  },
-  {
-    id: 4,
-    contractor: "ООО Контент Лаб",
-    projectCode: "HOZ-3",
-    month: "February",
-    year: 2026,
-    direction: "Content",
-    responsible: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
-    progress: { done: 3, total: 5 },
-    sum: 2200000,
-    isOverdue: false,
-    documents: [
-      { id: 1, type: "Договор",     status: "Signed ORIG", sum: 2200000, docNumber: "C-77",   datePlan: "01.02.2026", dateFact: "29.01.2026", hasFile: true,  comment: "" },
-      { id: 2, type: "Приложение",  status: "Signed ORIG", sum: 2200000, docNumber: "A-12",   datePlan: "05.02.2026", dateFact: "03.02.2026", hasFile: false, comment: "" },
-      { id: 3, type: "Счёт",        status: "Signed EDO",  sum: 2200000, docNumber: "I-203",  datePlan: "10.02.2026", dateFact: "08.02.2026", hasFile: false, comment: "" },
-      { id: 4, type: "Акт",         status: "Received",    sum: 2200000, docNumber: "A-44",   datePlan: "28.02.2026", dateFact: null,         hasFile: false, comment: "Under accountant review" },
-      { id: 5, type: "УПД",         status: "Not Created", sum: null,    docNumber: null,     datePlan: "05.03.2026", dateFact: null,         hasFile: false, comment: "" },
-    ],
-  },
-  {
-    id: 5,
-    contractor: "ИП Рябов Д.О.",
-    projectCode: "YAN-3",
-    month: "February",
-    year: 2026,
-    client: "Яндекс",
-    direction: "Context",
-    responsible: { initials: "АС", name: "Алина С.", color: "bg-zinc-400" },
-    doManager: { initials: "ИМ", name: "Инна М.", color: "bg-stone-400" },
-    progress: { done: 0, total: 3 },
-    sum: 550000,
-    isOverdue: true,
-    documents: [
-      { id: 1, type: "Договор", status: "Requested",   sum: 550000, docNumber: null, datePlan: "15.02.2026", dateFact: null, hasFile: true,  comment: "Remind contractor", isOverdue: true, overdueDays: 117 },
-      { id: 2, type: "Акт",     status: "Not Created", sum: null,   docNumber: null, datePlan: "01.03.2026", dateFact: null, hasFile: false, comment: "" },
-      { id: 3, type: "Акт",     status: "Not Created", sum: null,   docNumber: null, datePlan: "05.03.2026", dateFact: null, hasFile: false, comment: "" },
-    ],
-  },
-  {
-    id: 6,
-    contractor: "ООО Диджитал Про",
-    projectCode: "HOZ-1",
-    month: "April",
-    year: 2026,
-    direction: "Media",
-    responsible: { initials: "КП", name: "Кирилл П.", color: "bg-slate-400" },
-    doManager: { initials: "ПВ", name: "Полина В.", color: "bg-neutral-400" },
-    progress: { done: 2, total: 4 },
-    sum: 3700000,
-    isOverdue: false,
-    documents: [
-      { id: 1, type: "Договор",     status: "Signed ORIG", sum: 3700000, docNumber: "C-99",   datePlan: "05.04.2026", dateFact: "03.04.2026", hasFile: true,  comment: "" },
-      { id: 2, type: "Приложение",  status: "Signed ORIG", sum: 3700000, docNumber: "AD-14",  datePlan: "10.04.2026", dateFact: "09.04.2026", hasFile: false, comment: "" },
-      { id: 3, type: "Счёт",        status: "Received",    sum: 3700000, docNumber: "I-612",  datePlan: "20.04.2026", dateFact: null,         hasFile: false, comment: "Awaiting confirmation" },
-      { id: 4, type: "Акт",         status: "Not Created", sum: null,    docNumber: null,     datePlan: "30.04.2026", dateFact: null,         hasFile: false, comment: "" },
-    ],
-  },
-];
+export default InternalContractorsPage;

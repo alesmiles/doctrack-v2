@@ -5,7 +5,7 @@ interface KanbanCardProps {
   document: KanbanDocument;
 }
 
-const DOC_TYPE_BADGE_STYLES: Record<string, { bg: string; color: string }> = {
+export const DOC_TYPE_BADGE_STYLES: Record<string, { bg: string; color: string }> = {
   "Договор": { bg: "#DCFCE7", color: "#16A34A" },
   "Приложение": { bg: "#EBF2FF", color: "#2563EB" },
   "УПД": { bg: "#F3E8FF", color: "#7C3AED" },

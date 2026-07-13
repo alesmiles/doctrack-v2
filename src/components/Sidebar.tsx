@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, PlusCircle, FileText, Users, Handshake, RussianRuble, MailCheck, Building, HardHat, UserCog, Archive, Settings, ShieldCheck } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, PlusCircle, FileText, Users, Handshake, Building2, RussianRuble, MailCheck, Building, HardHat, UserCog, Archive, Settings, ShieldCheck } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +15,6 @@ interface SidebarProps {
 
 export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateProject, onCreateClientDoc, onCreateVendorDoc }: SidebarProps) {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [isContractorsOpen, setIsContractorsOpen] = useState(false);
   const sections: Array<{ title: string; items: Array<{ id: string; icon: any; label: string; badge?: number }> }> = [
     {
       title: "ДОКУМЕНТООБОРОТ",
@@ -109,43 +108,31 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
             {!collapsed && <span className="truncate">Клиенты</span>}
           </button>
 
-          {/* Contractors flyout */}
-          <DropdownMenu open={isContractorsOpen} onOpenChange={setIsContractorsOpen}>
-            <DropdownMenuTrigger asChild>
-              <button
-                className={cn(
-                  "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
-                  (activePage === "contractors-client" || activePage === "contractors-internal")
-                    ? "bg-blue-50 text-blue-700"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                  collapsed && "justify-center px-0"
-                )}
-                title={collapsed ? "Подрядчики" : undefined}
-              >
-                <Handshake className={cn("w-4 h-4 flex-shrink-0", (activePage === "contractors-client" || activePage === "contractors-internal") && "text-blue-600")} />
-                {!collapsed && (
-                  <>
-                    <span className="truncate">Подрядчики</span>
-                    <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", isContractorsOpen && "rotate-180")} />
-                  </>
-                )}
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="right" align="start" className="w-48">
-              <DropdownMenuItem
-                onClick={() => onNavigate("contractors-client")}
-                className={cn(activePage === "contractors-client" && "bg-blue-50 text-blue-700 font-medium")}
-              >
-                Клиент
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => onNavigate("contractors-internal")}
-                className={cn(activePage === "contractors-internal" && "bg-blue-50 text-blue-700 font-medium")}
-              >
-                Внутренний
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <button
+            className={cn(
+              "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+              activePage === "contractors-client" ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              collapsed && "justify-center px-0"
+            )}
+            onClick={() => onNavigate("contractors-client")}
+            title={collapsed ? "Подрядчики · Клиенты" : undefined}
+          >
+            <Handshake className={cn("w-4 h-4 flex-shrink-0", activePage === "contractors-client" && "text-blue-600")} />
+            {!collapsed && <span className="truncate">Подрядчики · Клиенты</span>}
+          </button>
+
+          <button
+            className={cn(
+              "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+              activePage === "contractors-internal" ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              collapsed && "justify-center px-0"
+            )}
+            onClick={() => onNavigate("contractors-internal")}
+            title={collapsed ? "Подрядчики · Внутренние" : undefined}
+          >
+            <Building2 className={cn("w-4 h-4 flex-shrink-0", activePage === "contractors-internal" && "text-blue-600")} />
+            {!collapsed && <span className="truncate">Подрядчики · Внутренние</span>}
+          </button>
         </div>
 
         {/* Rest sections */}
