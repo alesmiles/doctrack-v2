@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/milevichus/doctrack-v2-local status --short)",
+      "Bash(lsof -i :5174 -sTCP:LISTEN -t)",
+      "Bash(kill 53504)",
+      "Bash(lsof -i :5173 -sTCP:LISTEN -t)",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_press_key",
+      "Bash(pkill -f \"vite\")",
+      "Bash(rm -f /Users/milevichus/doctrack-v2-local/contractors-*.png)",
+      "mcp__playwright__browser_tabs",
+      "Bash(rm -f *.png && rm -rf .playwright-mcp && git status --short)",
+      "mcp__playwright__browser_type",
+      "Bash(rm -f *.png && rm -rf .playwright-mcp && pkill -f \"vite\" 2>/dev/null; git status --short)",
+      "Bash(rm -f *.png && rm -rf .playwright-mcp && pkill -f \"vite\" 2>/dev/null; npx tsc --noEmit 2>&1 | head -30; git status --short)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(npm run *)",
+      "Bash(git stash *)",
+      "Bash(echo \"---EXITCODE $?---\")",
+      "Bash(grep -nE '#[0-9a-fA-F]{3,6}')",
+      "Bash(grep -nE '#[0-9a-fA-F]{3,6}' src/data/soglasovanie-seed.ts src/mocks/users.ts src/components/AppHeader.tsx)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173)",
+      "Bash(echo \"exit: $?\")",
+      "mcp__playwright__browser_find",
+      "Bash(echo \"\\(exit code: $?\\)\")",
+      "Bash(npx eslint *)"
+    ],
+    "additionalDirectories": [
+      "/Users/milevichus/doctrack-v2-local"
+    ]
+  }
+}
