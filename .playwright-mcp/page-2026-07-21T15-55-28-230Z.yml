@@ -1,0 +1,219 @@
+- generic:
+  - generic:
+    - generic:
+      - banner:
+        - button:
+          - generic: "Роль:"
+          - generic: КАМ
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - generic:
+                - button:
+                  - generic: Проект
+                - button:
+                  - generic: Документ клиента
+                - button:
+                  - generic: Документ подрядчика
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - generic:
+                - button:
+                  - generic: Клиентские
+                - button:
+                  - generic: Внутренние
+              - button:
+                - generic: Сметы
+              - generic:
+                - button:
+                  - generic: Клиентские
+                - button:
+                  - generic: Подрядчиков
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Сметы
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button: Клиент
+                - button: КАМ
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: На согласовании
+                        - generic: "1"
+                    - generic:
+                      - generic:
+                        - generic: Согласована
+                        - generic: "2"
+                    - generic:
+                      - generic:
+                        - generic: Требует правок
+                        - generic: "1"
+                    - generic:
+                      - generic:
+                        - generic: Отклонена
+                        - generic: "1"
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: 08.06.2026
+                      - generic:
+                        - generic: SBR-6
+                        - text: Сбер
+                      - generic:
+                        - generic:
+                          - generic: ПВ
+                          - generic: Полина В.
+                        - generic: 620 000 ₽
+                  - generic:
+                    - generic:
+                      - generic: 20.05.2026
+                      - generic:
+                        - generic: YAN-5
+                        - text: Яндекс
+                      - generic:
+                        - generic:
+                          - generic: ПВ
+                          - generic: Полина В.
+                        - generic: 3 900 000 ₽
+                    - generic:
+                      - generic: 18.05.2026
+                      - generic:
+                        - generic: YAN-6
+                        - text: Яндекс
+                      - generic:
+                        - generic:
+                          - generic: КП
+                          - generic: Кирилл П.
+                        - generic: 7 300 000 ₽
+                      - generic: Финализируем оплату
+                  - generic:
+                    - generic:
+                      - generic: 01.06.2026
+                      - generic:
+                        - generic: ALF-12
+                        - text: Альфа-Банк ТГ
+                      - generic:
+                        - generic:
+                          - generic: КП
+                          - generic: Кирилл П.
+                        - generic: 2 450 000 ₽
+                      - generic: Правки по срокам
+                  - generic:
+                    - generic:
+                      - generic: 10.05.2026
+                      - generic:
+                        - generic: AVI-5
+                        - text: Авито
+                      - generic:
+                        - generic:
+                          - generic: АС
+                          - generic: Алина С.
+                        - generic: 5 000 000 ₽
+  - dialog [ref=e968]:
+    - generic [ref=e969]:
+      - heading "New Project" [level=2] [ref=e970]
+      - paragraph [ref=e971]: Create a project card — the foundation for document workflow
+    - generic [ref=e972]:
+      - paragraph [ref=e973]: Client & Project
+      - generic [ref=e974]:
+        - generic [ref=e975]:
+          - generic [ref=e976]: Client *
+          - combobox [active] [ref=e977] [cursor=pointer]:
+            - generic: Select client
+        - generic [ref=e980]:
+          - generic [ref=e981]: Project Code *
+          - textbox "ALF-9" [ref=e982]
+      - generic [ref=e983]:
+        - generic [ref=e984]:
+          - generic [ref=e985]: Project Name
+          - textbox "Influence Campaign March 2025" [ref=e986]
+        - generic [ref=e987]:
+          - generic [ref=e988]: Service Line
+          - combobox [ref=e989] [cursor=pointer]:
+            - generic: Select
+        - paragraph [ref=e992]: Team
+        - generic [ref=e993]:
+          - generic [ref=e994]:
+            - generic [ref=e995]: KAM
+            - combobox [ref=e996] [cursor=pointer]:
+              - generic: Select
+          - generic [ref=e999]:
+            - generic [ref=e1000]: Doc Manager
+            - combobox [ref=e1001] [cursor=pointer]:
+              - generic: Select
+        - paragraph [ref=e1004]: Default Documents
+        - paragraph [ref=e1005]: Will be added to the project automatically
+        - generic [ref=e1006]:
+          - generic [ref=e1007]:
+            - checkbox "Contract / Order" [checked] [disabled] [ref=e1008]
+            - generic [ref=e1009]: Contract / Order
+            - generic [ref=e1010]: required
+          - generic [ref=e1011]:
+            - checkbox "Annex / Estimate" [checked] [disabled] [ref=e1012]
+            - generic [ref=e1013]: Annex / Estimate
+            - generic [ref=e1014]: required
+          - generic [ref=e1015]:
+            - checkbox "Invoice" [checked] [ref=e1016] [cursor=pointer]
+            - generic [ref=e1017] [cursor=pointer]: Invoice
+            - generic [ref=e1018]: default
+          - generic [ref=e1019]:
+            - checkbox "Acceptance Act" [checked] [ref=e1020] [cursor=pointer]
+            - generic [ref=e1021] [cursor=pointer]: Acceptance Act
+            - generic [ref=e1022]: default
+          - generic [ref=e1023]:
+            - checkbox "Addendum" [ref=e1024] [cursor=pointer]
+            - generic [ref=e1025] [cursor=pointer]: Addendum
+          - generic [ref=e1026]:
+            - checkbox "UPD" [ref=e1027] [cursor=pointer]
+            - generic [ref=e1028] [cursor=pointer]: UPD
+    - generic [ref=e1029]:
+      - button "Cancel" [ref=e1030] [cursor=pointer]
+      - button "Done" [ref=e1031] [cursor=pointer]
+      - button "Create Document →" [disabled]
+    - button "Close" [ref=e1032] [cursor=pointer]

@@ -1,0 +1,208 @@
+- generic:
+  - generic:
+    - generic:
+      - banner:
+        - button:
+          - generic: "Роль:"
+          - generic: КАМ
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Согласование
+              - generic:
+                - button:
+                  - generic: Сметы
+                - button:
+                  - generic: Документы
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики · Клиенты
+              - button:
+                - generic: Подрядчики · Внутренние
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - generic:
+            - generic: IM
+            - generic:
+              - generic: Inna Mikhrabova
+              - generic: Менеджер документов
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Согласование · Документы
+            - generic:
+              - generic:
+                - button: Клиенты
+                - button: Подрядчики · клиенты
+                - button [pressed]: Подрядчики · внутр.
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button: Подрядчик
+                - button: Ответственный
+                - button: Тип
+                - button: Мои согласования
+                - button: Группировка
+                - button [expanded]
+            - generic:
+              - generic:
+                - generic:
+                  - generic: СтудияПро
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Внутр. согласование
+                            - generic: "2"
+                        - generic:
+                          - generic:
+                            - generic: С подрядчиком
+                            - generic: "1"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · мы
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · подрядчик
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подписан
+                            - generic: "0"
+                    - generic:
+                      - generic:
+                        - button:
+                          - generic: Договор №40
+                          - generic:
+                            - generic: СтудияПро
+                            - generic: 4 дн.
+                          - generic: v1
+                        - button:
+                          - generic: Приложение №3
+                          - generic:
+                            - generic: СтудияПро
+                            - generic: 1 дн.
+                          - generic: v1
+                      - generic:
+                        - button:
+                          - generic: Акт №12
+                          - generic:
+                            - generic: СтудияПро
+                            - generic: 2 дн.
+                          - generic: v2
+                - generic:
+                  - generic: АдТех Solutions
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Внутр. согласование
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: С подрядчиком
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · мы
+                            - generic: "1"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · подрядчик
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подписан
+                            - generic: "1"
+                    - generic:
+                      - generic:
+                        - button:
+                          - generic: УПД №18
+                          - generic:
+                            - generic: АдТех Solutions
+                            - generic: +3 дн.
+                          - generic: v1
+                      - generic:
+                        - button:
+                          - generic: Счёт №9
+                          - generic:
+                            - generic: АдТех Solutions
+                            - generic: снимется через 3 дн.
+                          - generic: v1
+                - generic:
+                  - generic: МедиаКрафт
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Внутр. согласование
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: С подрядчиком
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · мы
+                            - generic: "0"
+                        - generic:
+                          - generic:
+                            - generic: Подпись · подрядчик
+                            - generic: "1"
+                        - generic:
+                          - generic:
+                            - generic: Подписан
+                            - generic: "0"
+                    - generic:
+                      - generic:
+                        - button:
+                          - generic: Договор №52
+                          - generic:
+                            - generic: МедиаКрафт
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: v1
+                            - generic: ЭДО
+            - generic:
+              - generic:
+                - generic:
+                  - button
+  - menu [active] [ref=e1376]:
+    - generic [ref=e1377]: Настройки фильтров

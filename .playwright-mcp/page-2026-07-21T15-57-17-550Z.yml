@@ -1,0 +1,90 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - 'button "Роль: КАМ" [ref=f1e5] [cursor=pointer]':
+      - generic [ref=f1e6]: "Роль:"
+      - generic [ref=f1e7]: КАМ
+  - generic [ref=f1e10]:
+    - complementary [ref=f1e11]:
+      - generic [ref=f1e12]:
+        - generic [ref=f1e13]:
+          - generic [ref=f1e14]: D
+          - generic [ref=f1e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=f1e16] [cursor=pointer]
+      - navigation [ref=f1e19]:
+        - generic [ref=f1e20]:
+          - generic [ref=f1e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=f1e22] [cursor=pointer]
+          - button "Подрядчики" [ref=f1e35] [cursor=pointer]
+          - button "Внутренние" [ref=f1e629] [cursor=pointer]
+          - button "Сметы" [ref=f1e644] [cursor=pointer]
+        - generic [ref=f1e50]:
+          - generic [ref=f1e51]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=f1e52] [cursor=pointer]
+          - button "К оплате" [ref=f1e56] [cursor=pointer]
+        - generic [ref=f1e62]:
+          - generic [ref=f1e63]: БАЗА
+          - button "Клиенты" [ref=f1e64] [cursor=pointer]
+          - button "Подрядчики" [ref=f1e69] [cursor=pointer]
+          - button "Сотрудники" [ref=f1e76] [cursor=pointer]
+        - generic [ref=f1e90]:
+          - generic [ref=f1e91]: СИСТЕМА
+          - button "Архив" [ref=f1e92] [cursor=pointer]
+          - button "Настройки" [ref=f1e97] [cursor=pointer]
+          - button "Доступ" [ref=f1e102] [cursor=pointer]
+      - button "ДС Дмитрий Соколов Продюсер" [active] [ref=f1e650] [cursor=pointer]:
+        - generic [ref=f1e108]: ДС
+        - generic [ref=f1e109]:
+          - generic [ref=f1e110]: Дмитрий Соколов
+          - generic [ref=f1e111]: Продюсер
+    - main [ref=f1e112]:
+      - generic [ref=f1e545]:
+        - generic [ref=f1e546]:
+          - heading "Сотрудники" [level=1] [ref=f1e547]
+          - button "Добавить" [ref=f1e548] [cursor=pointer]
+        - generic [ref=f1e550]:
+          - textbox "Поиск по ФИО..." [ref=f1e555]
+          - button "Все статусы" [ref=f1e556] [cursor=pointer]
+        - table [ref=f1e561]:
+          - rowgroup [ref=f1e562]:
+            - row [ref=f1e563]:
+              - columnheader "ФИО" [ref=f1e564]
+              - columnheader "Должность" [ref=f1e565]
+              - columnheader "Статус" [ref=f1e566]
+          - rowgroup [ref=f1e567]:
+            - row [ref=f1e568] [cursor=pointer]:
+              - cell "ИМ Инна Михрабова" [ref=f1e569]:
+                - generic [ref=f1e570]:
+                  - generic [ref=f1e571]: ИМ
+                  - generic [ref=f1e572]: Инна Михрабова
+              - cell "Менеджер документооборота" [ref=f1e573]
+              - cell [ref=f1e574]:
+                - button "Активен" [ref=f1e575]
+            - row [ref=f1e579] [cursor=pointer]:
+              - cell "КП Кирилл Петров" [ref=f1e580]:
+                - generic [ref=f1e581]:
+                  - generic [ref=f1e582]: КП
+                  - generic [ref=f1e583]: Кирилл Петров
+              - cell "Key Account Manager" [ref=f1e584]
+              - cell [ref=f1e585]:
+                - button "Активен" [ref=f1e586]
+            - row [ref=f1e590] [cursor=pointer]:
+              - cell "ПВ Полина Волкова" [ref=f1e591]:
+                - generic [ref=f1e592]:
+                  - generic [ref=f1e593]: ПВ
+                  - generic [ref=f1e594]: Полина Волкова
+              - cell "Менеджер документооборота" [ref=f1e595]
+              - cell [ref=f1e596]:
+                - button "Активен" [ref=f1e597]
+            - row [ref=f1e601] [cursor=pointer]:
+              - cell "АС Алина Смирнова" [ref=f1e602]:
+                - generic [ref=f1e603]:
+                  - generic [ref=f1e604]: АС
+                  - generic [ref=f1e605]: Алина Смирнова
+              - cell "Юрист" [ref=f1e606]
+              - cell [ref=f1e607]:
+                - button "Уволен" [ref=f1e608]
+        - generic:
+          - generic:
+            - generic:
+              - heading "Новый сотрудник" [level=2]
+              - button

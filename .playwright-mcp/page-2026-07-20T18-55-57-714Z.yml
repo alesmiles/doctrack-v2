@@ -1,0 +1,161 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - generic [ref=e36]:
+            - button "Сметы" [ref=e37] [cursor=pointer]
+            - button "Документы" [ref=e41] [cursor=pointer]
+          - button "Клиенты" [ref=e46] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e53] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e60] [cursor=pointer]
+        - generic [ref=e66]:
+          - generic [ref=e67]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e68] [cursor=pointer]
+          - button "К оплате" [ref=e72] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79]: БАЗА
+          - button "Клиенты" [ref=e80] [cursor=pointer]
+          - button "Подрядчики" [ref=e85] [cursor=pointer]
+          - button "Сотрудники" [ref=e92] [cursor=pointer]
+        - generic [ref=e106]:
+          - generic [ref=e107]: СИСТЕМА
+          - button "Архив" [ref=e108] [cursor=pointer]
+          - button "Настройки" [ref=e113] [cursor=pointer]
+          - button "Доступ" [ref=e118] [cursor=pointer]
+      - generic [ref=e123]:
+        - generic [ref=e124]: IM
+        - generic [ref=e125]:
+          - generic [ref=e126]: Inna Mikhrabova
+          - generic [ref=e127]: Менеджер документов
+    - main [ref=e128]:
+      - generic [ref=e407]:
+        - heading "Согласование · Документы" [level=1] [ref=e409]
+        - generic [ref=e411]:
+          - button "Клиенты" [ref=e412] [cursor=pointer]
+          - button "Подрядчики · клиенты" [ref=e413] [cursor=pointer]
+          - button "Подрядчики · внутр." [active] [pressed] [ref=e414] [cursor=pointer]
+        - generic [ref=e416]:
+          - textbox "Поиск…" [ref=e421]
+          - button "Подрядчик" [ref=e1154] [cursor=pointer]
+          - button "Ответственный" [ref=e1219] [cursor=pointer]
+          - button "Тип" [ref=e428] [cursor=pointer]
+          - button "Мои согласования" [ref=e647] [cursor=pointer]
+          - button "Группировка" [ref=e433] [cursor=pointer]
+          - button [ref=e434] [cursor=pointer]
+        - generic [ref=e439]:
+          - generic [ref=e1220]:
+            - generic [ref=e1221]: СтудияПро
+            - generic [ref=e1222]:
+              - generic [ref=e1224]:
+                - generic [ref=e1226]:
+                  - generic [ref=e1227]: Внутр. согласование
+                  - generic [ref=e1228]: "2"
+                - generic [ref=e1230]:
+                  - generic [ref=e1231]: С подрядчиком
+                  - generic [ref=e1232]: "1"
+                - generic [ref=e1234]:
+                  - generic [ref=e1235]: Подпись · мы
+                  - generic [ref=e1236]: "0"
+                - generic [ref=e1238]:
+                  - generic [ref=e1239]: Подпись · подрядчик
+                  - generic [ref=e1240]: "0"
+                - generic [ref=e1242]:
+                  - generic [ref=e1243]: Подписан
+                  - generic [ref=e1244]: "0"
+              - generic [ref=e1245]:
+                - generic [ref=e1246]:
+                  - button "Договор №40 СтудияПро 4 дн. v1" [ref=e1247] [cursor=pointer]:
+                    - generic [ref=e1248]: Договор №40
+                    - generic [ref=e1249]:
+                      - generic [ref=e1250]: СтудияПро
+                      - generic [ref=e1251]: 4 дн.
+                    - generic [ref=e1256]: v1
+                  - button "Приложение №3 СтудияПро 1 дн. v1" [ref=e1258] [cursor=pointer]:
+                    - generic [ref=e1259]: Приложение №3
+                    - generic [ref=e1260]:
+                      - generic [ref=e1261]: СтудияПро
+                      - generic [ref=e1262]: 1 дн.
+                    - generic [ref=e1267]: v1
+                - button "Акт №12 СтудияПро 2 дн. v2" [ref=e1270] [cursor=pointer]:
+                  - generic [ref=e1271]: Акт №12
+                  - generic [ref=e1272]:
+                    - generic [ref=e1273]: СтудияПро
+                    - generic [ref=e1274]: 2 дн.
+                  - generic [ref=e1279]: v2
+          - generic [ref=e1284]:
+            - generic [ref=e1285]: АдТех Solutions
+            - generic [ref=e1286]:
+              - generic [ref=e1288]:
+                - generic [ref=e1290]:
+                  - generic [ref=e1291]: Внутр. согласование
+                  - generic [ref=e1292]: "0"
+                - generic [ref=e1294]:
+                  - generic [ref=e1295]: С подрядчиком
+                  - generic [ref=e1296]: "0"
+                - generic [ref=e1298]:
+                  - generic [ref=e1299]: Подпись · мы
+                  - generic [ref=e1300]: "1"
+                - generic [ref=e1302]:
+                  - generic [ref=e1303]: Подпись · подрядчик
+                  - generic [ref=e1304]: "0"
+                - generic [ref=e1306]:
+                  - generic [ref=e1307]: Подписан
+                  - generic [ref=e1308]: "1"
+              - generic [ref=e1309]:
+                - button "УПД №18 АдТех Solutions +3 дн. v1" [ref=e1313] [cursor=pointer]:
+                  - generic [ref=e1314]: УПД №18
+                  - generic [ref=e1315]:
+                    - generic [ref=e1316]: АдТех Solutions
+                    - generic [ref=e1317]: +3 дн.
+                  - generic [ref=e1322]: v1
+                - button "Счёт №9 АдТех Solutions снимется через 3 дн. v1" [ref=e1326] [cursor=pointer]:
+                  - generic [ref=e1327]: Счёт №9
+                  - generic [ref=e1328]:
+                    - generic [ref=e1329]: АдТех Solutions
+                    - generic [ref=e1330]: снимется через 3 дн.
+                  - generic [ref=e1331]: v1
+          - generic [ref=e1333]:
+            - generic [ref=e1334]: МедиаКрафт
+            - generic [ref=e1335]:
+              - generic [ref=e1337]:
+                - generic [ref=e1339]:
+                  - generic [ref=e1340]: Внутр. согласование
+                  - generic [ref=e1341]: "0"
+                - generic [ref=e1343]:
+                  - generic [ref=e1344]: С подрядчиком
+                  - generic [ref=e1345]: "0"
+                - generic [ref=e1347]:
+                  - generic [ref=e1348]: Подпись · мы
+                  - generic [ref=e1349]: "0"
+                - generic [ref=e1351]:
+                  - generic [ref=e1352]: Подпись · подрядчик
+                  - generic [ref=e1353]: "1"
+                - generic [ref=e1355]:
+                  - generic [ref=e1356]: Подписан
+                  - generic [ref=e1357]: "0"
+              - button "Договор №52 МедиаКрафт 0 дн. v1 ЭДО" [ref=e1363] [cursor=pointer]:
+                - generic [ref=e1364]: Договор №52
+                - generic [ref=e1365]:
+                  - generic [ref=e1366]: МедиаКрафт
+                  - generic [ref=e1367]: 0 дн.
+                - generic [ref=e1372]:
+                  - generic [ref=e1373]: v1
+                  - generic [ref=e1374]: ЭДО
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=2]
+              - button

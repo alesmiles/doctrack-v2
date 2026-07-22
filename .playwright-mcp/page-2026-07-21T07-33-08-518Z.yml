@@ -1,0 +1,222 @@
+- generic:
+  - generic:
+    - generic:
+      - banner:
+        - button:
+          - generic: "Роль:"
+          - generic: КАМ
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Согласование
+              - generic:
+                - button:
+                  - generic: Сметы
+                - button:
+                  - generic: Документы
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики · Клиенты
+              - button:
+                - generic: Подрядчики · Внутренние
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button [expanded]:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Клиенты
+                - generic:
+                  - generic:
+                    - button:
+                      - generic: Канбан
+                    - button:
+                      - generic: Таблица
+              - generic:
+                - generic:
+                  - generic:
+                    - textbox:
+                      - /placeholder: Поиск…
+                  - button: Клиент
+                  - button: КАМ
+                  - button: Тип
+                  - button: Группировка
+                  - button
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Внутр. согласование
+                            - generic: "3"
+                        - generic:
+                          - generic:
+                            - generic: Согл. с клиентом
+                            - generic: "4"
+                        - generic:
+                          - generic:
+                            - generic: Мы подписываем
+                            - generic: "2"
+                        - generic:
+                          - generic:
+                            - generic: Клиент подписывает
+                            - generic: "2"
+                        - generic:
+                          - generic:
+                            - generic: Подписан
+                            - generic: "2"
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: УПД
+                            - generic: 3 дн.
+                          - generic:
+                            - generic: Yandex
+                            - generic: УПД №45
+                          - generic:
+                            - generic: к Приложению 13
+                            - generic: правки
+                        - generic:
+                          - generic:
+                            - generic: Акт
+                            - generic: 1 дн.
+                          - generic:
+                            - generic: Сбер
+                            - generic: Акт №8
+                          - generic: к Приложению 27
+                        - generic:
+                          - generic:
+                            - generic: УПД
+                            - generic: 6 дн.
+                          - generic:
+                            - generic: РусТех
+                            - generic: УПД №60
+                          - generic:
+                            - generic: к Приложению 33
+                            - generic: правки
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Договор
+                            - generic: 4 дн.
+                          - generic:
+                            - generic: РусТех
+                            - generic: Договор №33
+                        - generic:
+                          - generic:
+                            - generic: УПД
+                            - generic: 6 дн.
+                          - generic:
+                            - generic: Альфа Медиа
+                            - generic: УПД №52
+                          - generic: к Приложению 88
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 2 дн.
+                          - generic:
+                            - generic: Альфа Медиа
+                            - generic: Приложение №88
+                        - generic:
+                          - generic:
+                            - generic: Договор
+                            - generic: 7 дн.
+                          - generic:
+                            - generic: Яндекс
+                            - generic:
+                              - generic: Договор №77
+                              - generic: правки
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Счёт
+                            - generic: 1 дн.
+                          - generic:
+                            - generic: Yandex
+                            - generic: Счёт №201
+                          - generic: к Приложению 13
+                        - generic:
+                          - generic:
+                            - generic: СФ
+                            - generic: 8 дн.
+                          - generic:
+                            - generic: Авито
+                            - generic: СФ №15
+                          - generic: к Приложению 41
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 2 дн.
+                          - generic:
+                            - generic: Yandex
+                            - generic: Приложение №13
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 7 дн.
+                          - generic:
+                            - generic: Сбер
+                            - generic: Приложение №27
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Договор
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: Yandex
+                            - generic: Договор №12
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: Авито
+                            - generic: Приложение №41
+            - button: AI
+  - menu "АМ Александр Милевич Директор" [active] [ref=f1e407]:
+    - menuitem "Директор" [ref=f1e408]
+    - menuitem "Юрист" [ref=f1e412]
+    - menuitem "КАМ" [ref=f1e414]
+    - menuitem "Продюсер" [ref=f1e416]
+    - menuitem "Специалист ДО" [ref=f1e418]

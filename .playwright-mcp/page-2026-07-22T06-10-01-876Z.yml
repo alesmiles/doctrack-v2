@@ -1,0 +1,91 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - generic [ref=e391]:
+            - button "Проект" [ref=e392] [cursor=pointer]
+            - button "Документ клиента" [ref=e394] [cursor=pointer]
+            - button "Документ подрядчика" [ref=e396] [cursor=pointer]
+          - button "Клиенты" [ref=e28] [cursor=pointer]
+          - button "Подрядчики" [ref=e35] [cursor=pointer]
+          - button "Сметы" [ref=e44] [cursor=pointer]
+          - generic [ref=e1010]:
+            - button "Клиентские" [ref=e1011] [cursor=pointer]
+            - button "Внутренние" [ref=e1013] [cursor=pointer]
+        - generic [ref=e50]:
+          - generic [ref=e51]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e52] [cursor=pointer]
+          - button "К оплате" [ref=e56] [cursor=pointer]
+        - generic [ref=e62]:
+          - generic [ref=e63]: БАЗА
+          - button "Клиенты" [ref=e64] [cursor=pointer]
+          - button "Подрядчики" [ref=e69] [cursor=pointer]
+          - button "Сотрудники" [ref=e76] [cursor=pointer]
+        - generic [ref=e90]:
+          - generic [ref=e91]: СИСТЕМА
+          - button "Архив" [ref=e92] [cursor=pointer]
+          - button "Настройки" [ref=e97] [cursor=pointer]
+          - button "Доступ" [ref=e102] [cursor=pointer]
+      - button "АМ Александр Милевич Директор" [ref=e107] [cursor=pointer]:
+        - generic [ref=e108]: АМ
+        - generic [ref=e109]:
+          - generic [ref=e110]: Александр Милевич
+          - generic [ref=e111]: Директор
+    - main [ref=e112]:
+      - generic [ref=e1015]:
+        - heading "Сметы · Внутренние" [level=1] [ref=e1017]
+        - generic [ref=e1019]:
+          - textbox "Поиск…" [ref=e1024]
+          - button "КАМ" [ref=e1025] [cursor=pointer]
+          - button "Кирилл П." [active] [ref=e1114] [cursor=pointer]
+          - button "Группировка" [ref=e1031] [cursor=pointer]
+          - button "× Сбросить" [ref=e1115] [cursor=pointer]:
+            - generic [ref=e1116]: ×
+            - text: Сбросить
+        - generic [ref=e1035]:
+          - generic [ref=e1037]:
+            - generic [ref=e1039]:
+              - generic [ref=e1040]: На согласовании
+              - generic [ref=e1041]: "0"
+            - generic [ref=e1043]:
+              - generic [ref=e1044]: Требует правок
+              - generic [ref=e1045]: "1"
+            - generic [ref=e1047]:
+              - generic [ref=e1048]: Согласована
+              - generic [ref=e1049]: "1"
+            - generic [ref=e1051]:
+              - generic [ref=e1052]: Отклонена
+              - generic [ref=e1053]: "0"
+          - generic [ref=e1054]:
+            - generic [ref=e1067] [cursor=pointer]:
+              - generic [ref=e1068]: 01.06.2026
+              - generic [ref=e1070]:
+                - generic [ref=e1071]: Альфа-Банк ТГ
+                - text: Дизайн баннеров
+              - generic [ref=e1072]:
+                - generic [ref=e1073]:
+                  - generic [ref=e1074]: КП
+                  - generic [ref=e1075]: Кирилл П.
+                - generic [ref=e1076]: 2 450 000 ₽
+            - generic [ref=e1088] [cursor=pointer]:
+              - generic [ref=e1089]: 18.05.2026
+              - generic [ref=e1091]:
+                - generic [ref=e1092]: Яндекс
+                - text: Разработка лендинга
+              - generic [ref=e1093]:
+                - generic [ref=e1094]:
+                  - generic [ref=e1095]: КП
+                  - generic [ref=e1096]: Кирилл П.
+                - generic [ref=e1097]: 7 300 000 ₽

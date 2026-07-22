@@ -1,0 +1,114 @@
+- generic:
+  - generic:
+    - generic:
+      - banner:
+        - button:
+          - generic: "Роль:"
+          - generic: КАМ
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сметы
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button [expanded]:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Сотрудники
+              - button: Добавить
+            - generic:
+              - generic:
+                - textbox:
+                  - /placeholder: Поиск по ФИО...
+              - button: Все статусы
+            - generic:
+              - generic:
+                - table:
+                  - rowgroup:
+                    - row:
+                      - columnheader: ФИО
+                      - columnheader: Должность
+                      - columnheader: Статус
+                  - rowgroup:
+                    - row:
+                      - cell:
+                        - generic:
+                          - generic: ИМ
+                          - generic: Инна Михрабова
+                      - cell: Менеджер документооборота
+                      - cell:
+                        - button: Активен
+                    - row:
+                      - cell:
+                        - generic:
+                          - generic: КП
+                          - generic: Кирилл Петров
+                      - cell: Key Account Manager
+                      - cell:
+                        - button: Активен
+                    - row:
+                      - cell:
+                        - generic:
+                          - generic: ПВ
+                          - generic: Полина Волкова
+                      - cell: Менеджер документооборота
+                      - cell:
+                        - button: Активен
+                    - row:
+                      - cell:
+                        - generic:
+                          - generic: АС
+                          - generic: Алина Смирнова
+                      - cell: Юрист
+                      - cell:
+                        - button: Уволен
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=2]: Новый сотрудник
+                  - button
+  - menu "АМ Александр Милевич Директор" [active] [ref=f1e612]:
+    - menuitem "Директор" [ref=f1e613]
+    - menuitem "Юрист" [ref=f1e617]
+    - menuitem "КАМ" [ref=f1e619]
+    - menuitem "Продюсер" [ref=f1e621]
+    - menuitem "Специалист ДО" [ref=f1e623]

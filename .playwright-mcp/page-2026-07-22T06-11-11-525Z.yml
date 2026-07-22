@@ -1,0 +1,97 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - generic [ref=e391]:
+            - button "Проект" [ref=e392] [cursor=pointer]
+            - button "Документ клиента" [ref=e394] [cursor=pointer]
+            - button "Документ подрядчика" [ref=e396] [cursor=pointer]
+          - button "Клиенты" [ref=e28] [cursor=pointer]
+          - button "Подрядчики" [ref=e35] [cursor=pointer]
+          - button "Сметы" [active] [ref=e44] [cursor=pointer]
+          - generic [ref=e1486]:
+            - button "Клиентские" [ref=e1487] [cursor=pointer]
+            - button "Внутренние" [ref=e1489] [cursor=pointer]
+        - generic [ref=e50]:
+          - generic [ref=e51]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e52] [cursor=pointer]
+          - button "К оплате" [ref=e56] [cursor=pointer]
+        - generic [ref=e62]:
+          - generic [ref=e63]: БАЗА
+          - button "Клиенты" [ref=e64] [cursor=pointer]
+          - button "Подрядчики" [ref=e69] [cursor=pointer]
+          - button "Сотрудники" [ref=e76] [cursor=pointer]
+        - generic [ref=e90]:
+          - generic [ref=e91]: СИСТЕМА
+          - button "Архив" [ref=e92] [cursor=pointer]
+          - button "Настройки" [ref=e97] [cursor=pointer]
+          - button "Доступ" [ref=e102] [cursor=pointer]
+      - button "АМ Александр Милевич Директор" [ref=e107] [cursor=pointer]:
+        - generic [ref=e108]: АМ
+        - generic [ref=e109]:
+          - generic [ref=e110]: Александр Милевич
+          - generic [ref=e111]: Директор
+    - main [ref=e112]:
+      - generic [ref=e1419]:
+        - generic [ref=e1420]:
+          - heading "Сотрудники" [level=1] [ref=e1421]
+          - button "Добавить" [ref=e1422] [cursor=pointer]
+        - generic [ref=e1424]:
+          - textbox "Поиск по ФИО..." [ref=e1429]
+          - button "Все статусы" [ref=e1430] [cursor=pointer]
+        - table [ref=e1435]:
+          - rowgroup [ref=e1436]:
+            - row [ref=e1437]:
+              - columnheader "ФИО" [ref=e1438]
+              - columnheader "Должность" [ref=e1439]
+              - columnheader "Статус" [ref=e1440]
+          - rowgroup [ref=e1441]:
+            - row [ref=e1442] [cursor=pointer]:
+              - cell "ИМ Инна Михрабова" [ref=e1443]:
+                - generic [ref=e1444]:
+                  - generic [ref=e1445]: ИМ
+                  - generic [ref=e1446]: Инна Михрабова
+              - cell "Менеджер документооборота" [ref=e1447]
+              - cell [ref=e1448]:
+                - button "Активен" [ref=e1449]
+            - row [ref=e1453] [cursor=pointer]:
+              - cell "КП Кирилл Петров" [ref=e1454]:
+                - generic [ref=e1455]:
+                  - generic [ref=e1456]: КП
+                  - generic [ref=e1457]: Кирилл Петров
+              - cell "Key Account Manager" [ref=e1458]
+              - cell [ref=e1459]:
+                - button "Активен" [ref=e1460]
+            - row [ref=e1464] [cursor=pointer]:
+              - cell "ПВ Полина Волкова" [ref=e1465]:
+                - generic [ref=e1466]:
+                  - generic [ref=e1467]: ПВ
+                  - generic [ref=e1468]: Полина Волкова
+              - cell "Менеджер документооборота" [ref=e1469]
+              - cell [ref=e1470]:
+                - button "Активен" [ref=e1471]
+            - row [ref=e1475] [cursor=pointer]:
+              - cell "АС Алина Смирнова" [ref=e1476]:
+                - generic [ref=e1477]:
+                  - generic [ref=e1478]: АС
+                  - generic [ref=e1479]: Алина Смирнова
+              - cell "Юрист" [ref=e1480]
+              - cell [ref=e1481]:
+                - button "Уволен" [ref=e1482]
+        - generic:
+          - generic:
+            - generic:
+              - heading "Новый сотрудник" [level=2]
+              - button

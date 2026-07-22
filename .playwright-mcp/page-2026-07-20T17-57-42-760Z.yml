@@ -1,0 +1,43 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - button "Сметы" [active] [ref=e36] [cursor=pointer]
+          - button "Документы" [ref=e40] [cursor=pointer]
+          - button "Клиенты" [ref=e45] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e52] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e59] [cursor=pointer]
+        - generic [ref=e65]:
+          - generic [ref=e66]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e67] [cursor=pointer]
+          - button "К оплате" [ref=e71] [cursor=pointer]
+        - generic [ref=e77]:
+          - generic [ref=e78]: БАЗА
+          - button "Клиенты" [ref=e79] [cursor=pointer]
+          - button "Подрядчики" [ref=e84] [cursor=pointer]
+          - button "Сотрудники" [ref=e91] [cursor=pointer]
+        - generic [ref=e105]:
+          - generic [ref=e106]: СИСТЕМА
+          - button "Архив" [ref=e107] [cursor=pointer]
+          - button "Настройки" [ref=e112] [cursor=pointer]
+          - button "Доступ" [ref=e117] [cursor=pointer]
+      - generic [ref=e122]:
+        - generic [ref=e123]: IM
+        - generic [ref=e124]:
+          - generic [ref=e125]: Inna Mikhrabova
+          - generic [ref=e126]: Менеджер документов
+    - main [ref=e127]:
+      - paragraph [ref=e407]: Section in development

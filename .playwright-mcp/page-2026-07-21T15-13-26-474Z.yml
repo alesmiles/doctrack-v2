@@ -1,0 +1,185 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - generic [ref=e36]:
+            - button "Сметы" [ref=e37] [cursor=pointer]
+            - button "Документы" [ref=e41] [cursor=pointer]
+          - button "Клиенты" [ref=e46] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e53] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e60] [cursor=pointer]
+          - button "Сметы" [ref=e66] [cursor=pointer]
+        - generic [ref=e70]:
+          - generic [ref=e71]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e72] [cursor=pointer]
+          - button "К оплате" [ref=e76] [cursor=pointer]
+        - generic [ref=e82]:
+          - generic [ref=e83]: БАЗА
+          - button "Клиенты" [ref=e84] [cursor=pointer]
+          - button "Подрядчики" [ref=e89] [cursor=pointer]
+          - button "Сотрудники" [ref=e96] [cursor=pointer]
+        - generic [ref=e110]:
+          - generic [ref=e111]: СИСТЕМА
+          - button "Архив" [ref=e112] [cursor=pointer]
+          - button "Настройки" [ref=e117] [cursor=pointer]
+          - button "Доступ" [ref=e122] [cursor=pointer]
+      - button "АМ Александр Милевич Директор" [ref=e127] [cursor=pointer]:
+        - generic [ref=e128]: АМ
+        - generic [ref=e129]:
+          - generic [ref=e130]: Александр Милевич
+          - generic [ref=e131]: Директор
+    - main [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Клиенты" [level=1] [ref=e136]
+            - generic [ref=e138]:
+              - button "Канбан" [ref=e139] [cursor=pointer]
+              - button "Таблица" [ref=e146] [cursor=pointer]
+          - generic [ref=e151]:
+            - textbox "Поиск…" [ref=e156]
+            - button "Клиент" [ref=e157] [cursor=pointer]
+            - button "КАМ" [ref=e160] [cursor=pointer]
+            - button "Тип" [ref=e163] [cursor=pointer]
+            - button "Группировка" [ref=e166] [cursor=pointer]
+            - button [ref=e167] [cursor=pointer]
+        - generic [ref=e174]:
+          - generic [ref=e176]:
+            - generic [ref=e178]:
+              - generic [ref=e179]: Внутр. согласование
+              - generic [ref=e180]: "3"
+            - generic [ref=e182]:
+              - generic [ref=e183]: Согл. с клиентом
+              - generic [ref=e184]: "4"
+            - generic [ref=e186]:
+              - generic [ref=e187]: Мы подписываем
+              - generic [ref=e188]: "2"
+            - generic [ref=e190]:
+              - generic [ref=e191]: Клиент подписывает
+              - generic [ref=e192]: "2"
+            - generic [ref=e194]:
+              - generic [ref=e195]: Подписан
+              - generic [ref=e196]: "2"
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199] [cursor=pointer]:
+                - generic [ref=e200]:
+                  - generic [ref=e201]: УПД
+                  - generic [ref=e202]: 3 дн.
+                - generic [ref=e207]:
+                  - generic [ref=e208]: Yandex
+                  - generic [ref=e209]: УПД №45
+                - generic [ref=e211]:
+                  - generic [ref=e212]: к Приложению 13
+                  - generic [ref=e217]: правки
+              - generic [ref=e222] [cursor=pointer]:
+                - generic [ref=e223]:
+                  - generic [ref=e224]: Акт
+                  - generic [ref=e225]: 1 дн.
+                - generic [ref=e230]:
+                  - generic [ref=e231]: Сбер
+                  - generic [ref=e232]: Акт №8
+                - generic [ref=e234]: к Приложению 27
+              - generic [ref=e240] [cursor=pointer]:
+                - generic [ref=e241]:
+                  - generic [ref=e242]: УПД
+                  - generic [ref=e243]: 6 дн.
+                - generic [ref=e248]:
+                  - generic [ref=e249]: РусТех
+                  - generic [ref=e250]: УПД №60
+                - generic [ref=e252]:
+                  - generic [ref=e253]: к Приложению 33
+                  - generic [ref=e258]: правки
+            - generic [ref=e263]:
+              - generic [ref=e264] [cursor=pointer]:
+                - generic [ref=e265]:
+                  - generic [ref=e266]: Договор
+                  - generic [ref=e267]: 4 дн.
+                - generic [ref=e272]:
+                  - generic [ref=e273]: РусТех
+                  - generic [ref=e274]: Договор №33
+              - generic [ref=e276] [cursor=pointer]:
+                - generic [ref=e277]:
+                  - generic [ref=e278]: УПД
+                  - generic [ref=e279]: 6 дн.
+                - generic [ref=e284]:
+                  - generic [ref=e285]: Альфа Медиа
+                  - generic [ref=e286]: УПД №52
+                - generic [ref=e288]: к Приложению 88
+              - generic [ref=e294] [cursor=pointer]:
+                - generic [ref=e295]:
+                  - generic [ref=e296]: Приложение
+                  - generic [ref=e297]: 2 дн.
+                - generic [ref=e302]:
+                  - generic [ref=e303]: Альфа Медиа
+                  - generic [ref=e304]: Приложение №88
+              - generic [ref=e306] [cursor=pointer]:
+                - generic [ref=e307]:
+                  - generic [ref=e308]: Договор
+                  - generic [ref=e309]: 7 дн.
+                - generic [ref=e314]:
+                  - generic [ref=e315]: Яндекс
+                  - generic [ref=e316]:
+                    - generic [ref=e317]: Договор №77
+                    - generic [ref=e318]: правки
+            - generic [ref=e323]:
+              - generic [ref=e324] [cursor=pointer]:
+                - generic [ref=e325]:
+                  - generic [ref=e326]: Счёт
+                  - generic [ref=e327]: 1 дн.
+                - generic [ref=e332]:
+                  - generic [ref=e333]: Yandex
+                  - generic [ref=e334]: Счёт №201
+                - generic [ref=e336]: к Приложению 13
+              - generic [ref=e342] [cursor=pointer]:
+                - generic [ref=e343]:
+                  - generic [ref=e344]: СФ
+                  - generic [ref=e345]: 8 дн.
+                - generic [ref=e350]:
+                  - generic [ref=e351]: Авито
+                  - generic [ref=e352]: СФ №15
+                - generic [ref=e354]: к Приложению 41
+            - generic [ref=e360]:
+              - generic [ref=e361] [cursor=pointer]:
+                - generic [ref=e362]:
+                  - generic [ref=e363]: Приложение
+                  - generic [ref=e364]: 2 дн.
+                - generic [ref=e369]:
+                  - generic [ref=e370]: Yandex
+                  - generic [ref=e371]: Приложение №13
+              - generic [ref=e373] [cursor=pointer]:
+                - generic [ref=e374]:
+                  - generic [ref=e375]: Приложение
+                  - generic [ref=e376]: 7 дн.
+                - generic [ref=e381]:
+                  - generic [ref=e382]: Сбер
+                  - generic [ref=e383]: Приложение №27
+            - generic [ref=e385]:
+              - generic [ref=e386] [cursor=pointer]:
+                - generic [ref=e387]:
+                  - generic [ref=e388]: Договор
+                  - generic [ref=e389]: 0 дн.
+                - generic [ref=e394]:
+                  - generic [ref=e395]: Yandex
+                  - generic [ref=e396]: Договор №12
+              - generic [ref=e398] [cursor=pointer]:
+                - generic [ref=e399]:
+                  - generic [ref=e400]: Приложение
+                  - generic [ref=e401]: 0 дн.
+                - generic [ref=e406]:
+                  - generic [ref=e407]: Авито
+                  - generic [ref=e408]: Приложение №41
+        - button "AI" [ref=e410] [cursor=pointer]

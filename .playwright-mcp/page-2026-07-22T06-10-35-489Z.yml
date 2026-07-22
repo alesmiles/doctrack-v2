@@ -1,0 +1,107 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - generic [ref=e391]:
+            - button "Проект" [ref=e392] [cursor=pointer]
+            - button "Документ клиента" [ref=e394] [cursor=pointer]
+            - button "Документ подрядчика" [ref=e396] [cursor=pointer]
+          - button "Клиенты" [ref=e28] [cursor=pointer]
+          - button "Подрядчики" [ref=e35] [cursor=pointer]
+          - button "Сметы" [ref=e44] [cursor=pointer]
+        - generic [ref=e50]:
+          - generic [ref=e51]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e52] [cursor=pointer]
+          - button "К оплате" [ref=e56] [cursor=pointer]
+        - generic [ref=e62]:
+          - generic [ref=e63]: БАЗА
+          - button "Клиенты" [active] [ref=e64] [cursor=pointer]
+          - button "Подрядчики" [ref=e69] [cursor=pointer]
+          - button "Сотрудники" [ref=e76] [cursor=pointer]
+        - generic [ref=e90]:
+          - generic [ref=e91]: СИСТЕМА
+          - button "Архив" [ref=e92] [cursor=pointer]
+          - button "Настройки" [ref=e97] [cursor=pointer]
+          - button "Доступ" [ref=e102] [cursor=pointer]
+      - button "АМ Александр Милевич Директор" [ref=e107] [cursor=pointer]:
+        - generic [ref=e108]: АМ
+        - generic [ref=e109]:
+          - generic [ref=e110]: Александр Милевич
+          - generic [ref=e111]: Директор
+    - main [ref=e112]:
+      - generic [ref=e1265]:
+        - generic [ref=e1266]:
+          - heading "Клиенты" [level=1] [ref=e1267]
+          - button "Добавить" [ref=e1268] [cursor=pointer]
+        - generic [ref=e1270]:
+          - textbox "Поиск по компании..." [ref=e1275]
+          - button "Все статусы" [ref=e1276] [cursor=pointer]
+        - table [ref=e1281]:
+          - rowgroup [ref=e1282]:
+            - row [ref=e1283]:
+              - columnheader "Компания" [ref=e1284]
+              - columnheader "Юр.лицо" [ref=e1285]
+              - columnheader "Ответственные лица" [ref=e1286]
+              - columnheader "Статус" [ref=e1287]
+          - rowgroup [ref=e1288]:
+            - row [ref=e1289] [cursor=pointer]:
+              - cell "Яндекс" [ref=e1290]
+              - cell "3 юрлица" [ref=e1291]
+              - cell "КП Кирилл Петров +2" [ref=e1292]:
+                - generic [ref=e1293]:
+                  - generic [ref=e1294]: КП
+                  - generic [ref=e1295]: Кирилл Петров
+                  - generic [ref=e1296]: "+2"
+              - cell [ref=e1297]:
+                - button "Активный" [ref=e1298]
+            - row [ref=e1302] [cursor=pointer]:
+              - cell "Сбер" [ref=e1303]
+              - cell "ПАО Сбербанк" [ref=e1304]
+              - cell "АС Алина Смирнова" [ref=e1305]:
+                - generic [ref=e1306]:
+                  - generic [ref=e1307]: АС
+                  - generic [ref=e1308]: Алина Смирнова
+              - cell [ref=e1309]:
+                - button "Активный" [ref=e1310]
+            - row [ref=e1314] [cursor=pointer]:
+              - cell "Авито" [ref=e1315]
+              - cell "2 юрлица" [ref=e1316]
+              - cell "ПВ Полина Волкова +1" [ref=e1317]:
+                - generic [ref=e1318]:
+                  - generic [ref=e1319]: ПВ
+                  - generic [ref=e1320]: Полина Волкова
+                  - generic [ref=e1321]: "+1"
+              - cell [ref=e1322]:
+                - button "Пилот" [ref=e1323]
+            - row [ref=e1327] [cursor=pointer]:
+              - cell "Альфа-Банк ТГ" [ref=e1328]
+              - cell "АО «Альфа-Банк»" [ref=e1329]
+              - cell "—" [ref=e1330]
+              - cell [ref=e1331]:
+                - button "Лид" [ref=e1332]
+            - row [ref=e1336] [cursor=pointer]:
+              - cell "Тинькофф" [ref=e1337]
+              - cell "АО «Тинькофф Банк»" [ref=e1338]
+              - cell "ПВ Полина Волкова" [ref=e1339]:
+                - generic [ref=e1340]:
+                  - generic [ref=e1341]: ПВ
+                  - generic [ref=e1342]: Полина Волкова
+              - cell [ref=e1343]:
+                - button "Отток" [ref=e1344]
+        - generic:
+          - generic:
+            - generic:
+              - heading "Новый клиент" [level=2]
+              - button

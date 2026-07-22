@@ -1,0 +1,177 @@
+- generic:
+  - generic:
+    - generic:
+      - banner:
+        - button:
+          - generic: "Роль:"
+          - generic: КАМ
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Согласование
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики · Клиенты
+              - button:
+                - generic: Подрядчики · Внутренние
+              - button:
+                - generic: Сметы
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Сметы
+              - generic:
+                - button:
+                  - generic: Канбан
+                - button:
+                  - generic: Таблица
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button [expanded]: Клиент
+                - button: КАМ
+            - generic:
+              - generic:
+                - generic:
+                  - generic: Клиент
+                  - generic: Проект
+                  - generic: КАМ
+                  - generic: Сумма
+                  - generic: Статус
+                  - generic: Дата создания
+                - generic:
+                  - generic: Яндекс
+                  - generic: YAN-4
+                  - generic:
+                    - generic: КП
+                    - generic: Кирилл П.
+                  - generic: 4 750 000 ₽
+                  - generic: На согласовании
+                  - generic: 02.06.2026
+                - generic:
+                  - generic: Сбер
+                  - generic: SBR-4
+                  - generic:
+                    - generic: АС
+                    - generic: Алина С.
+                  - generic: 1 200 000 ₽
+                  - generic: Согласована
+                  - generic: 28.05.2026
+                - generic:
+                  - generic: Авито
+                  - generic: AVI-4
+                  - generic:
+                    - generic: ПВ
+                    - generic: Полина В.
+                  - generic: 5 600 000 ₽
+                  - generic: Требует правок
+                  - generic: 30.05.2026
+                - generic:
+                  - generic: Альфа-Банк ТГ
+                  - generic: ALF-11
+                  - generic:
+                    - generic: КП
+                    - generic: Кирилл П.
+                  - generic: 12 000 000 ₽
+                  - generic: Отклонена
+                  - generic: 15.05.2026
+                - generic:
+                  - generic: Сбер
+                  - generic: SBR-5
+                  - generic:
+                    - generic: АС
+                    - generic: Алина С.
+                  - generic: 850 000 ₽
+                  - generic: На согласовании
+                  - generic: 05.06.2026
+                - generic:
+                  - generic: Яндекс
+                  - generic: YAN-5
+                  - generic:
+                    - generic: ПВ
+                    - generic: Полина В.
+                  - generic: 3 900 000 ₽
+                  - generic: Согласована
+                  - generic: 20.05.2026
+                - generic:
+                  - generic: Альфа-Банк ТГ
+                  - generic: ALF-12
+                  - generic:
+                    - generic: КП
+                    - generic: Кирилл П.
+                  - generic: 2 450 000 ₽
+                  - generic: Требует правок
+                  - generic: 01.06.2026
+                - generic:
+                  - generic: Авито
+                  - generic: AVI-5
+                  - generic:
+                    - generic: АС
+                    - generic: Алина С.
+                  - generic: 5 000 000 ₽
+                  - generic: Отклонена
+                  - generic: 10.05.2026
+                - generic:
+                  - generic: Сбер
+                  - generic: SBR-6
+                  - generic:
+                    - generic: ПВ
+                    - generic: Полина В.
+                  - generic: 620 000 ₽
+                  - generic: На согласовании
+                  - generic: 08.06.2026
+                - generic:
+                  - generic: Яндекс
+                  - generic: YAN-6
+                  - generic:
+                    - generic: КП
+                    - generic: Кирилл П.
+                  - generic: 7 300 000 ₽
+                  - generic: Согласована
+                  - generic: 18.05.2026
+  - menu "Клиент" [active] [ref=e714]:
+    - menuitem "Все клиенты" [ref=e715]
+    - menuitem "Яндекс" [ref=e716]
+    - menuitem "Сбер" [ref=e717]
+    - menuitem "Авито" [ref=e718]
+    - menuitem "Альфа-Банк ТГ" [ref=e719]

@@ -1,0 +1,155 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - button "Клиенты" [ref=e654] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e661] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e432] [cursor=pointer]
+        - generic [ref=e66]:
+          - generic [ref=e67]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e68] [cursor=pointer]
+          - button "К оплате" [ref=e72] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79]: БАЗА
+          - button "Клиенты" [ref=e80] [cursor=pointer]
+          - button "Подрядчики" [ref=e85] [cursor=pointer]
+          - button "Сотрудники" [ref=e92] [cursor=pointer]
+        - generic [ref=e106]:
+          - generic [ref=e107]: СИСТЕМА
+          - button "Архив" [ref=e108] [cursor=pointer]
+          - button "Настройки" [ref=e113] [cursor=pointer]
+          - button "Доступ" [ref=e118] [cursor=pointer]
+      - button "АС Алина Смирнова Юрист" [active] [ref=e668] [cursor=pointer]:
+        - generic [ref=e124]: АС
+        - generic [ref=e125]:
+          - generic [ref=e126]: Алина Смирнова
+          - generic [ref=e127]: Юрист
+    - main [ref=e128]:
+      - generic [ref=e439]:
+        - generic [ref=e440]:
+          - generic [ref=e441]:
+            - heading "Подрядчики" [level=1] [ref=e442]
+            - paragraph [ref=e443]: внутренние
+          - generic [ref=e445]:
+            - button "Канбан" [ref=e446] [cursor=pointer]
+            - button "Таблица" [ref=e453] [cursor=pointer]
+        - generic [ref=e458]:
+          - textbox "Поиск…" [ref=e463]
+          - button "Подрядчик" [ref=e464] [cursor=pointer]
+          - button "Ответственный" [ref=e467] [cursor=pointer]
+          - button "Тип" [ref=e470] [cursor=pointer]
+          - button "Направление" [ref=e473] [cursor=pointer]
+          - button "Группировка" [ref=e476] [cursor=pointer]
+          - button [ref=e477] [cursor=pointer]
+        - generic [ref=e484]:
+          - generic [ref=e486]:
+            - generic [ref=e488]:
+              - generic [ref=e489]: На согласовании
+              - generic [ref=e490]: "3"
+            - generic [ref=e492]:
+              - generic [ref=e493]: На подписании
+              - generic [ref=e494]: "4"
+            - generic [ref=e496]:
+              - generic [ref=e497]: Подписан
+              - generic [ref=e498]: "3"
+          - generic [ref=e499]:
+            - generic [ref=e500]:
+              - generic [ref=e501] [cursor=pointer]:
+                - generic [ref=e502]:
+                  - generic [ref=e503]: Договор
+                  - generic [ref=e504]: 2 дн.
+                - generic [ref=e509]:
+                  - generic [ref=e510]: ИП Петров С.И.
+                  - generic [ref=e511]: Договор №61
+                - generic [ref=e512]:
+                  - generic [ref=e513]: "Направление: IT"
+                  - generic [ref=e514]: правки
+              - generic [ref=e519] [cursor=pointer]:
+                - generic [ref=e520]:
+                  - generic [ref=e521]: УПД
+                  - generic [ref=e522]: 6 дн.
+                - generic [ref=e527]:
+                  - generic [ref=e528]: ООО КлинСервис
+                  - generic [ref=e529]: УПД №77
+                - generic [ref=e530]: "Направление: Административный"
+              - generic [ref=e532] [cursor=pointer]:
+                - generic [ref=e533]:
+                  - generic [ref=e534]: Акт
+                  - generic [ref=e535]: 1 дн.
+                - generic [ref=e540]:
+                  - generic [ref=e541]: ИП Захарова Л.Д.
+                  - generic [ref=e542]: Акт №19
+                - generic [ref=e543]: "Направление: —"
+            - generic [ref=e545]:
+              - generic [ref=e546] [cursor=pointer]:
+                - generic [ref=e547]:
+                  - generic [ref=e548]: Приложение
+                  - generic [ref=e549]: 2 дн.
+                - generic [ref=e554]:
+                  - generic [ref=e555]: ООО КлинСервис
+                  - generic [ref=e556]: Приложение №5
+                - generic [ref=e557]: "Направление: Административный"
+              - generic [ref=e559] [cursor=pointer]:
+                - generic [ref=e560]:
+                  - generic [ref=e561]: Счёт
+                  - generic [ref=e562]: 7 дн.
+                - generic [ref=e567]:
+                  - generic [ref=e568]: ООО ТехноРент
+                  - generic [ref=e569]: Счёт №412
+                - generic [ref=e570]:
+                  - generic [ref=e571]: "Направление: IT"
+                  - generic [ref=e572]: правки
+              - generic [ref=e577] [cursor=pointer]:
+                - generic [ref=e578]:
+                  - generic [ref=e579]: Договор
+                  - generic [ref=e580]: 4 дн.
+                - generic [ref=e585]:
+                  - generic [ref=e586]: ИП Волкова Е.А.
+                  - generic [ref=e587]: Договор №88
+                - generic [ref=e588]: "Направление: Маркетинг"
+              - generic [ref=e590] [cursor=pointer]:
+                - generic [ref=e591]:
+                  - generic [ref=e592]: УПД
+                  - generic [ref=e593]: 8 дн.
+                - generic [ref=e598]:
+                  - generic [ref=e599]: ООО АудитПлюс
+                  - generic [ref=e600]: УПД №30
+                - generic [ref=e601]: "Направление: Бухгалтерия"
+            - generic [ref=e603]:
+              - generic [ref=e604] [cursor=pointer]:
+                - generic [ref=e605]:
+                  - generic [ref=e606]: Приложение
+                  - generic [ref=e607]: 0 дн.
+                - generic [ref=e612]:
+                  - generic [ref=e613]: ООО АудитПлюс
+                  - generic [ref=e614]: Приложение №7
+                - generic [ref=e615]: "Направление: Бухгалтерия"
+              - generic [ref=e617] [cursor=pointer]:
+                - generic [ref=e618]:
+                  - generic [ref=e619]: СФ
+                  - generic [ref=e620]: 0 дн.
+                - generic [ref=e625]:
+                  - generic [ref=e626]: ИП Петров С.И.
+                  - generic [ref=e627]: СФ №9
+                - generic [ref=e628]: "Направление: IT"
+              - generic [ref=e630] [cursor=pointer]:
+                - generic [ref=e631]:
+                  - generic [ref=e632]: Акт
+                  - generic [ref=e633]: 0 дн.
+                - generic [ref=e638]:
+                  - generic [ref=e639]: ИП Захарова Л.Д.
+                  - generic [ref=e640]: Акт №20
+                - generic [ref=e641]: "Направление: —"

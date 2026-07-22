@@ -1,0 +1,98 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - button "Клиенты" [ref=e46] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e53] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e60] [cursor=pointer]
+          - button "Сметы" [ref=e66] [cursor=pointer]
+        - generic [ref=e70]:
+          - generic [ref=e71]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e72] [cursor=pointer]
+          - button "К оплате" [ref=e76] [cursor=pointer]
+        - generic [ref=e82]:
+          - generic [ref=e83]: БАЗА
+          - button "Клиенты" [ref=e84] [cursor=pointer]
+          - button "Подрядчики" [ref=e89] [cursor=pointer]
+          - button "Сотрудники" [ref=e96] [cursor=pointer]
+        - generic [ref=e110]:
+          - generic [ref=e111]: СИСТЕМА
+          - button "Архив" [ref=e112] [cursor=pointer]
+          - button "Настройки" [ref=e117] [cursor=pointer]
+          - button "Доступ" [ref=e122] [cursor=pointer]
+      - button "АМ Александр Милевич Директор" [ref=e127] [cursor=pointer]:
+        - generic [ref=e128]: АМ
+        - generic [ref=e129]:
+          - generic [ref=e130]: Александр Милевич
+          - generic [ref=e131]: Директор
+    - main [ref=e132]:
+      - generic [ref=e413]:
+        - generic [ref=e414]:
+          - heading "Сметы" [level=1] [ref=e415]
+          - generic [ref=e416]:
+            - button "Канбан" [ref=e417] [cursor=pointer]
+            - button "Таблица" [active] [ref=e424] [cursor=pointer]
+        - generic [ref=e429]:
+          - textbox "Поиск…" [ref=e434]
+          - button "Клиент" [ref=e790] [cursor=pointer]
+          - button "Кирилл П." [ref=e883] [cursor=pointer]
+          - button "× Сбросить" [ref=e884] [cursor=pointer]:
+            - generic [ref=e885]: ×
+            - text: Сбросить
+        - generic [ref=e887]:
+          - generic [ref=e888]:
+            - generic [ref=e889]: Клиент
+            - generic [ref=e890]: Проект
+            - generic [ref=e891]: КАМ
+            - generic [ref=e892]: Сумма
+            - generic [ref=e893]: Статус
+            - generic [ref=e894]: Дата создания
+          - generic [ref=e895]:
+            - generic [ref=e896]: Яндекс
+            - generic [ref=e897]: YAN-4
+            - generic [ref=e898]:
+              - generic [ref=e899]: КП
+              - generic [ref=e900]: Кирилл П.
+            - generic [ref=e901]: 4 750 000 ₽
+            - generic [ref=e902]: На согласовании
+            - generic [ref=e905]: 02.06.2026
+          - generic [ref=e906]:
+            - generic [ref=e907]: Альфа-Банк ТГ
+            - generic [ref=e908]: ALF-11
+            - generic [ref=e909]:
+              - generic [ref=e910]: КП
+              - generic [ref=e911]: Кирилл П.
+            - generic [ref=e912]: 12 000 000 ₽
+            - generic [ref=e913]: Отклонена
+            - generic [ref=e916]: 15.05.2026
+          - generic [ref=e917]:
+            - generic [ref=e918]: Альфа-Банк ТГ
+            - generic [ref=e919]: ALF-12
+            - generic [ref=e920]:
+              - generic [ref=e921]: КП
+              - generic [ref=e922]: Кирилл П.
+            - generic [ref=e923]: 2 450 000 ₽
+            - generic [ref=e924]: Требует правок
+            - generic [ref=e927]: 01.06.2026
+          - generic [ref=e928]:
+            - generic [ref=e929]: Яндекс
+            - generic [ref=e930]: YAN-6
+            - generic [ref=e931]:
+              - generic [ref=e932]: КП
+              - generic [ref=e933]: Кирилл П.
+            - generic [ref=e934]: 7 300 000 ₽
+            - generic [ref=e935]: Согласована
+            - generic [ref=e938]: 18.05.2026

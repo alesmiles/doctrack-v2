@@ -1,0 +1,108 @@
+- generic [ref=f2e4]:
+  - complementary [ref=f2e5]:
+    - generic [ref=f2e6]:
+      - generic [ref=f2e7]:
+        - generic [ref=f2e8]: D
+        - generic [ref=f2e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=f2e10] [cursor=pointer]
+    - navigation [ref=f2e13]:
+      - generic [ref=f2e14]:
+        - generic [ref=f2e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=f2e16] [cursor=pointer]
+        - button "Клиенты" [ref=f2e22] [cursor=pointer]
+        - button "Подрядчики" [ref=f2e29] [cursor=pointer]
+        - button "Сметы" [ref=f2e38] [cursor=pointer]
+        - generic [ref=f2e385]:
+          - button "Клиентские" [ref=f2e386] [cursor=pointer]
+          - button "Проектные" [active] [ref=f2e388] [cursor=pointer]
+          - button "Внутренние" [ref=f2e390] [cursor=pointer]
+      - generic [ref=f2e44]:
+        - generic [ref=f2e45]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=f2e46] [cursor=pointer]
+        - button "К оплате" [ref=f2e50] [cursor=pointer]
+      - generic [ref=f2e56]:
+        - generic [ref=f2e57]: БАЗА
+        - button "Клиенты" [ref=f2e58] [cursor=pointer]
+        - button "Подрядчики" [ref=f2e63] [cursor=pointer]
+        - button "Сотрудники" [ref=f2e70] [cursor=pointer]
+      - generic [ref=f2e84]:
+        - generic [ref=f2e85]: СИСТЕМА
+        - button "Архив" [ref=f2e86] [cursor=pointer]
+        - button "Настройки" [ref=f2e91] [cursor=pointer]
+        - button "Доступ" [ref=f2e96] [cursor=pointer]
+    - button "АМ Александр Милевич Директор" [ref=f2e101] [cursor=pointer]:
+      - generic [ref=f2e102]: АМ
+      - generic [ref=f2e103]:
+        - generic [ref=f2e104]: Александр Милевич
+        - generic [ref=f2e105]: Директор
+  - main [ref=f2e106]:
+    - generic [ref=f2e392]:
+      - heading "Сметы · Проектные" [level=1] [ref=f2e394]
+      - generic [ref=f2e396]:
+        - textbox "Поиск…" [ref=f2e401]
+        - button "КАМ" [ref=f2e402] [cursor=pointer]
+        - button "Ответственный" [ref=f2e405] [cursor=pointer]
+        - button "Группировка" [ref=f2e408] [cursor=pointer]
+      - generic [ref=f2e412]:
+        - generic [ref=f2e414]:
+          - generic [ref=f2e416]:
+            - generic [ref=f2e417]: На согласовании
+            - generic [ref=f2e418]: "1"
+          - generic [ref=f2e420]:
+            - generic [ref=f2e421]: Требует правок
+            - generic [ref=f2e422]: "1"
+          - generic [ref=f2e424]:
+            - generic [ref=f2e425]: Согласована
+            - generic [ref=f2e426]: "1"
+          - generic [ref=f2e428]:
+            - generic [ref=f2e429]: Отклонена
+            - generic [ref=f2e430]: "1"
+        - generic [ref=f2e431]:
+          - generic [ref=f2e433] [cursor=pointer]:
+            - generic [ref=f2e434]:
+              - generic [ref=f2e435]: Смета
+              - generic [ref=f2e436]: 09.06.2026
+            - generic [ref=f2e437]:
+              - generic [ref=f2e438]: Яндекс
+              - text: Аренда площадки
+            - generic [ref=f2e439]:
+              - generic [ref=f2e440]:
+                - generic [ref=f2e441]: КП
+                - generic [ref=f2e442]: Кирилл П.
+              - generic [ref=f2e443]: 1 350 000 ₽
+          - generic [ref=f2e445] [cursor=pointer]:
+            - generic [ref=f2e446]:
+              - generic [ref=f2e447]: Смета
+              - generic [ref=f2e448]: 03.06.2026
+            - generic [ref=f2e449]:
+              - generic [ref=f2e450]: Сбер
+              - text: Печать материалов
+            - generic [ref=f2e451]:
+              - generic [ref=f2e452]:
+                - generic [ref=f2e453]: АС
+                - generic [ref=f2e454]: Алина С.
+              - generic [ref=f2e455]: 480 000 ₽
+          - generic [ref=f2e457] [cursor=pointer]:
+            - generic [ref=f2e458]:
+              - generic [ref=f2e459]: Смета
+              - generic [ref=f2e460]: 25.05.2026
+            - generic [ref=f2e461]:
+              - generic [ref=f2e462]: Авито
+              - text: Аренда оборудования
+            - generic [ref=f2e463]:
+              - generic [ref=f2e464]:
+                - generic [ref=f2e465]: ПВ
+                - generic [ref=f2e466]: Полина В.
+              - generic [ref=f2e467]: 920 000 ₽
+          - generic [ref=f2e469] [cursor=pointer]:
+            - generic [ref=f2e470]:
+              - generic [ref=f2e471]: Смета
+              - generic [ref=f2e472]: 12.05.2026
+            - generic [ref=f2e473]:
+              - generic [ref=f2e474]: Альфа-Банк ТГ
+              - text: Кастинг актёров
+            - generic [ref=f2e475]:
+              - generic [ref=f2e476]:
+                - generic [ref=f2e477]: КП
+                - generic [ref=f2e478]: Кирилл П.
+              - generic [ref=f2e479]: 610 000 ₽

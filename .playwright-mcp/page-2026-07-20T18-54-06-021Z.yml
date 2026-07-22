@@ -1,0 +1,194 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - 'button "Роль: КАМ" [ref=e5] [cursor=pointer]':
+      - generic [ref=e6]: "Роль:"
+      - generic [ref=e7]: КАМ
+  - generic [ref=e10]:
+    - complementary [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: D
+          - generic [ref=e15]: DocTrack
+        - button "Свернуть боковую панель" [ref=e16] [cursor=pointer]
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e21]: ДОКУМЕНТООБОРОТ
+          - button "Создать" [ref=e22] [cursor=pointer]
+          - button "Согласование" [ref=e28] [cursor=pointer]
+          - generic [ref=e36]:
+            - button "Сметы" [ref=e37] [cursor=pointer]
+            - button "Документы" [active] [ref=e41] [cursor=pointer]
+          - button "Клиенты" [ref=e46] [cursor=pointer]
+          - button "Подрядчики · Клиенты" [ref=e53] [cursor=pointer]
+          - button "Подрядчики · Внутренние" [ref=e60] [cursor=pointer]
+        - generic [ref=e66]:
+          - generic [ref=e67]: ПЛАТЕЖИ
+          - button "Дебиторка" [ref=e68] [cursor=pointer]
+          - button "К оплате" [ref=e72] [cursor=pointer]
+        - generic [ref=e78]:
+          - generic [ref=e79]: БАЗА
+          - button "Клиенты" [ref=e80] [cursor=pointer]
+          - button "Подрядчики" [ref=e85] [cursor=pointer]
+          - button "Сотрудники" [ref=e92] [cursor=pointer]
+        - generic [ref=e106]:
+          - generic [ref=e107]: СИСТЕМА
+          - button "Архив" [ref=e108] [cursor=pointer]
+          - button "Настройки" [ref=e113] [cursor=pointer]
+          - button "Доступ" [ref=e118] [cursor=pointer]
+      - generic [ref=e123]:
+        - generic [ref=e124]: IM
+        - generic [ref=e125]:
+          - generic [ref=e126]: Inna Mikhrabova
+          - generic [ref=e127]: Менеджер документов
+    - main [ref=e128]:
+      - generic [ref=e407]:
+        - heading "Согласование · Документы" [level=1] [ref=e409]
+        - generic [ref=e411]:
+          - button "Клиенты" [pressed] [ref=e412] [cursor=pointer]
+          - button "Подрядчики · клиенты" [ref=e413] [cursor=pointer]
+          - button "Подрядчики · внутр." [ref=e414] [cursor=pointer]
+        - generic [ref=e416]:
+          - textbox "Поиск…" [ref=e421]
+          - button "Клиент" [ref=e422] [cursor=pointer]
+          - button "КАМ" [ref=e425] [cursor=pointer]
+          - button "Тип" [ref=e428] [cursor=pointer]
+          - button "Мои согласования" [ref=e432] [cursor=pointer]
+          - button "Группировка" [ref=e433] [cursor=pointer]
+          - button [ref=e434] [cursor=pointer]
+        - generic [ref=e439]:
+          - generic [ref=e440]:
+            - generic [ref=e441]: Yandex · YAN-1
+            - generic [ref=e442]:
+              - generic [ref=e444]:
+                - generic [ref=e446]:
+                  - generic [ref=e447]: Внутр. согласование
+                  - generic [ref=e448]: "1"
+                - generic [ref=e450]:
+                  - generic [ref=e451]: С клиентом
+                  - generic [ref=e452]: "0"
+                - generic [ref=e454]:
+                  - generic [ref=e455]: Подпись · мы
+                  - generic [ref=e456]: "0"
+                - generic [ref=e458]:
+                  - generic [ref=e459]: Подпись · клиент
+                  - generic [ref=e460]: "1"
+                - generic [ref=e462]:
+                  - generic [ref=e463]: Подписан
+                  - generic [ref=e464]: "1"
+              - generic [ref=e465]:
+                - button "Договор №112 Yandex 2 дн. v3" [ref=e467] [cursor=pointer]:
+                  - generic [ref=e468]: Договор №112
+                  - generic [ref=e469]:
+                    - generic [ref=e470]: Yandex
+                    - generic [ref=e471]: 2 дн.
+                  - generic [ref=e476]: v3
+                - button "ДС к пр. 4 Yandex +6 дн. v2 ЭДО" [ref=e481] [cursor=pointer]:
+                  - generic [ref=e482]: ДС к пр. 4
+                  - generic [ref=e483]:
+                    - generic [ref=e484]: Yandex
+                    - generic [ref=e485]: +6 дн.
+                  - generic [ref=e490]:
+                    - generic [ref=e491]: v2
+                    - generic [ref=e492]: ЭДО
+                - button "Счёт №15 Yandex снимется через 3 дн. v1" [ref=e494] [cursor=pointer]:
+                  - generic [ref=e495]: Счёт №15
+                  - generic [ref=e496]:
+                    - generic [ref=e497]: Yandex
+                    - generic [ref=e498]: снимется через 3 дн.
+                  - generic [ref=e499]: v1
+          - generic [ref=e501]:
+            - generic [ref=e502]: Yandex · YAN-2
+            - generic [ref=e503]:
+              - generic [ref=e505]:
+                - generic [ref=e507]:
+                  - generic [ref=e508]: Внутр. согласование
+                  - generic [ref=e509]: "1"
+                - generic [ref=e511]:
+                  - generic [ref=e512]: С клиентом
+                  - generic [ref=e513]: "0"
+                - generic [ref=e515]:
+                  - generic [ref=e516]: Подпись · мы
+                  - generic [ref=e517]: "0"
+                - generic [ref=e519]:
+                  - generic [ref=e520]: Подпись · клиент
+                  - generic [ref=e521]: "0"
+                - generic [ref=e523]:
+                  - generic [ref=e524]: Подписан
+                  - generic [ref=e525]: "1"
+              - generic [ref=e526]:
+                - button "Договор №98 Yandex +5 дн. v1" [ref=e528] [cursor=pointer]:
+                  - generic [ref=e529]: Договор №98
+                  - generic [ref=e530]:
+                    - generic [ref=e531]: Yandex
+                    - generic [ref=e532]: +5 дн.
+                  - generic [ref=e537]: v1
+                - button "Договор №77 Yandex снимется через 3 дн. v4" [ref=e543] [cursor=pointer]:
+                  - generic [ref=e544]: Договор №77
+                  - generic [ref=e545]:
+                    - generic [ref=e546]: Yandex
+                    - generic [ref=e547]: снимется через 3 дн.
+                  - generic [ref=e548]: v4
+          - generic [ref=e550]:
+            - generic [ref=e551]: Avito · AVI-1
+            - generic [ref=e552]:
+              - generic [ref=e554]:
+                - generic [ref=e556]:
+                  - generic [ref=e557]: Внутр. согласование
+                  - generic [ref=e558]: "0"
+                - generic [ref=e560]:
+                  - generic [ref=e561]: С клиентом
+                  - generic [ref=e562]: "2"
+                - generic [ref=e564]:
+                  - generic [ref=e565]: Подпись · мы
+                  - generic [ref=e566]: "0"
+                - generic [ref=e568]:
+                  - generic [ref=e569]: Подпись · клиент
+                  - generic [ref=e570]: "0"
+                - generic [ref=e572]:
+                  - generic [ref=e573]: Подписан
+                  - generic [ref=e574]: "0"
+              - generic [ref=e577]:
+                - button "Приложение 7 Avito 1 дн. v1" [ref=e578] [cursor=pointer]:
+                  - generic [ref=e579]: Приложение 7
+                  - generic [ref=e580]:
+                    - generic [ref=e581]: Avito
+                    - generic [ref=e582]: 1 дн.
+                  - generic [ref=e587]: v1
+                - button "УПД 44 Avito 0 дн. v1 ЭДО" [ref=e589] [cursor=pointer]:
+                  - generic [ref=e590]: УПД 44
+                  - generic [ref=e591]:
+                    - generic [ref=e592]: Avito
+                    - generic [ref=e593]: 0 дн.
+                  - generic [ref=e598]:
+                    - generic [ref=e599]: v1
+                    - generic [ref=e600]: ЭДО
+          - generic [ref=e604]:
+            - generic [ref=e605]: Sber · SBR-1
+            - generic [ref=e606]:
+              - generic [ref=e608]:
+                - generic [ref=e610]:
+                  - generic [ref=e611]: Внутр. согласование
+                  - generic [ref=e612]: "0"
+                - generic [ref=e614]:
+                  - generic [ref=e615]: С клиентом
+                  - generic [ref=e616]: "0"
+                - generic [ref=e618]:
+                  - generic [ref=e619]: Подпись · мы
+                  - generic [ref=e620]: "1"
+                - generic [ref=e622]:
+                  - generic [ref=e623]: Подпись · клиент
+                  - generic [ref=e624]: "0"
+                - generic [ref=e626]:
+                  - generic [ref=e627]: Подписан
+                  - generic [ref=e628]: "0"
+              - button "Акт №21 Sber 1 дн. v2" [ref=e633] [cursor=pointer]:
+                - generic [ref=e634]: Акт №21
+                - generic [ref=e635]:
+                  - generic [ref=e636]: Sber
+                  - generic [ref=e637]: 1 дн.
+                - generic [ref=e642]: v2
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=2]
+              - button
