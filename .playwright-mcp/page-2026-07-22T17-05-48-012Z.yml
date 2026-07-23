@@ -1,0 +1,81 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e10] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=e16] [cursor=pointer]
+        - button "Клиенты" [ref=e22] [cursor=pointer]
+        - button "Подрядчики" [ref=e29] [cursor=pointer]
+        - button "Сметы" [ref=e38] [cursor=pointer]
+        - button "На подписи 2" [ref=e547] [cursor=pointer]:
+          - generic [ref=e48]: На подписи
+          - generic [ref=e49]: "2"
+      - generic [ref=e50]:
+        - generic [ref=e51]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e52] [cursor=pointer]
+        - button "К оплате" [ref=e56] [cursor=pointer]
+      - generic [ref=e62]:
+        - generic [ref=e63]: БАЗА
+        - button "Клиенты" [ref=e64] [cursor=pointer]
+        - button "Подрядчики" [ref=e69] [cursor=pointer]
+        - button "Сотрудники" [ref=e76] [cursor=pointer]
+      - generic [ref=e90]:
+        - generic [ref=e91]: СИСТЕМА
+        - button "Архив" [ref=e92] [cursor=pointer]
+        - button "Настройки" [ref=e97] [cursor=pointer]
+        - button "Доступ" [ref=e102] [cursor=pointer]
+    - button "АМ Александр Милевич Директор" [ref=e107] [cursor=pointer]:
+      - generic [ref=e108]: АМ
+      - generic [ref=e109]:
+        - generic [ref=e110]: Александр Милевич
+        - generic [ref=e111]: Директор
+  - main [ref=e112]:
+    - generic [ref=e391]:
+      - heading "На подписи" [level=1] [ref=e393]
+      - generic [ref=e395]:
+        - textbox "Поиск…" [ref=e400]
+        - button "Клиенты" [ref=e401] [cursor=pointer]
+        - button "Подрядчики · клиенты" [ref=e404] [cursor=pointer]
+        - button "Подрядчики · внутр." [ref=e407] [cursor=pointer]
+        - button "Ответственный" [ref=e410] [cursor=pointer]
+        - button "Тип документа" [ref=e413] [cursor=pointer]
+      - generic [ref=e417]:
+        - generic [ref=e419]:
+          - checkbox [ref=e421] [cursor=pointer]
+          - generic [ref=e422]: Документ
+          - generic [ref=e423]: Направление
+          - generic [ref=e424]: Контрагент
+          - generic [ref=e425]: Ответственный
+          - generic [ref=e426]: Сумма
+          - button "Подписать до" [ref=e427] [cursor=pointer]
+        - generic [ref=e428]:
+          - button "Акт №19 Подрядчик · внутр. СтудияПро Менеджер документооборота Полина Волкова 480 000 ₽ 10.06.2026+2 дн. Подписать" [ref=e466] [cursor=pointer]:
+            - checkbox [ref=e468]
+            - generic [ref=e469]: Акт №19
+            - generic [ref=e470]: Подрядчик · внутр.
+            - generic [ref=e472]: СтудияПро
+            - generic [ref=e473]: Менеджер документооборота Полина Волкова
+            - generic [ref=e474]: 480 000 ₽
+            - generic [ref=e475]:
+              - text: 10.06.2026
+              - generic [ref=e476]: +2 дн.
+            - button "Подписать" [ref=e478]
+          - button "Акт №33 Клиент Yandex Key Account Manager Кирилл Петров 3 600 000 ₽ 16.06.2026 Подписать" [ref=e497] [cursor=pointer]:
+            - checkbox [ref=e431]
+            - generic [ref=e432]: Акт №33
+            - generic [ref=e433]: Клиент
+            - generic [ref=e435]: Yandex
+            - generic [ref=e436]: Key Account Manager Кирилл Петров
+            - generic [ref=e437]: 3 600 000 ₽
+            - generic [ref=e438]: 16.06.2026
+            - button "Подписать" [ref=e498]
+      - generic:
+        - generic:
+          - generic:
+            - heading [level=2]
+            - button

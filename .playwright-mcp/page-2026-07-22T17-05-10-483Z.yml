@@ -1,0 +1,119 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e10] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=e16] [cursor=pointer]
+        - button "Клиенты" [ref=e22] [cursor=pointer]
+        - button "Подрядчики" [ref=e29] [cursor=pointer]
+        - button "Сметы" [ref=e38] [cursor=pointer]
+        - button "На подписи 4" [ref=e44] [cursor=pointer]:
+          - generic [ref=e48]: На подписи
+          - generic [ref=e49]: "4"
+      - generic [ref=e50]:
+        - generic [ref=e51]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e52] [cursor=pointer]
+        - button "К оплате" [ref=e56] [cursor=pointer]
+      - generic [ref=e62]:
+        - generic [ref=e63]: БАЗА
+        - button "Клиенты" [ref=e64] [cursor=pointer]
+        - button "Подрядчики" [ref=e69] [cursor=pointer]
+        - button "Сотрудники" [ref=e76] [cursor=pointer]
+      - generic [ref=e90]:
+        - generic [ref=e91]: СИСТЕМА
+        - button "Архив" [ref=e92] [cursor=pointer]
+        - button "Настройки" [ref=e97] [cursor=pointer]
+        - button "Доступ" [ref=e102] [cursor=pointer]
+    - button "АМ Александр Милевич Директор" [ref=e107] [cursor=pointer]:
+      - generic [ref=e108]: АМ
+      - generic [ref=e109]:
+        - generic [ref=e110]: Александр Милевич
+        - generic [ref=e111]: Директор
+  - main [ref=e112]:
+    - generic [ref=e391]:
+      - heading "На подписи" [level=1] [ref=e393]
+      - generic [ref=e395]:
+        - textbox "Поиск…" [ref=e400]
+        - button "Клиенты" [ref=e401] [cursor=pointer]
+        - button "Подрядчики · клиенты" [ref=e404] [cursor=pointer]
+        - button "Подрядчики · внутр." [ref=e407] [cursor=pointer]
+        - button "Ответственный" [ref=e410] [cursor=pointer]
+        - button "Тип документа" [ref=e413] [cursor=pointer]
+      - generic [ref=e417]:
+        - generic [ref=e419]:
+          - checkbox [ref=e421] [cursor=pointer]
+          - generic [ref=e422]: Документ
+          - generic [ref=e423]: Направление
+          - generic [ref=e424]: Контрагент
+          - generic [ref=e425]: Ответственный
+          - generic [ref=e426]: Сумма
+          - button "Подписать до" [ref=e427] [cursor=pointer]
+        - generic [ref=e428]:
+          - button "УПД №14 Подрядчик · клиент Инфлюенс Групп Менеджер документооборота Полина Волкова 620 000 ₽ 08.06.2026+4 дн." [ref=e499] [cursor=pointer]:
+            - checkbox [checked] [ref=e455]
+            - generic [ref=e456]: УПД №14
+            - generic [ref=e457]: Подрядчик · клиент
+            - generic [ref=e459]: Инфлюенс Групп
+            - generic [ref=e460]: Менеджер документооборота Полина Волкова
+            - generic [ref=e461]: 620 000 ₽
+            - generic [ref=e462]:
+              - text: 08.06.2026
+              - generic [ref=e463]: +4 дн.
+          - button "Акт №19 Подрядчик · внутр. СтудияПро Менеджер документооборота Полина Волкова 480 000 ₽ 10.06.2026+2 дн. Подписать" [ref=e466] [cursor=pointer]:
+            - checkbox [ref=e468]
+            - generic [ref=e469]: Акт №19
+            - generic [ref=e470]: Подрядчик · внутр.
+            - generic [ref=e472]: СтудияПро
+            - generic [ref=e473]: Менеджер документооборота Полина Волкова
+            - generic [ref=e474]: 480 000 ₽
+            - generic [ref=e475]:
+              - text: 10.06.2026
+              - generic [ref=e476]: +2 дн.
+            - button "Подписать" [ref=e478]
+          - button "Акт №21 Клиент Sber Key Account Manager Кирилл Петров 8 900 000 ₽ 14.06.2026" [active] [ref=e505] [cursor=pointer]:
+            - checkbox [checked] [ref=e443]
+            - generic [ref=e444]: Акт №21
+            - generic [ref=e445]: Клиент
+            - generic [ref=e447]: Sber
+            - generic [ref=e448]: Key Account Manager Кирилл Петров
+            - generic [ref=e449]: 8 900 000 ₽
+            - generic [ref=e450]: 14.06.2026
+          - button "Акт №33 Клиент Yandex Key Account Manager Кирилл Петров 3 600 000 ₽ 16.06.2026 Подписать" [ref=e497] [cursor=pointer]:
+            - checkbox [ref=e431]
+            - generic [ref=e432]: Акт №33
+            - generic [ref=e433]: Клиент
+            - generic [ref=e435]: Yandex
+            - generic [ref=e436]: Key Account Manager Кирилл Петров
+            - generic [ref=e437]: 3 600 000 ₽
+            - generic [ref=e438]: 16.06.2026
+            - button "Подписать" [ref=e498]
+        - generic [ref=e500]:
+          - generic [ref=e501]: Выбрано 2 · 9 520 000 ₽
+          - generic [ref=e502]:
+            - button "Вернуть с вопросом" [ref=e503] [cursor=pointer]
+            - button "Подписать выбранные · 2" [ref=e506] [cursor=pointer]
+      - generic [ref=e509]:
+        - generic [ref=e510]:
+          - heading "Акт №21" [level=2] [ref=e511]
+          - button [ref=e512] [cursor=pointer]
+        - generic [ref=e517]:
+          - generic [ref=e518]:
+            - generic [ref=e519]: Направление
+            - generic [ref=e520]: Клиент
+          - generic [ref=e521]:
+            - generic [ref=e522]: Контрагент
+            - generic [ref=e523]: Sber
+          - generic [ref=e524]:
+            - generic [ref=e525]: Ответственный
+            - generic [ref=e526]: Key Account Manager Кирилл Петров
+          - generic [ref=e527]:
+            - generic [ref=e528]: Сумма
+            - generic [ref=e529]: 8 900 000 ₽
+          - generic [ref=e530]:
+            - generic [ref=e531]: Подписать до
+            - generic [ref=e532]: 14.06.2026

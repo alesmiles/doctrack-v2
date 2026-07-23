@@ -86,7 +86,7 @@ export interface SoglasovanieDocument {
   stage: DocStage;
   projectId?: number; // RAW_PROJECTS.id — clients и contractors_client
   contractorId?: string; // BASE_CONTRACTORS.id — contractors_client и contractors_internal
-  responsibleId?: string; // BASE_EMPLOYEES.id — "Ответственный" для contractors_internal
+  responsibleId?: string; // BASE_EMPLOYEES.id — "Ответственный"
   version: number;
   amount: number | null;
   deadline: string | null;
@@ -96,6 +96,18 @@ export interface SoglasovanieDocument {
   overdueByDays: number; // 0 — не просрочен
   channel?: "edo";
   autoHideInDays?: number; // override DEFAULT_AUTO_HIDE_DAYS для этой карточки
+  // R11 (Блок 7 · На подписи): момент постановки в очередь на подпись директора —
+  // задан только для stage === "sign_us", используется для сортировки по умолчанию.
+  queuedAt?: string;
+  // R16 (Блок 7 · На подписи): есть замечание юриста — исключает строку из
+  // «выбрать всё», не мешает подписанию по кнопке в строке.
+  hasLawyerNote?: boolean;
+  // R22 (Ревизия 1 · Блок 7 · На подписи): контрагенты в RAW_PROJECTS/
+  // BASE_CONTRACTORS ограничены 4–5 реальными компаниями — для проверяемого
+  // разнообразия фильтров (12 клиентов) часть документов направления
+  // "clients" ссылается на синтетическую компанию через это поле вместо
+  // projectId. getContragentName() проверяет его в первую очередь.
+  contragentNameOverride?: string;
 }
 
 export const DOCUMENTS: SoglasovanieDocument[] = [
@@ -122,8 +134,66 @@ export const DOCUMENTS: SoglasovanieDocument[] = [
   },
   {
     id: "doc-c5", name: "Акт №21", type: "Акт", direction: "clients", stage: "sign_us",
-    projectId: 4, version: 2, amount: 8900000, deadline: "2026-06-14", assignedTo: "user-director",
-    createdAt: "2026-06-09", daysInStage: 1, overdueByDays: 0,
+    projectId: 4, responsibleId: "emp-2", version: 2, amount: 8900000, deadline: "2026-06-14", assignedTo: "user-director",
+    createdAt: "2026-06-09", daysInStage: 1, overdueByDays: 0, queuedAt: "2026-06-10T09:15:00",
+  },
+  {
+    id: "doc-c9", name: "Акт №33", type: "Акт", direction: "clients", stage: "sign_us",
+    projectId: 3, responsibleId: "emp-2", version: 1, amount: 3600000, deadline: "2026-06-16", assignedTo: "user-director",
+    createdAt: "2026-06-08", daysInStage: 4, overdueByDays: 0, queuedAt: "2026-06-08T16:45:00",
+  },
+  // R22 (Ревизия 1): ещё 10 клиентов в очереди директора — 2 через реальный
+  // projectId (Авито, Альфа-Банк ТГ), 8 через contragentNameOverride (в
+  // RAW_PROJECTS этих компаний нет) — итого 12 разных клиентов в очереди.
+  {
+    id: "doc-c10", name: "Договор №201", type: "Договор", direction: "clients", stage: "sign_us",
+    projectId: 7, responsibleId: "emp-2", version: 1, amount: 1450000, deadline: "2026-06-13", assignedTo: "user-director",
+    createdAt: "2026-06-05", daysInStage: 2, overdueByDays: 0, queuedAt: "2026-06-07T10:00:00",
+  },
+  {
+    id: "doc-c11", name: "Приложение №5", type: "Приложение", direction: "clients", stage: "sign_us",
+    projectId: 10, responsibleId: "emp-3", version: 1, amount: 2650000, deadline: "2026-06-09", assignedTo: "user-director",
+    createdAt: "2026-06-03", daysInStage: 3, overdueByDays: 3, queuedAt: "2026-06-06T09:30:00",
+  },
+  {
+    id: "doc-c12", name: "Акт №44", type: "Акт", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "Тинькофф", responsibleId: "emp-1", version: 1, amount: 980000, deadline: "2026-06-18", assignedTo: "user-director",
+    createdAt: "2026-06-10", daysInStage: 1, overdueByDays: 0, queuedAt: "2026-06-11T13:00:00",
+  },
+  {
+    id: "doc-c13", name: "УПД №77", type: "УПД", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "МТС", responsibleId: "emp-2", version: 1, amount: 540000, deadline: "2026-06-11", assignedTo: "user-director",
+    createdAt: "2026-06-06", daysInStage: 3, overdueByDays: 1, queuedAt: "2026-06-09T15:00:00",
+  },
+  {
+    id: "doc-c14", name: "Договор №305", type: "Договор", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "Ozon", responsibleId: "emp-3", version: 1, amount: 3200000, deadline: "2026-06-20", assignedTo: "user-director",
+    createdAt: "2026-06-02", daysInStage: 5, overdueByDays: 0, queuedAt: "2026-06-05T11:20:00",
+  },
+  {
+    id: "doc-c15", name: "Счёт №88", type: "Счёт", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "Wildberries", responsibleId: "emp-1", version: 1, amount: 1120000, deadline: "2026-06-07", assignedTo: "user-director",
+    createdAt: "2026-06-01", daysInStage: 6, overdueByDays: 5, queuedAt: "2026-06-04T08:45:00",
+  },
+  {
+    id: "doc-c16", name: "СФ №12", type: "СФ", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "ВТБ", responsibleId: "emp-2", version: 1, amount: 670000, deadline: "2026-06-22", assignedTo: "user-director",
+    createdAt: "2026-06-11", daysInStage: 1, overdueByDays: 0, queuedAt: "2026-06-12T07:30:00",
+  },
+  {
+    id: "doc-c17", name: "Приложение №9", type: "Приложение", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "Ростелеком", responsibleId: "emp-3", version: 1, amount: null, deadline: "2026-06-14", assignedTo: "user-director",
+    createdAt: "2026-06-07", daysInStage: 4, overdueByDays: 0, queuedAt: "2026-06-08T14:10:00",
+  },
+  {
+    id: "doc-c18", name: "Акт №61", type: "Акт", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "X5 Group", responsibleId: "emp-1", version: 1, amount: 2340000, deadline: "2026-06-10", assignedTo: "user-director",
+    createdAt: "2026-06-09", daysInStage: 2, overdueByDays: 2, queuedAt: "2026-06-10T16:40:00",
+  },
+  {
+    id: "doc-c19", name: "УПД №90", type: "УПД", direction: "clients", stage: "sign_us",
+    contragentNameOverride: "Магнит", responsibleId: "emp-2", version: 1, amount: 810000, deadline: "2026-06-19", assignedTo: "user-director",
+    createdAt: "2026-06-01", daysInStage: 7, overdueByDays: 0, queuedAt: "2026-06-03T12:00:00",
   },
   {
     id: "doc-c6", name: "ДС к пр. 4", type: "ДС", direction: "clients", stage: "sign_them",
@@ -159,8 +229,24 @@ export const DOCUMENTS: SoglasovanieDocument[] = [
   },
   {
     id: "doc-cc4", name: "УПД №14", type: "УПД", direction: "contractors_client", stage: "sign_us",
-    contractorId: "co-2", projectId: 7, version: 1, amount: 620000, deadline: "2026-06-08", assignedTo: "user-director",
-    createdAt: "2026-06-02", daysInStage: 4, overdueByDays: 4,
+    contractorId: "co-2", projectId: 7, responsibleId: "emp-3", version: 1, amount: 620000, deadline: "2026-06-08", assignedTo: "user-director",
+    createdAt: "2026-06-02", daysInStage: 4, overdueByDays: 4, queuedAt: "2026-06-11T14:30:00",
+  },
+  // R22 (Ревизия 1): ещё 3 подрядчика-клиента в очереди директора (co-1/co-3/co-4) — итого 4.
+  {
+    id: "doc-cc7", name: "Договор подряда №12", type: "Договор", direction: "contractors_client", stage: "sign_us",
+    contractorId: "co-1", responsibleId: "emp-2", version: 1, amount: 870000, deadline: "2026-06-16", assignedTo: "user-director",
+    createdAt: "2026-06-04", daysInStage: 2, overdueByDays: 0, queuedAt: "2026-06-06T10:15:00",
+  },
+  {
+    id: "doc-cc8", name: "Приложение №11", type: "Приложение", direction: "contractors_client", stage: "sign_us",
+    contractorId: "co-3", responsibleId: "emp-1", version: 1, amount: null, deadline: "2026-06-09", assignedTo: "user-director",
+    createdAt: "2026-06-05", daysInStage: 2, overdueByDays: 3, queuedAt: "2026-06-07T09:00:00",
+  },
+  {
+    id: "doc-cc9", name: "Акт №25", type: "Акт", direction: "contractors_client", stage: "sign_us",
+    contractorId: "co-4", responsibleId: "emp-3", version: 1, amount: 540000, deadline: "2026-06-21", assignedTo: "user-director",
+    createdAt: "2026-06-08", daysInStage: 1, overdueByDays: 0, queuedAt: "2026-06-09T13:30:00",
   },
   {
     id: "doc-cc5", name: "Договор №21", type: "Договор", direction: "contractors_client", stage: "sign_them",
@@ -192,7 +278,28 @@ export const DOCUMENTS: SoglasovanieDocument[] = [
   {
     id: "doc-ci4", name: "УПД №18", type: "УПД", direction: "contractors_internal", stage: "sign_us",
     contractorId: "co-4", responsibleId: "emp-1", version: 1, amount: 310000, deadline: "2026-06-09", assignedTo: "user-kam",
-    createdAt: "2026-06-04", daysInStage: 3, overdueByDays: 3,
+    createdAt: "2026-06-04", daysInStage: 3, overdueByDays: 3, queuedAt: "2026-06-09T11:00:00",
+  },
+  {
+    id: "doc-ci7", name: "Акт №19", type: "Акт", direction: "contractors_internal", stage: "sign_us",
+    contractorId: "co-3", responsibleId: "emp-3", version: 1, amount: 480000, deadline: "2026-06-10", assignedTo: "user-director",
+    createdAt: "2026-06-12", daysInStage: 0, overdueByDays: 2, queuedAt: "2026-06-12T08:00:00", hasLawyerNote: true,
+  },
+  // R22 (Ревизия 1): ещё 3 подрядчика-внутр. в очереди директора (co-1/co-2/co-4) — итого 4.
+  {
+    id: "doc-ci8", name: "УПД №30", type: "УПД", direction: "contractors_internal", stage: "sign_us",
+    contractorId: "co-1", responsibleId: "emp-2", version: 1, amount: 410000, deadline: "2026-06-08", assignedTo: "user-director",
+    createdAt: "2026-06-03", daysInStage: 5, overdueByDays: 4, queuedAt: "2026-06-05T09:50:00",
+  },
+  {
+    id: "doc-ci9", name: "Договор №70", type: "Договор", direction: "contractors_internal", stage: "sign_us",
+    contractorId: "co-2", responsibleId: "emp-3", version: 1, amount: 1650000, deadline: "2026-06-17", assignedTo: "user-director",
+    createdAt: "2026-06-04", daysInStage: 4, overdueByDays: 0, queuedAt: "2026-06-06T15:20:00",
+  },
+  {
+    id: "doc-ci10", name: "Приложение №15", type: "Приложение", direction: "contractors_internal", stage: "sign_us",
+    contractorId: "co-4", responsibleId: "emp-1", version: 1, amount: null, deadline: "2026-06-13", assignedTo: "user-director",
+    createdAt: "2026-06-10", daysInStage: 1, overdueByDays: 0, queuedAt: "2026-06-11T11:10:00",
   },
   {
     id: "doc-ci5", name: "Договор №52", type: "Договор", direction: "contractors_internal", stage: "sign_them",
@@ -223,7 +330,10 @@ export function getResponsibleName(responsibleId: string | undefined): string {
 
 // R6: "имя контрагента" на карточке — клиент проекта для направления «Клиенты»,
 // подрядчик — для обоих направлений «Подрядчики».
+// R22 (Ревизия 1 · Блок 7 · На подписи): contragentNameOverride имеет приоритет
+// над projectId — см. комментарий у поля в SoglasovanieDocument.
 export function getContragentName(doc: SoglasovanieDocument): string {
+  if (doc.contragentNameOverride) return doc.contragentNameOverride;
   if (doc.direction === "clients") {
     return RAW_PROJECTS.find((p) => p.id === doc.projectId)?.client ?? "—";
   }

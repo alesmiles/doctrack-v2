@@ -1,0 +1,36 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e10] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [active] [ref=e16] [cursor=pointer]
+        - generic [ref=e741]:
+          - button "Документ клиента" [ref=e742] [cursor=pointer]
+          - button "Документ подрядчика" [ref=e744] [cursor=pointer]
+        - button "Клиенты" [ref=e22] [cursor=pointer]
+        - button "Подрядчики" [ref=e29] [cursor=pointer]
+      - generic [ref=e51]:
+        - generic [ref=e52]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e53] [cursor=pointer]
+        - button "К оплате" [ref=e57] [cursor=pointer]
+      - generic [ref=e63]:
+        - generic [ref=e64]: БАЗА
+        - button "Клиенты" [ref=e65] [cursor=pointer]
+        - button "Подрядчики" [ref=e70] [cursor=pointer]
+      - generic [ref=e91]:
+        - generic [ref=e92]: СИСТЕМА
+        - button "Архив" [ref=e93] [cursor=pointer]
+        - button "Настройки" [ref=e98] [cursor=pointer]
+        - button "Доступ" [ref=e103] [cursor=pointer]
+    - button "АС Алина Смирнова Юрист" [ref=e738] [cursor=pointer]:
+      - generic [ref=e109]: АС
+      - generic [ref=e110]:
+        - generic [ref=e111]: Алина Смирнова
+        - generic [ref=e112]: Юрист
+  - main [ref=e113]:
+    - paragraph [ref=e740]: Раздел в разработке

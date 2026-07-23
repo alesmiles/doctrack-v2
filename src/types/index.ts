@@ -77,6 +77,8 @@ export interface CurrentUser {
   id: string;
   name: string;
   role: UserRole;
+  // R2 (Блок 7 · На подписи): управляет видимостью пункта сайдбара «На подписи».
+  canSign?: boolean;
 }
 
 export type EstimateStatus = "На согласовании" | "Согласована" | "Требует правок" | "Отклонена";

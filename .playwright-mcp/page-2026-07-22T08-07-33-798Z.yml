@@ -1,0 +1,184 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - generic:
+                - button:
+                  - generic: Клиентские
+                - button:
+                  - generic: Внутренние
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button [expanded]:
+            - generic: ИР
+            - generic:
+              - generic: Ирина Романова
+              - generic: Специалист ДО
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Подрядчики
+                - paragraph: внутренние
+              - generic:
+                - generic:
+                  - button:
+                    - generic: Канбан
+                  - button:
+                    - generic: Таблица
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button: Подрядчик
+                - button: Ответственный
+                - button: Тип
+                - button: Направление
+                - button: Группировка
+                - button
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: На согласовании
+                            - generic: "3"
+                        - generic:
+                          - generic:
+                            - generic: На подписании
+                            - generic: "4"
+                        - generic:
+                          - generic:
+                            - generic: Подписан
+                            - generic: "3"
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Договор
+                            - generic: 2 дн.
+                          - generic:
+                            - generic: ИП Петров С.И.
+                            - generic: Договор №61
+                          - generic:
+                            - generic: "Направление: IT"
+                            - generic: правки
+                        - generic:
+                          - generic:
+                            - generic: УПД
+                            - generic: 6 дн.
+                          - generic:
+                            - generic: ООО КлинСервис
+                            - generic: УПД №77
+                          - generic: "Направление: Административный"
+                        - generic:
+                          - generic:
+                            - generic: Акт
+                            - generic: 1 дн.
+                          - generic:
+                            - generic: ИП Захарова Л.Д.
+                            - generic: Акт №19
+                          - generic: "Направление: —"
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 2 дн.
+                          - generic:
+                            - generic: ООО КлинСервис
+                            - generic: Приложение №5
+                          - generic: "Направление: Административный"
+                        - generic:
+                          - generic:
+                            - generic: Счёт
+                            - generic: 7 дн.
+                          - generic:
+                            - generic: ООО ТехноРент
+                            - generic: Счёт №412
+                          - generic:
+                            - generic: "Направление: IT"
+                            - generic: правки
+                        - generic:
+                          - generic:
+                            - generic: Договор
+                            - generic: 4 дн.
+                          - generic:
+                            - generic: ИП Волкова Е.А.
+                            - generic: Договор №88
+                          - generic: "Направление: Маркетинг"
+                        - generic:
+                          - generic:
+                            - generic: УПД
+                            - generic: 8 дн.
+                          - generic:
+                            - generic: ООО АудитПлюс
+                            - generic: УПД №30
+                          - generic: "Направление: Бухгалтерия"
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: Приложение
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: ООО АудитПлюс
+                            - generic: Приложение №7
+                          - generic: "Направление: Бухгалтерия"
+                        - generic:
+                          - generic:
+                            - generic: СФ
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: ИП Петров С.И.
+                            - generic: СФ №9
+                          - generic: "Направление: IT"
+                        - generic:
+                          - generic:
+                            - generic: Акт
+                            - generic: 0 дн.
+                          - generic:
+                            - generic: ИП Захарова Л.Д.
+                            - generic: Акт №20
+                          - generic: "Направление: —"
+  - menu "ИР Ирина Романова Специалист ДО" [active] [ref=e652]:
+    - menuitem "Директор" [ref=e653]
+    - menuitem "Юрист" [ref=e655]
+    - menuitem "КАМ" [ref=e657]
+    - menuitem "Продюсер" [ref=e659]
+    - menuitem "Специалист ДО" [ref=e661]

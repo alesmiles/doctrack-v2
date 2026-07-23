@@ -4,6 +4,7 @@ import { Sidebar } from "./components/Sidebar"
 import { DEMO_USERS } from "./mocks/users"
 import { ClientsPage } from "./pages/ClientsPage"
 import { SoglasovanieDocumentsPage } from "./pages/SoglasovanieDocumentsPage"
+import { SoglasovanieQueuePage } from "./pages/SoglasovanieQueuePage"
 import { ContractorsPage } from "./pages/ContractorsPage"
 import { InternalContractorsPage } from "./pages/InternalContractorsPage"
 import { EstimatesPage } from "./pages/EstimatesPage"
@@ -12,15 +13,26 @@ import { DocumentEditorPage } from "./pages/DocumentEditorPage"
 import { ClientsDirectoryPage } from "./pages/base/ClientsDirectoryPage"
 import { ContractorsDirectoryPage } from "./pages/base/ContractorsDirectoryPage"
 import { EmployeesDirectoryPage } from "./pages/base/EmployeesDirectoryPage"
+import { SoglasovanieNaPodpisiPage } from "./pages/SoglasovanieNaPodpisiPage"
+import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { CreateProjectModal } from "./components/CreateProjectModal"
 import { CreateClientDocModal, type ClientDocFormData } from "./components/CreateClientDocModal"
 import { CreateVendorDocModal } from "./components/CreateVendorDocModal"
 import { CreateEstimateModal } from "./components/CreateEstimateModal"
-import { ROLES, type RoleId } from "./config/roles"
+import { ROLES, ROLE_DEMO_USER_ID, type RoleId } from "./config/roles"
 
 // R8: id'ы, реально рендерящиеся в renderPage() — используются как кандидаты
 // для редиректа при смене роли
 const RENDERABLE_SIDEBAR_ITEMS: string[] = ["clients", "contractors-client", "contractors-internal"]
+
+// R6: определяет, к какому пункту конфига доступов (SidebarItemId) относится
+// текущий activePage — нужно для редиректа при смене роли, если новая роль
+// не видит текущую страницу (включая "На подписи" и "Сотрудники").
+function pageToSidebarItem(page: string): "clients" | "contractors-client" | "contractors-internal" | "employees" | "on-signature" | null {
+  if (page === "clients" || page === "contractors-client" || page === "contractors-internal" || page === "employees") return page
+  if (page.startsWith("on-signature")) return "on-signature"
+  return null
+}
 
 export default function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -38,28 +50,38 @@ export default function App() {
   } | null>(null)
   const [cameFromProject, setCameFromProject] = useState(false)
   const [savedClientDocForm, setSavedClientDocForm] = useState<ClientDocFormData | null>(null)
-  const [currentUser] = useState(() => DEMO_USERS.find((u) => u.role === "kam")!)
+  // R1/R2: currentUser следует за переключателем роли (см. ROLE_DEMO_USER_ID) —
+  // без этого счётчик и видимость "На подписи" не совпадали бы с выбранной ролью.
+  const currentUser = DEMO_USERS.find((u) => u.id === ROLE_DEMO_USER_ID[currentRole])!
 
   const handleRoleChange = (role: RoleId) => {
     setCurrentRole(role)
-    if (activePage === "clients" || activePage === "contractors-client" || activePage === "contractors-internal") {
-      if (!ROLES[role].sidebarItems.includes(activePage)) {
-        const fallback = ROLES[role].sidebarItems.find((id) => RENDERABLE_SIDEBAR_ITEMS.includes(id))
-        if (fallback) setActivePage(fallback)
-      }
+    const item = pageToSidebarItem(activePage)
+    if (item && !ROLES[role].sidebarItems.includes(item)) {
+      const fallback = ROLES[role].sidebarItems.find((id) => RENDERABLE_SIDEBAR_ITEMS.includes(id))
+      if (fallback) setActivePage(fallback)
     }
   }
+
+  // R9: для ролей с табличным типом отображения (сейчас — только Юрист)
+  // Клиенты/Подрядчики·Клиенты/Подрядчики·Внутренние показывают заглушку
+  // вместо реальной канбан-страницы (реальная таблица — вне рамок задачи).
+  const useTablePlaceholder = ROLES[currentRole].boardType.documents === "table"
 
   const renderPage = () => {
     switch (activePage) {
       case "clients":
-        return <ClientsPage />
+        return useTablePlaceholder ? <PlaceholderPage /> : <ClientsPage />
       case "soglasovanie-documents":
         return <SoglasovanieDocumentsPage currentUser={currentUser} />
+      case "soglasovanie":
+        return <SoglasovanieQueuePage />
       case "contractors-client":
-        return <ContractorsPage onNavigate={setActivePage} />
+        return useTablePlaceholder ? <PlaceholderPage /> : <ContractorsPage onNavigate={setActivePage} />
       case "contractors-internal":
-        return <InternalContractorsPage />
+        return useTablePlaceholder ? <PlaceholderPage /> : <InternalContractorsPage />
+      case "on-signature":
+        return <SoglasovanieNaPodpisiPage currentUser={currentUser} />
       case "estimates-client":
         return <EstimatesPage type="client" />
       case "estimates-project":

@@ -1,0 +1,175 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e652] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=e653] [cursor=pointer]
+        - button "Клиенты" [ref=e654] [cursor=pointer]
+        - button "Подрядчики" [ref=e655] [cursor=pointer]
+        - button "Сметы" [ref=e656] [cursor=pointer]
+        - button "Согласование 11" [ref=e657] [cursor=pointer]:
+          - generic [ref=e49]: Согласование
+          - generic [ref=e50]: "11"
+        - button "На подписи 20" [ref=e658] [cursor=pointer]:
+          - generic [ref=e55]: На подписи
+          - generic [ref=e56]: "20"
+      - generic [ref=e57]:
+        - generic [ref=e58]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e659] [cursor=pointer]
+        - button "К оплате" [ref=e660] [cursor=pointer]
+      - generic [ref=e69]:
+        - generic [ref=e70]: БАЗА
+        - button "Клиенты" [ref=e661] [cursor=pointer]
+        - button "Подрядчики" [ref=e662] [cursor=pointer]
+        - button "Сотрудники" [ref=e663] [cursor=pointer]
+      - generic [ref=e97]:
+        - generic [ref=e98]: СИСТЕМА
+        - button "Архив" [ref=e664] [cursor=pointer]
+        - button "Настройки" [ref=e665] [cursor=pointer]
+        - button "Доступ" [ref=e666] [cursor=pointer]
+    - button "АМ Александр Милевич Директор" [ref=e667] [cursor=pointer]:
+      - generic [ref=e115]: АМ
+      - generic [ref=e116]:
+        - generic [ref=e117]: Александр Милевич
+        - generic [ref=e118]: Директор
+  - main [ref=e119]:
+    - generic [ref=e398]:
+      - heading "Согласование" [level=1] [ref=e668]
+      - generic [ref=e401]:
+        - generic [ref=e402]:
+          - generic [ref=e404]: Документ
+          - generic [ref=e405]: Тип
+          - generic [ref=e406]: Направление
+          - generic [ref=e407]: Контрагент
+          - generic [ref=e408]: Ответственный
+          - generic [ref=e409]: Дедлайн
+          - generic [ref=e410]: Статус
+        - generic [ref=e411]:
+          - generic [ref=e432] [cursor=pointer]:
+            - checkbox [ref=e434]
+            - generic [ref=e435]:
+              - generic [ref=e436]: Договор подряда №5
+              - generic [ref=e437]: Договор
+            - generic [ref=e438]: С правками · 1
+            - generic [ref=e440]: Подрядчик
+            - generic [ref=e442]: ИП Кузнецов
+            - generic [ref=e443]: Ольга Заречная
+            - generic [ref=e445]:
+              - text: 10.06.2026
+              - generic [ref=e446]: +2дн.
+            - button "В работе" [ref=e670]
+          - generic [ref=e452] [cursor=pointer]:
+            - checkbox [ref=e454]
+            - generic [ref=e455]:
+              - generic [ref=e456]: Счёт №15
+              - generic [ref=e457]: Счёт
+            - generic [ref=e458]: С правками · 3
+            - generic [ref=e460]: Клиент
+            - generic [ref=e462]: МТС
+            - generic [ref=e463]: Марк Сомов
+            - generic [ref=e465]:
+              - text: 11.06.2026
+              - generic [ref=e466]: +1дн.
+            - button "В работе" [ref=e671]
+          - generic [ref=e472] [cursor=pointer]:
+            - checkbox [ref=e474]
+            - generic [ref=e475]:
+              - generic [ref=e476]: Акт №9
+              - generic [ref=e477]: Акт
+            - generic [ref=e478]: Первичный
+            - generic [ref=e480]: Подрядчик
+            - generic [ref=e482]: ООО СтройГрупп
+            - generic [ref=e483]: Ольга Заречная
+            - generic [ref=e484]: 13.06.2026
+            - button "Новое" [ref=e672]
+          - generic [ref=e490] [cursor=pointer]:
+            - checkbox [ref=e492]
+            - generic [ref=e493]:
+              - generic [ref=e494]: СФ №9
+              - generic [ref=e495]: СФ
+            - generic [ref=e496]: Первичный
+            - generic [ref=e498]: Клиент
+            - generic [ref=e500]: Wildberries
+            - generic [ref=e501]: Ольга Заречная
+            - generic [ref=e502]: 14.06.2026
+            - generic [ref=e503]:
+              - button "Отправлено, ждём клиента" [ref=e673]
+              - generic [ref=e508]: 4 дн. ожидания
+          - generic [ref=e509] [cursor=pointer]:
+            - checkbox [ref=e511]
+            - generic [ref=e512]:
+              - generic [ref=e513]: УПД №44
+              - generic [ref=e514]: УПД
+            - generic [ref=e515]: С правками · 1
+            - generic [ref=e517]: Клиент
+            - generic [ref=e519]: Авито
+            - generic [ref=e520]: Ольга Заречная
+            - generic [ref=e521]: 15.06.2026
+            - button "В работе" [ref=e674]
+          - generic [ref=e527] [cursor=pointer]:
+            - checkbox [ref=e529]
+            - generic [ref=e530]:
+              - generic [ref=e531]: Приложение №7
+              - generic [ref=e532]: Приложение
+            - generic [ref=e533]: Первичный
+            - generic [ref=e535]: Клиент
+            - generic [ref=e537]: Авито
+            - generic [ref=e538]: Марк Сомов
+            - generic [ref=e539]: 18.06.2026
+            - generic [ref=e540]:
+              - button "Отправлено, ждём клиента" [ref=e675]
+              - generic [ref=e545]: 3 дн. ожидания
+          - generic [ref=e546] [cursor=pointer]:
+            - checkbox [ref=e548]
+            - generic [ref=e549]:
+              - generic [ref=e550]: Приложение №3
+              - generic [ref=e551]: Приложение
+            - generic [ref=e552]: С правками · 2
+            - generic [ref=e554]: Подрядчик
+            - generic [ref=e556]: ООО СтройГрупп
+            - generic [ref=e557]: Ольга Заречная
+            - generic [ref=e558]: 19.06.2026
+            - button "В работе" [ref=e676]
+          - generic [ref=e564] [cursor=pointer]:
+            - checkbox [ref=e566]
+            - generic [ref=e567]:
+              - generic [ref=e568]: Договор №112
+              - generic [ref=e569]: Договор
+            - generic [ref=e570]: Первичный
+            - generic [ref=e572]: Клиент
+            - generic [ref=e574]: Яндекс
+            - generic [ref=e575]: Ольга Заречная
+            - generic [ref=e576]: 20.06.2026
+            - button "Новое" [ref=e677]
+          - generic [ref=e582] [cursor=pointer]:
+            - checkbox [ref=e584]
+            - generic [ref=e585]:
+              - generic [ref=e586]: Акт №21
+              - generic [ref=e587]: Акт
+            - generic [ref=e588]: Первичный
+            - generic [ref=e590]: Клиент
+            - generic [ref=e592]: Альфа-Банк ТГ
+            - generic [ref=e593]: Инна Михрабова
+            - generic [ref=e594]: —
+            - button "Новое" [ref=e678]
+          - generic [ref=e600] [cursor=pointer]:
+            - checkbox [ref=e602]
+            - generic [ref=e603]:
+              - generic [ref=e604]: УПД №14
+              - generic [ref=e605]: УПД
+            - generic [ref=e606]: Первичный
+            - generic [ref=e608]: Подрядчик
+            - generic [ref=e610]: ООО ТехМонтаж
+            - generic [ref=e611]: Марк Сомов
+            - generic [ref=e612]: —
+            - button "Новое" [ref=e679]
+      - generic:
+        - generic:
+          - generic:
+            - heading [level=2]
+            - button

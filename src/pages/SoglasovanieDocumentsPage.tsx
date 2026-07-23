@@ -8,8 +8,8 @@ import { SoglasovanieKanbanBoard } from "@/components/SoglasovanieKanbanBoard";
 import { cn } from "@/lib/utils";
 import { CurrentUser } from "@/types";
 import { RAW_PROJECTS } from "@/mocks/projects";
+import { useSoglasovanieDocuments } from "@/hooks/useSoglasovanieDocuments";
 import {
-  DOCUMENTS,
   DOC_DIRECTION_LABELS,
   DocDirection,
   DocType,
@@ -46,7 +46,8 @@ export function SoglasovanieDocumentsPage({ currentUser }: SoglasovanieDocuments
     setSecondaryFilter("");
   };
 
-  const documentsInDirection = useMemo(() => DOCUMENTS.filter((d) => d.direction === direction), [direction]);
+  const documents = useSoglasovanieDocuments();
+  const documentsInDirection = useMemo(() => documents.filter((d) => d.direction === direction), [documents, direction]);
 
   const contragentOptions = useMemo(
     () => Array.from(new Set(documentsInDirection.map((d) => getContragentName(d)))),

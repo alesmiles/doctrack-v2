@@ -1,0 +1,98 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Сметы
+              - button:
+                - generic: Согласование
+                - generic: "11"
+              - button:
+                - generic: На подписи
+                - generic: "20"
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Согласование
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button: Направление
+                - combobox:
+                  - generic: МедиаКрафт
+                - button: Ответственный
+                - button: Тип
+                - button [expanded]: Документ
+                - button
+                - button: Сбросить
+            - generic:
+              - generic:
+                - generic: Документ
+                - generic: Тип
+                - generic: Направление
+                - generic: Контрагент
+                - generic: Ответственный
+                - generic: Дедлайн
+              - generic:
+                - generic:
+                  - generic:
+                    - checkbox
+                  - generic:
+                    - generic: Акт №9
+                    - generic: Акт
+                  - generic: Первичный
+                  - generic: Подрядчик
+                  - generic: МедиаКрафт
+                  - generic: Ольга Заречная
+                  - generic: 13.06.2026
+            - generic:
+              - generic:
+                - generic:
+                  - button
+  - menu "Документ" [active] [ref=e1074]:
+    - menuitem "Все" [ref=e1075]
+    - menuitem "Договор" [ref=e1076]
+    - menuitem "Акт" [ref=e1077]
+    - menuitem "УПД" [ref=e1078]
+    - menuitem "Счёт" [ref=e1079]
+    - menuitem "Приложение" [ref=e1080]

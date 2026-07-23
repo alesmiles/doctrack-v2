@@ -1,0 +1,117 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - complementary:
+          - generic:
+            - generic:
+              - generic: D
+              - generic: DocTrack
+            - button
+          - navigation:
+            - generic:
+              - generic: ДОКУМЕНТООБОРОТ
+              - button:
+                - generic: Создать
+              - button:
+                - generic: Сметы
+              - button:
+                - generic: Согласование
+                - generic: "11"
+              - button:
+                - generic: На подписи
+                - generic: "20"
+            - generic:
+              - generic: ПЛАТЕЖИ
+              - button:
+                - generic: Дебиторка
+              - button:
+                - generic: К оплате
+            - generic:
+              - generic: БАЗА
+              - button:
+                - generic: Клиенты
+              - button:
+                - generic: Подрядчики
+              - button:
+                - generic: Сотрудники
+            - generic:
+              - generic: СИСТЕМА
+              - button:
+                - generic: Архив
+              - button:
+                - generic: Настройки
+              - button:
+                - generic: Доступ
+          - button:
+            - generic: АМ
+            - generic:
+              - generic: Александр Милевич
+              - generic: Директор
+        - main:
+          - generic:
+            - generic:
+              - heading [level=1]: Согласование
+            - generic:
+              - generic:
+                - generic:
+                  - textbox:
+                    - /placeholder: Поиск…
+                - button: Подрядчик
+                - button: Тип
+                - button: Ответственный
+                - button [expanded]
+            - generic:
+              - generic:
+                - generic: Документ
+                - generic: Тип
+                - generic: Направление
+                - generic: Контрагент
+                - generic: Ответственный
+                - generic: Дедлайн
+                - generic: Статус
+              - generic:
+                - generic:
+                  - generic:
+                    - checkbox
+                  - generic:
+                    - generic: Акт №9
+                    - generic: Акт
+                  - generic: Первичный
+                  - generic: Подрядчик
+                  - generic: ООО СтройГрупп
+                  - generic: Ольга Заречная
+                  - generic: 13.06.2026
+                  - generic: Новое
+                - generic:
+                  - generic:
+                    - checkbox
+                  - generic:
+                    - generic: Приложение №3
+                    - generic: Приложение
+                  - generic: С правками · 2
+                  - generic: Подрядчик
+                  - generic: ООО СтройГрупп
+                  - generic: Ольга Заречная
+                  - generic: 19.06.2026
+                  - generic: В работе
+                - generic:
+                  - generic:
+                    - checkbox
+                  - generic:
+                    - generic: УПД №14
+                    - generic: УПД
+                  - generic: Первичный
+                  - generic: Подрядчик
+                  - generic: ООО ТехМонтаж
+                  - generic: Марк Сомов
+                  - generic: —
+                  - generic: Новое
+            - generic:
+              - generic:
+                - generic:
+                  - button
+  - menu [active] [ref=f1e632]:
+    - generic [ref=f1e633]: Настройки фильтров
+    - separator [ref=f1e634]
+    - menuitemcheckbox "Показывать завершённые" [ref=f1e635]

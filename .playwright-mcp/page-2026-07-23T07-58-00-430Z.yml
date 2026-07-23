@@ -1,0 +1,179 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e1103] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=e1104] [cursor=pointer]
+        - button "Сметы" [ref=e1289] [cursor=pointer]
+        - button "Согласование 11" [ref=e1106] [cursor=pointer]:
+          - generic [ref=e33]: Согласование
+          - generic [ref=e34]: "11"
+      - generic [ref=e41]:
+        - generic [ref=e42]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e1108] [cursor=pointer]
+        - button "К оплате" [ref=e1109] [cursor=pointer]
+      - generic [ref=e53]:
+        - generic [ref=e54]: БАЗА
+        - button "Клиенты" [ref=e1110] [cursor=pointer]
+        - button "Подрядчики" [ref=e1111] [cursor=pointer]
+      - generic [ref=e81]:
+        - generic [ref=e82]: СИСТЕМА
+        - button "Архив" [ref=e1113] [cursor=pointer]
+        - button "Настройки" [ref=e1114] [cursor=pointer]
+        - button "Доступ" [ref=e1115] [cursor=pointer]
+    - button "КП Кирилл Петров КАМ" [active] [ref=e1295] [cursor=pointer]:
+      - generic [ref=e99]: КП
+      - generic [ref=e100]:
+        - generic [ref=e101]: Кирилл Петров
+        - generic [ref=e102]: КАМ
+  - main [ref=e103]:
+    - generic [ref=e858]:
+      - heading "Согласование" [level=1] [ref=e1117]
+      - generic [ref=e862]:
+        - textbox "Поиск…" [ref=e1118]
+        - button "Направление" [ref=e1119] [cursor=pointer]
+        - combobox [ref=e871] [cursor=pointer]:
+          - generic [ref=e872]: Контрагент
+        - button "Ответственный" [ref=e1120] [cursor=pointer]
+        - button "Тип" [ref=e1121] [cursor=pointer]
+        - button "Документ" [ref=e1122] [cursor=pointer]
+        - button [ref=e884] [cursor=pointer]
+      - generic [ref=e888]:
+        - generic [ref=e889]:
+          - generic [ref=e891]: Документ
+          - generic [ref=e892]: Тип
+          - generic [ref=e893]: Направление
+          - generic [ref=e894]: Контрагент
+          - generic [ref=e895]: Ответственный
+          - generic [ref=e896]: Дедлайн
+        - generic [ref=e897]:
+          - generic [ref=e1124] [cursor=pointer]:
+            - checkbox [ref=e1126]
+            - generic [ref=e1127]:
+              - generic [ref=e1128]: Договор №98
+              - generic [ref=e1129]: Договор
+            - generic [ref=e1130]: С правками · 2
+            - generic [ref=e1132]: Клиент
+            - generic [ref=e1134]: Сбер
+            - generic [ref=e1135]: Ольга Заречная
+            - generic [ref=e1137]:
+              - text: 05.06.2026
+              - generic [ref=e1138]: +7дн.
+          - generic [ref=e1139] [cursor=pointer]:
+            - checkbox [ref=e1141]
+            - generic [ref=e1142]:
+              - generic [ref=e1143]: Договор подряда №5
+              - generic [ref=e1144]: Договор
+            - generic [ref=e1145]: С правками · 1
+            - generic [ref=e1147]: Подрядчик
+            - generic [ref=e1149]: Инфлюенс Групп
+            - generic [ref=e1150]: Ольга Заречная
+            - generic [ref=e1152]:
+              - text: 10.06.2026
+              - generic [ref=e1153]: +2дн.
+          - generic [ref=e1154] [cursor=pointer]:
+            - checkbox [ref=e1156]
+            - generic [ref=e1157]:
+              - generic [ref=e1158]: Счёт №15
+              - generic [ref=e1159]: Счёт
+            - generic [ref=e1160]: С правками · 3
+            - generic [ref=e1162]: Клиент
+            - generic [ref=e1164]: МТС
+            - generic [ref=e1165]: Марк Сомов
+            - generic [ref=e1167]:
+              - text: 11.06.2026
+              - generic [ref=e1168]: +1дн.
+          - generic [ref=e943] [cursor=pointer]:
+            - checkbox [ref=e945]
+            - generic [ref=e946]:
+              - generic [ref=e947]: Акт №9
+              - generic [ref=e948]: Акт
+            - generic [ref=e949]: Первичный
+            - generic [ref=e951]: Подрядчик
+            - generic [ref=e953]: МедиаКрафт
+            - generic [ref=e954]: Ольга Заречная
+            - generic [ref=e955]: 13.06.2026
+          - generic [ref=e1169] [cursor=pointer]:
+            - checkbox [ref=e1171]
+            - generic [ref=e1172]:
+              - generic [ref=e1173]: СФ №9
+              - generic [ref=e1174]: СФ
+            - generic [ref=e1175]: Первичный
+            - generic [ref=e1177]: Клиент
+            - generic [ref=e1179]: Wildberries
+            - generic [ref=e1180]: Ольга Заречная
+            - generic [ref=e1181]:
+              - text: 14.06.2026
+              - generic [ref=e1182]: 4 дн. ожидания
+          - generic [ref=e1183] [cursor=pointer]:
+            - checkbox [ref=e1185]
+            - generic [ref=e1186]:
+              - generic [ref=e1187]: УПД №44
+              - generic [ref=e1188]: УПД
+            - generic [ref=e1189]: С правками · 1
+            - generic [ref=e1191]: Клиент
+            - generic [ref=e1193]: Авито
+            - generic [ref=e1194]: Ольга Заречная
+            - generic [ref=e1195]: 15.06.2026
+          - generic [ref=e1196] [cursor=pointer]:
+            - checkbox [ref=e1198]
+            - generic [ref=e1199]:
+              - generic [ref=e1200]: Приложение №7
+              - generic [ref=e1201]: Приложение
+            - generic [ref=e1202]: Первичный
+            - generic [ref=e1204]: Клиент
+            - generic [ref=e1206]: Авито
+            - generic [ref=e1207]: Марк Сомов
+            - generic [ref=e1208]:
+              - text: 18.06.2026
+              - generic [ref=e1209]: 3 дн. ожидания
+          - generic [ref=e1210] [cursor=pointer]:
+            - checkbox [ref=e1212]
+            - generic [ref=e1213]:
+              - generic [ref=e1214]: Приложение №3
+              - generic [ref=e1215]: Приложение
+            - generic [ref=e1216]: С правками · 2
+            - generic [ref=e1218]: Подрядчик
+            - generic [ref=e1220]: АдТех Solutions
+            - generic [ref=e1221]: Ольга Заречная
+            - generic [ref=e1222]: 19.06.2026
+          - generic [ref=e1223] [cursor=pointer]:
+            - checkbox [ref=e1225]
+            - generic [ref=e1226]:
+              - generic [ref=e1227]: Договор №112
+              - generic [ref=e1228]: Договор
+            - generic [ref=e1229]: Первичный
+            - generic [ref=e1231]: Клиент
+            - generic [ref=e1233]: Яндекс
+            - generic [ref=e1234]: Ольга Заречная
+            - generic [ref=e1235]: 20.06.2026
+          - generic [ref=e1236] [cursor=pointer]:
+            - checkbox [ref=e1238]
+            - generic [ref=e1239]:
+              - generic [ref=e1240]: Акт №21
+              - generic [ref=e1241]: Акт
+            - generic [ref=e1242]: Первичный
+            - generic [ref=e1244]: Клиент
+            - generic [ref=e1246]: Альфа-Банк ТГ
+            - generic [ref=e1247]: Инна Михрабова
+            - generic [ref=e1248]: —
+          - generic [ref=e1249] [cursor=pointer]:
+            - checkbox [ref=e1251]
+            - generic [ref=e1252]:
+              - generic [ref=e1253]: УПД №14
+              - generic [ref=e1254]: УПД
+            - generic [ref=e1255]: Первичный
+            - generic [ref=e1257]: Подрядчик
+            - generic [ref=e1259]: СтудияПро
+            - generic [ref=e1260]: Марк Сомов
+            - generic [ref=e1261]: —
+      - generic:
+        - generic:
+          - generic:
+            - heading [level=2]
+            - button

@@ -1,0 +1,150 @@
+- generic [ref=e4]:
+  - complementary [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - generic [ref=e8]: D
+        - generic [ref=e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=e10] [cursor=pointer]
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [active] [ref=e16] [cursor=pointer]
+        - generic [ref=e1006]:
+          - button "Документ клиента" [ref=e1007] [cursor=pointer]
+          - button "Документ подрядчика" [ref=e1009] [cursor=pointer]
+        - button "Клиенты" [ref=e996] [cursor=pointer]
+        - button "Подрядчики" [ref=e29] [cursor=pointer]
+      - generic [ref=e51]:
+        - generic [ref=e52]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=e53] [cursor=pointer]
+        - button "К оплате" [ref=e57] [cursor=pointer]
+      - generic [ref=e63]:
+        - generic [ref=e64]: БАЗА
+        - button "Клиенты" [ref=e65] [cursor=pointer]
+        - button "Подрядчики" [ref=e70] [cursor=pointer]
+      - generic [ref=e91]:
+        - generic [ref=e92]: СИСТЕМА
+        - button "Архив" [ref=e93] [cursor=pointer]
+        - button "Настройки" [ref=e98] [cursor=pointer]
+        - button "Доступ" [ref=e103] [cursor=pointer]
+    - button "ИР Ирина Романова Специалист ДО" [ref=e1005] [cursor=pointer]:
+      - generic [ref=e109]: ИР
+      - generic [ref=e110]:
+        - generic [ref=e111]: Ирина Романова
+        - generic [ref=e112]: Специалист ДО
+  - main [ref=e113]:
+    - generic [ref=e771]:
+      - generic [ref=e772]:
+        - generic [ref=e773]:
+          - heading "Подрядчики" [level=1] [ref=e774]
+          - paragraph [ref=e775]: по клиентским проектам
+        - generic [ref=e777]:
+          - button "Канбан" [ref=e778] [cursor=pointer]
+          - button "Таблица" [ref=e785] [cursor=pointer]
+      - generic [ref=e790]:
+        - textbox "Поиск…" [ref=e795]
+        - button "Клиент" [ref=e796] [cursor=pointer]
+        - button "Подрядчик" [ref=e799] [cursor=pointer]
+        - button "Ответственный" [ref=e802] [cursor=pointer]
+        - button "Тип" [ref=e805] [cursor=pointer]
+        - button "Группировка" [ref=e808] [cursor=pointer]
+        - button [ref=e809] [cursor=pointer]
+      - generic [ref=e816]:
+        - generic [ref=e818]:
+          - generic [ref=e820]:
+            - generic [ref=e821]: На согласовании
+            - generic [ref=e822]: "3"
+          - generic [ref=e824]:
+            - generic [ref=e825]: На подписании
+            - generic [ref=e826]: "4"
+          - generic [ref=e828]:
+            - generic [ref=e829]: Подписан
+            - generic [ref=e830]: "3"
+        - generic [ref=e831]:
+          - generic [ref=e832]:
+            - generic [ref=e833] [cursor=pointer]:
+              - generic [ref=e834]:
+                - generic [ref=e835]: Договор
+                - generic [ref=e836]: 3 дн.
+              - generic [ref=e841]:
+                - generic [ref=e842]: ИП Смирнов А.В.
+                - generic [ref=e843]: Договор №14
+              - generic [ref=e844]:
+                - generic [ref=e845]: "Клиент: Яндекс"
+                - generic [ref=e846]: правки
+            - generic [ref=e851] [cursor=pointer]:
+              - generic [ref=e852]:
+                - generic [ref=e853]: УПД
+                - generic [ref=e854]: 6 дн.
+              - generic [ref=e859]:
+                - generic [ref=e860]: ООО МедиаСервис
+                - generic [ref=e861]: УПД №22
+              - generic [ref=e862]: "Клиент: Сбер"
+            - generic [ref=e864] [cursor=pointer]:
+              - generic [ref=e865]:
+                - generic [ref=e866]: Акт
+                - generic [ref=e867]: 1 дн.
+              - generic [ref=e872]:
+                - generic [ref=e873]: ООО Диджитал Про
+                - generic [ref=e874]: Акт №31
+              - generic [ref=e875]: "Клиент: —"
+          - generic [ref=e877]:
+            - generic [ref=e878] [cursor=pointer]:
+              - generic [ref=e879]:
+                - generic [ref=e880]: Приложение
+                - generic [ref=e881]: 2 дн.
+              - generic [ref=e886]:
+                - generic [ref=e887]: ООО МедиаСервис
+                - generic [ref=e888]: Приложение №9
+              - generic [ref=e889]: "Клиент: Сбер"
+            - generic [ref=e891] [cursor=pointer]:
+              - generic [ref=e892]:
+                - generic [ref=e893]: Счёт
+                - generic [ref=e894]: 7 дн.
+              - generic [ref=e899]:
+                - generic [ref=e900]: ИП Горелова Т.С.
+                - generic [ref=e901]: Счёт №205
+              - generic [ref=e902]:
+                - generic [ref=e903]: "Клиент: Авито"
+                - generic [ref=e904]: правки
+            - generic [ref=e909] [cursor=pointer]:
+              - generic [ref=e910]:
+                - generic [ref=e911]: Договор
+                - generic [ref=e912]: 4 дн.
+              - generic [ref=e917]:
+                - generic [ref=e918]: ООО Контент Лаб
+                - generic [ref=e919]: Договор №40
+              - generic [ref=e920]: "Клиент: РусТех"
+            - generic [ref=e922] [cursor=pointer]:
+              - generic [ref=e923]:
+                - generic [ref=e924]: УПД
+                - generic [ref=e925]: 8 дн.
+              - generic [ref=e930]:
+                - generic [ref=e931]: ИП Рябов Д.О.
+                - generic [ref=e932]: УПД №18
+              - generic [ref=e933]: "Клиент: Альфа Медиа"
+          - generic [ref=e935]:
+            - generic [ref=e936] [cursor=pointer]:
+              - generic [ref=e937]:
+                - generic [ref=e938]: Приложение
+                - generic [ref=e939]: 0 дн.
+              - generic [ref=e944]:
+                - generic [ref=e945]: ИП Рябов Д.О.
+                - generic [ref=e946]: Приложение №3
+              - generic [ref=e947]: "Клиент: Альфа Медиа"
+            - generic [ref=e949] [cursor=pointer]:
+              - generic [ref=e950]:
+                - generic [ref=e951]: СФ
+                - generic [ref=e952]: 0 дн.
+              - generic [ref=e957]:
+                - generic [ref=e958]: ИП Смирнов А.В.
+                - generic [ref=e959]: СФ №5
+              - generic [ref=e960]: "Клиент: Яндекс"
+            - generic [ref=e962] [cursor=pointer]:
+              - generic [ref=e963]:
+                - generic [ref=e964]: Акт
+                - generic [ref=e965]: 0 дн.
+              - generic [ref=e970]:
+                - generic [ref=e971]: ООО Диджитал Про
+                - generic [ref=e972]: Акт №12
+              - generic [ref=e973]: "Клиент: —"

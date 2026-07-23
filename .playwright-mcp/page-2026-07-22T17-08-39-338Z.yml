@@ -1,0 +1,101 @@
+- generic [ref=f1e4]:
+  - complementary [ref=f1e5]:
+    - generic [ref=f1e6]:
+      - generic [ref=f1e7]:
+        - generic [ref=f1e8]: D
+        - generic [ref=f1e9]: DocTrack
+      - button "Свернуть боковую панель" [ref=f1e10] [cursor=pointer]
+    - navigation [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]: ДОКУМЕНТООБОРОТ
+        - button "Создать" [ref=f1e16] [cursor=pointer]
+        - button "Клиенты" [ref=f1e22] [cursor=pointer]
+        - button "Подрядчики" [ref=f1e29] [cursor=pointer]
+        - button "Сметы" [ref=f1e38] [cursor=pointer]
+        - button "На подписи 4" [ref=f1e44] [cursor=pointer]:
+          - generic [ref=f1e48]: На подписи
+          - generic [ref=f1e49]: "4"
+      - generic [ref=f1e50]:
+        - generic [ref=f1e51]: ПЛАТЕЖИ
+        - button "Дебиторка" [ref=f1e52] [cursor=pointer]
+        - button "К оплате" [ref=f1e56] [cursor=pointer]
+      - generic [ref=f1e62]:
+        - generic [ref=f1e63]: БАЗА
+        - button "Клиенты" [ref=f1e64] [cursor=pointer]
+        - button "Подрядчики" [ref=f1e69] [cursor=pointer]
+        - button "Сотрудники" [ref=f1e76] [cursor=pointer]
+      - generic [ref=f1e90]:
+        - generic [ref=f1e91]: СИСТЕМА
+        - button "Архив" [ref=f1e92] [cursor=pointer]
+        - button "Настройки" [ref=f1e97] [cursor=pointer]
+        - button "Доступ" [ref=f1e102] [cursor=pointer]
+    - button "АМ Александр Милевич Директор" [ref=f1e107] [cursor=pointer]:
+      - generic [ref=f1e108]: АМ
+      - generic [ref=f1e109]:
+        - generic [ref=f1e110]: Александр Милевич
+        - generic [ref=f1e111]: Директор
+  - main [ref=f1e112]:
+    - generic [ref=f1e391]:
+      - heading "На подписи" [level=1] [ref=f1e393]
+      - generic [ref=f1e395]:
+        - textbox "Поиск…" [ref=f1e400]
+        - button "Клиенты" [ref=f1e401] [cursor=pointer]
+        - button "Подрядчики · клиенты" [ref=f1e404] [cursor=pointer]
+        - button "Подрядчики · внутр." [ref=f1e407] [cursor=pointer]
+        - button "Ответственный" [ref=f1e410] [cursor=pointer]
+        - button "Тип документа" [ref=f1e413] [cursor=pointer]
+      - generic [ref=f1e417]:
+        - generic [ref=f1e419]:
+          - checkbox [ref=f1e421] [cursor=pointer]
+          - generic [ref=f1e422]: Документ
+          - generic [ref=f1e423]: Направление
+          - generic [ref=f1e424]: Контрагент
+          - generic [ref=f1e425]: Ответственный
+          - generic [ref=f1e426]: Сумма
+          - button "Подписать до" [active] [ref=f1e427] [cursor=pointer]
+        - generic [ref=f1e428]:
+          - button "Акт №33 Клиент Yandex Key Account Manager Кирилл Петров 3 600 000 ₽ 16.06.2026 Подписать" [ref=f1e429] [cursor=pointer]:
+            - checkbox [ref=f1e431]
+            - generic [ref=f1e432]: Акт №33
+            - generic [ref=f1e433]: Клиент
+            - generic [ref=f1e435]: Yandex
+            - generic [ref=f1e436]: Key Account Manager Кирилл Петров
+            - generic [ref=f1e437]: 3 600 000 ₽
+            - generic [ref=f1e438]: 16.06.2026
+            - button "Подписать" [ref=f1e440]
+          - button "Акт №21 Клиент Sber Key Account Manager Кирилл Петров 8 900 000 ₽ 14.06.2026 Подписать" [ref=f1e441] [cursor=pointer]:
+            - checkbox [ref=f1e443]
+            - generic [ref=f1e444]: Акт №21
+            - generic [ref=f1e445]: Клиент
+            - generic [ref=f1e447]: Sber
+            - generic [ref=f1e448]: Key Account Manager Кирилл Петров
+            - generic [ref=f1e449]: 8 900 000 ₽
+            - generic [ref=f1e450]: 14.06.2026
+            - button "Подписать" [ref=f1e452]
+          - button "Акт №19 Подрядчик · внутр. СтудияПро Менеджер документооборота Полина Волкова 480 000 ₽ 10.06.2026+2 дн. Подписать" [ref=f1e466] [cursor=pointer]:
+            - checkbox [ref=f1e468]
+            - generic [ref=f1e469]: Акт №19
+            - generic [ref=f1e470]: Подрядчик · внутр.
+            - generic [ref=f1e472]: СтудияПро
+            - generic [ref=f1e473]: Менеджер документооборота Полина Волкова
+            - generic [ref=f1e474]: 480 000 ₽
+            - generic [ref=f1e475]:
+              - text: 10.06.2026
+              - generic [ref=f1e476]: +2 дн.
+            - button "Подписать" [ref=f1e478]
+          - button "УПД №14 Подрядчик · клиент Инфлюенс Групп Менеджер документооборота Полина Волкова 620 000 ₽ 08.06.2026+4 дн. Подписать" [ref=f1e453] [cursor=pointer]:
+            - checkbox [ref=f1e455]
+            - generic [ref=f1e456]: УПД №14
+            - generic [ref=f1e457]: Подрядчик · клиент
+            - generic [ref=f1e459]: Инфлюенс Групп
+            - generic [ref=f1e460]: Менеджер документооборота Полина Волкова
+            - generic [ref=f1e461]: 620 000 ₽
+            - generic [ref=f1e462]:
+              - text: 08.06.2026
+              - generic [ref=f1e463]: +4 дн.
+            - button "Подписать" [ref=f1e465]
+      - generic:
+        - generic:
+          - generic:
+            - heading [level=2]
+            - button
