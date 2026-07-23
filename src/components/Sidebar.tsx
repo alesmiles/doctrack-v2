@@ -1,7 +1,11 @@
-import { useState } from "react";
-import { ChevronDown, ChevronLeft, ChevronRight, PlusCircle, FileText, Users, Handshake, Building2, RussianRuble, MailCheck, Building, HardHat, UserCog, Archive, Settings, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronDown, ChevronLeft, ChevronRight, PlusCircle, FileText, Users, RussianRuble, MailCheck, Building, HardHat, Handshake, UserCog, Archive, Settings, ShieldCheck, Calculator, Check, FileSignature, Scale } from "lucide-react";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { CurrentUser } from "@/types";
+import { ROLES, ROLE_LABELS, ROLE_FOOTER_DEMO, type RoleId } from "@/config/roles";
+import { useSoglasovanieDocuments } from "@/hooks/useSoglasovanieDocuments";
+import { LEGAL_QUEUE_DOCUMENTS } from "@/data/soglasovanie-legal-queue";
 
 interface SidebarProps {
   collapsed: boolean;
@@ -11,10 +15,55 @@ interface SidebarProps {
   onCreateProject: () => void;
   onCreateClientDoc: () => void;
   onCreateVendorDoc: () => void;
+  onCreateEstimate: () => void;
+  currentUser: CurrentUser;
+  currentRole: RoleId;
+  onRoleChange: (role: RoleId) => void;
 }
 
-export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateProject, onCreateClientDoc, onCreateVendorDoc }: SidebarProps) {
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+// R3: порядок пунктов переключателя роли в футере сайдбара
+const ROLE_MENU_ORDER: RoleId[] = ["director", "lawyer", "kam", "producer", "do_specialist"];
+
+function getInitials(fullName: string): string {
+  return fullName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateProject, onCreateClientDoc, onCreateVendorDoc, onCreateEstimate, currentUser, currentRole, onRoleChange }: SidebarProps) {
+  // Единая переменная — раскрыт не более чем один аккордеон сайдбара
+  // (Создать/Сметы/Подрядчики) одновременно.
+  const [openAccordion, setOpenAccordion] = useState<"create" | "estimates" | "contractors" | null>(null);
+  const [isRoleMenuOpen, setIsRoleMenuOpen] = useState(false);
+  const documents = useSoglasovanieDocuments();
+
+  const showEstimates = ROLES[currentRole].sidebarItems.includes("estimates");
+  const showClients = ROLES[currentRole].sidebarItems.includes("clients");
+  const showContractors = ROLES[currentRole].sidebarItems.includes("contractors-client") || ROLES[currentRole].sidebarItems.includes("contractors-internal");
+  // R2 (Блок 7 · На подписи): видимость пункта завязана на canSign, а не на
+  // конфиг ролей (ROLES[...].sidebarItems) — так требует ТЗ буквально.
+  const showOnSignature = currentUser.canSign === true;
+  const onSignatureCount = documents.filter((d) => d.stage === "sign_us" && d.assignedTo === currentUser.id).length;
+  const showEmployees = ROLES[currentRole].sidebarItems.includes("employees");
+  // Счётчик — количество строк в тестовых данных очереди (см. DoD задачи
+  // «раздел Согласование»); пункт показан всем ролям — в ТЗ не описана
+  // привязка к роли юриста через ROLES[...].sidebarItems, в отличие от
+  // «На подписи», поэтому не стал её домысливать.
+  const soglasovanieCount = LEGAL_QUEUE_DOCUMENTS.length;
+
+  useEffect(() => {
+    if (activePage === "estimates-client" || activePage === "estimates-project" || activePage === "estimates-internal") {
+      setOpenAccordion("estimates");
+    } else if (activePage === "contractors-client" || activePage === "contractors-internal") {
+      setOpenAccordion("contractors");
+    } else {
+      setOpenAccordion(null);
+    }
+  }, [activePage]);
+
   const sections: Array<{ title: string; items: Array<{ id: string; icon: any; label: string; badge?: number }> }> = [
     {
       title: "ДОКУМЕНТООБОРОТ",
@@ -49,7 +98,7 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
   ];
 
   return (
-    <aside className={cn("h-screen flex flex-col border-r border-gray-200 bg-white transition-all duration-200 flex-shrink-0", collapsed ? "w-14" : "w-56")}>
+    <aside className={cn("h-full flex flex-col border-r border-gray-200 bg-white transition-all duration-200 flex-shrink-0", collapsed ? "w-14" : "w-56")}>
       <div className="flex items-center h-14 border-b border-gray-100 px-4 justify-between">
         <div className={cn("flex items-center", collapsed ? "justify-center w-full" : "gap-3")}>
           <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">D</div>
@@ -64,75 +113,219 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
         </button>
       </div>
 
-      <nav className="flex-1 overflow-y-auto py-3 px-2">
+      <nav className="flex-1 min-h-0 overflow-y-auto py-3 px-2">
         <div className="mb-4">
           {!collapsed && (
             <div className="px-2 mb-1.5 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">ДОКУМЕНТООБОРОТ</div>
           )}
 
-          <DropdownMenu open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-            <DropdownMenuTrigger asChild>
+          <button
+            className={cn(
+              "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              collapsed && "justify-center px-0 w-auto"
+            )}
+            onClick={() => setOpenAccordion((prev) => (prev === "create" ? null : "create"))}
+            title={collapsed ? "Создать" : undefined}
+          >
+            <PlusCircle className="w-4 h-4 flex-shrink-0" />
+            {!collapsed && (
+              <>
+                <span className="truncate">Создать</span>
+                <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", openAccordion === "create" && "rotate-180")} />
+              </>
+            )}
+          </button>
+
+          {!collapsed && openAccordion === "create" && (
+            <div className="ml-[26px] pl-3 border-l-[1.5px] border-gray-200">
+              {ROLES[currentRole].createItems.includes("project") && (
+                <button
+                  className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  onClick={onCreateProject}
+                >
+                  <span className="truncate">Проект</span>
+                </button>
+              )}
+              {ROLES[currentRole].createItems.includes("client-doc") && (
+                <button
+                  className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  onClick={onCreateClientDoc}
+                >
+                  <span className="truncate">Документ клиента</span>
+                </button>
+              )}
+              {ROLES[currentRole].createItems.includes("vendor-doc") && (
+                <button
+                  className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  onClick={onCreateVendorDoc}
+                >
+                  <span className="truncate">Документ подрядчика</span>
+                </button>
+              )}
+              {ROLES[currentRole].createItems.includes("estimate") && (
+                <button
+                  className="w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  onClick={onCreateEstimate}
+                >
+                  <span className="truncate">Смета</span>
+                </button>
+              )}
+            </div>
+          )}
+
+          {showEstimates && (
+            <>
               <button
                 className={cn(
                   "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                   collapsed && "justify-center px-0 w-auto"
                 )}
-                title={collapsed ? "Создать" : undefined}
+                onClick={() => setOpenAccordion((prev) => (prev === "estimates" ? null : "estimates"))}
+                title={collapsed ? "Сметы" : undefined}
               >
-                <PlusCircle className="w-4 h-4 flex-shrink-0" />
+                <Calculator className="w-4 h-4 flex-shrink-0" />
                 {!collapsed && (
                   <>
-                    <span className="truncate">Создать</span>
-                    <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", isCreateOpen && "rotate-180")} />
+                    <span className="truncate">Сметы</span>
+                    <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", openAccordion === "estimates" && "rotate-180")} />
                   </>
                 )}
               </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="right" align="start" className="w-48">
-              <DropdownMenuItem onClick={onCreateProject}>Проект</DropdownMenuItem>
-              <DropdownMenuItem onClick={onCreateClientDoc}>Документ клиента</DropdownMenuItem>
-              <DropdownMenuItem onClick={onCreateVendorDoc}>Документ подрядчика</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+
+              {!collapsed && openAccordion === "estimates" && (
+                <div className="ml-[26px] pl-3 border-l-[1.5px] border-gray-200">
+                  <button
+                    className={cn(
+                      "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                      activePage === "estimates-client" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    )}
+                    onClick={() => onNavigate("estimates-client")}
+                  >
+                    <span className="truncate">Клиентские</span>
+                  </button>
+                  <button
+                    className={cn(
+                      "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                      activePage === "estimates-project" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    )}
+                    onClick={() => onNavigate("estimates-project")}
+                  >
+                    <span className="truncate">Проектные</span>
+                  </button>
+                  <button
+                    className={cn(
+                      "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                      activePage === "estimates-internal" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    )}
+                    onClick={() => onNavigate("estimates-internal")}
+                  >
+                    <span className="truncate">Внутренние</span>
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {showClients && (
+            <button
+              className={cn(
+                "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                activePage === "clients" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                collapsed && "justify-center px-0"
+              )}
+              onClick={() => onNavigate("clients")}
+              title={collapsed ? "Клиенты" : undefined}
+            >
+              <Users className={cn("w-4 h-4 flex-shrink-0", activePage === "clients" && "text-blue-600")} />
+              {!collapsed && <span className="truncate">Клиенты</span>}
+            </button>
+          )}
+
+          {showContractors && (
+            <>
+              <button
+                className={cn(
+                  "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5 text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                  collapsed && "justify-center px-0 w-auto"
+                )}
+                onClick={() => setOpenAccordion((prev) => (prev === "contractors" ? null : "contractors"))}
+                title={collapsed ? "Подрядчики" : undefined}
+              >
+                <Handshake className="w-4 h-4 flex-shrink-0" />
+                {!collapsed && (
+                  <>
+                    <span className="truncate">Подрядчики</span>
+                    <ChevronDown className={cn("w-3.5 h-3.5 ml-auto opacity-40 transition-transform", openAccordion === "contractors" && "rotate-180")} />
+                  </>
+                )}
+              </button>
+
+              {!collapsed && openAccordion === "contractors" && (
+                <div className="ml-[26px] pl-3 border-l-[1.5px] border-gray-200">
+                  {ROLES[currentRole].sidebarItems.includes("contractors-client") && (
+                    <button
+                      className={cn(
+                        "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                        activePage === "contractors-client" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      )}
+                      onClick={() => onNavigate("contractors-client")}
+                    >
+                      <span className="truncate">Проектные</span>
+                    </button>
+                  )}
+                  {ROLES[currentRole].sidebarItems.includes("contractors-internal") && (
+                    <button
+                      className={cn(
+                        "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                        activePage === "contractors-internal" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      )}
+                      onClick={() => onNavigate("contractors-internal")}
+                    >
+                      <span className="truncate">Внутренние</span>
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          )}
 
           <button
             className={cn(
               "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
-              activePage === "clients" ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+              activePage === "soglasovanie" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
               collapsed && "justify-center px-0"
             )}
-            onClick={() => onNavigate("clients")}
-            title={collapsed ? "Клиенты" : undefined}
+            onClick={() => onNavigate("soglasovanie")}
+            title={collapsed ? "Согласование" : undefined}
           >
-            <Users className={cn("w-4 h-4 flex-shrink-0", activePage === "clients" && "text-blue-600")} />
-            {!collapsed && <span className="truncate">Клиенты</span>}
+            <Scale className={cn("w-4 h-4 flex-shrink-0", activePage === "soglasovanie" && "text-blue-600")} />
+            {!collapsed && (
+              <>
+                <span className="truncate">Согласование</span>
+                <span className="ml-auto text-[10px] bg-gray-100 text-gray-600 rounded-full px-1.5 py-0.5 font-medium">{soglasovanieCount}</span>
+              </>
+            )}
           </button>
 
-          <button
-            className={cn(
-              "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
-              activePage === "contractors-client" ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-              collapsed && "justify-center px-0"
-            )}
-            onClick={() => onNavigate("contractors-client")}
-            title={collapsed ? "Подрядчики · Клиенты" : undefined}
-          >
-            <Handshake className={cn("w-4 h-4 flex-shrink-0", activePage === "contractors-client" && "text-blue-600")} />
-            {!collapsed && <span className="truncate">Подрядчики · Клиенты</span>}
-          </button>
-
-          <button
-            className={cn(
-              "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
-              activePage === "contractors-internal" ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-              collapsed && "justify-center px-0"
-            )}
-            onClick={() => onNavigate("contractors-internal")}
-            title={collapsed ? "Подрядчики · Внутренние" : undefined}
-          >
-            <Building2 className={cn("w-4 h-4 flex-shrink-0", activePage === "contractors-internal" && "text-blue-600")} />
-            {!collapsed && <span className="truncate">Подрядчики · Внутренние</span>}
-          </button>
+          {showOnSignature && (
+            <button
+              className={cn(
+                "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
+                activePage === "on-signature" ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                collapsed && "justify-center px-0"
+              )}
+              onClick={() => onNavigate("on-signature")}
+              title={collapsed ? "На подписи" : undefined}
+            >
+              <FileSignature className={cn("w-4 h-4 flex-shrink-0", activePage === "on-signature" && "text-blue-600")} />
+              {!collapsed && (
+                <>
+                  <span className="truncate">На подписи</span>
+                  <span className="ml-auto text-[10px] bg-gray-100 text-gray-600 rounded-full px-1.5 py-0.5 font-medium">{onSignatureCount}</span>
+                </>
+              )}
+            </button>
+          )}
         </div>
 
         {/* Rest sections */}
@@ -141,14 +334,14 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
             {!collapsed && (
               <div className="px-2 mb-1.5 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{section.title}</div>
             )}
-            {section.items.map((item) => {
+            {section.items.filter((item) => item.id !== "employees" || showEmployees).map((item) => {
               const isActive = activePage === item.id;
               return (
                 <button
                   key={item.id}
                   className={cn(
                     "w-full flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors mb-0.5",
-                    isActive ? "bg-blue-50 text-blue-700" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                    isActive ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                     collapsed && "justify-center px-0"
                   )}
                   title={collapsed ? item.label : undefined}
@@ -170,15 +363,35 @@ export function Sidebar({ collapsed, onToggle, activePage, onNavigate, onCreateP
         ))}
       </nav>
 
-      <div className={cn("border-t border-gray-100 p-3 flex items-center gap-3", collapsed && "justify-center px-2")}>
-        <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">IM</div>
-        {!collapsed && (
-          <div className="min-w-0">
-            <div className="text-sm font-medium text-gray-900 truncate">Inna Mikhrabova</div>
-            <div className="text-xs text-gray-400 truncate">Менеджер документов</div>
-          </div>
-        )}
-      </div>
+      <DropdownMenu open={isRoleMenuOpen} onOpenChange={setIsRoleMenuOpen}>
+        <DropdownMenuTrigger asChild>
+          <button
+            className={cn(
+              "border-t border-gray-100 p-3 flex items-center gap-3 flex-shrink-0 w-full text-left hover:bg-gray-50 transition-colors",
+              collapsed && "justify-center px-2"
+            )}
+            title={collapsed ? "Сменить роль" : undefined}
+          >
+            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-semibold flex-shrink-0">
+              {getInitials(ROLE_FOOTER_DEMO[currentRole].name)}
+            </div>
+            {!collapsed && (
+              <div className="min-w-0">
+                <div className="text-sm font-medium text-gray-900 truncate">{ROLE_FOOTER_DEMO[currentRole].name}</div>
+                <div className="text-xs text-gray-400 truncate">{ROLE_FOOTER_DEMO[currentRole].title}</div>
+              </div>
+            )}
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="top" align="start" className="w-48">
+          {ROLE_MENU_ORDER.map((role) => (
+            <DropdownMenuItem key={role} onClick={() => onRoleChange(role)}>
+              <span className="flex-1 truncate">{ROLE_LABELS[role]}</span>
+              {role === currentRole && <Check className="w-3.5 h-3.5 ml-2 text-blue-600 flex-shrink-0" />}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </aside>
   );
 }

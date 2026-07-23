@@ -71,4 +71,29 @@ export interface ContractorProject {
   documents: ContractorDoc[];
 }
 
+export type UserRole = "kam" | "lawyer" | "producer" | "mendo" | "director" | "findir";
+
+export interface CurrentUser {
+  id: string;
+  name: string;
+  role: UserRole;
+  // R2 (Блок 7 · На подписи): управляет видимостью пункта сайдбара «На подписи».
+  canSign?: boolean;
+}
+
+export type EstimateStatus = "На согласовании" | "Согласована" | "Требует правок" | "Отклонена";
+
+export interface Estimate {
+  id: number;
+  project: string;
+  client: string;
+  kam: Person;
+  sum: number;
+  status: EstimateStatus;
+  createdAt: string;
+  comment: string;
+  type: "client" | "contractor" | "contractor-project";
+  responsible: Person;
+}
+
 export default {};

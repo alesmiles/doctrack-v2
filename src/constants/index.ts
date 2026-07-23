@@ -84,4 +84,13 @@ export const OPT_FILTER_LABELS: Record<OptionalFilterId, string> = {
   overdue:   "Overdue Payments",
 };
 
+export const ROLE_LABELS: Record<import("../types").UserRole, string> = {
+  kam:      "КАМ",
+  lawyer:   "Юрист",
+  producer: "Продюсер",
+  mendo:    "МенДО",
+  director: "Директор/ОЛ",
+  findir:   "Финдир",
+};
+
 export default {};
