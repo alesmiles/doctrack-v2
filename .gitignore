@@ -29,3 +29,7 @@ dist-ssr
 tsconfig.app.tsbuildinfo
 tsconfig.node.tsbuildinfo
 CLAUDE.md.backup
+
+# Playwright artifacts
+.playwright-mcp/
+*.png
