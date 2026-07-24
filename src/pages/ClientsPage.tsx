@@ -13,6 +13,7 @@ import { Project } from "../types";
 import { cn } from "@/lib/utils";
 import AIPanel from "@/components/AIPanel";
 import { KanbanBoard } from "@/components/KanbanBoard";
+import { CLIENT_NAMES } from "@/utils/clients";
 import { ViewSwitcher } from "@/components/ViewSwitcher";
 
 export function ClientsPage() {
@@ -37,7 +38,7 @@ export function ClientsPage() {
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
-  const clientOptions = Array.from(new Set(projects.map((p) => p.client)));
+  const clientOptions = CLIENT_NAMES;
   const kamOptions = Array.from(new Set(projects.map((p) => p.kam.name)));
   const doManagerOptions = Array.from(new Set(projects.map((p) => p.doManager.name)));
   const directionOptions = Array.from(new Set(projects.map((p) => p.direction)));

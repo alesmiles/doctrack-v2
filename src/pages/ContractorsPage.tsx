@@ -15,6 +15,8 @@ import {
 import { ViewSwitcher } from "@/components/ViewSwitcher";
 import { ContractorKanbanBoard } from "@/components/ContractorKanbanBoard";
 import { contractorKanbanDocuments } from "@/mocks/contractorsKanbanMockData";
+import { CLIENT_NAMES } from "@/utils/clients";
+import { CONTRACTOR_NAMES } from "@/utils/contractors";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -80,14 +82,8 @@ export function ContractorsPage(_props: ContractorsPageProps) {
     }
   };
 
-  const clientOptions = Array.from(new Set([
-    ...contractors.map(p => p.client).filter(Boolean) as string[],
-    ...contractorKanbanDocuments.map(d => d.clientName).filter(Boolean) as string[],
-  ]));
-  const contractorOptions = Array.from(new Set([
-    ...contractors.map(p => p.contractor),
-    ...contractorKanbanDocuments.map(d => d.contractorName),
-  ]));
+  const clientOptions = CLIENT_NAMES;
+  const contractorOptions = CONTRACTOR_NAMES;
   const visibleContractorOptions = contractorOptions.filter(c => c.toLowerCase().includes(contractorQuery.toLowerCase()));
   const visibleClientOptions = clientOptions.filter(c => c.toLowerCase().includes(clientQuery.toLowerCase()));
   const responsibleOptions = Array.from(new Set([

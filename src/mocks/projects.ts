@@ -4,7 +4,7 @@ import { Doc, Project } from "../types";
 // ─── RAW_PROJECTS data ────────────────────────────────────────────────────────
 const RAW_PROJECTS = [
   {
-    id: 1, client: "Yandex", code: "YAN-1", period: "March 2026", direction: "Media",
+    id: 1, client: "Яндекс", code: "YAN-1", period: "March 2026", direction: "Media",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -16,7 +16,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 2, client: "Yandex", code: "YAN-2", period: "April 2026", direction: "Influence",
+    id: 2, client: "Яндекс", code: "YAN-2", period: "April 2026", direction: "Influence",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -26,7 +26,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 3, client: "Yandex", code: "YAN-3", period: "February 2026", direction: "Context",
+    id: 3, client: "Яндекс", code: "YAN-3", period: "February 2026", direction: "Context",
     kam: { initials: "AS", name: "Алина С.", color: "bg-zinc-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -38,7 +38,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 4, client: "Sber", code: "SBR-1", period: "January 2026", direction: "Media",
+    id: 4, client: "Сбер", code: "SBR-1", period: "January 2026", direction: "Media",
     kam: { initials: "AS", name: "Алина С.", color: "bg-zinc-400" },
     doManager: { initials: "PV", name: "Полина В.", color: "bg-neutral-400" },
     documents: [
@@ -50,7 +50,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 5, client: "Sber", code: "SBR-2", period: "March 2026", direction: "Influence",
+    id: 5, client: "Сбер", code: "SBR-2", period: "March 2026", direction: "Influence",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "PV", name: "Полина В.", color: "bg-neutral-400" },
     documents: [
@@ -61,7 +61,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 6, client: "Sber", code: "SBR-3", period: "December 2025", direction: "TV",
+    id: 6, client: "Сбер", code: "SBR-3", period: "December 2025", direction: "TV",
     kam: { initials: "AS", name: "Алина С.", color: "bg-zinc-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -72,7 +72,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 7, client: "Avito", code: "AVI-1", period: "February 2026", direction: "Influence",
+    id: 7, client: "Авито", code: "AVI-1", period: "February 2026", direction: "Influence",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "PV", name: "Полина В.", color: "bg-neutral-400" },
     documents: [
@@ -85,7 +85,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 8, client: "Avito", code: "AVI-2", period: "March 2026", direction: "Media",
+    id: 8, client: "Авито", code: "AVI-2", period: "March 2026", direction: "Media",
     kam: { initials: "AS", name: "Алина С.", color: "bg-zinc-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -96,7 +96,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 9, client: "Avito", code: "AVI-3", period: "April 2026", direction: "Context",
+    id: 9, client: "Авито", code: "AVI-3", period: "April 2026", direction: "Context",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "PV", name: "Полина В.", color: "bg-neutral-400" },
     documents: [
@@ -105,7 +105,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 10, client: "Alfa-Bank TG", code: "ALF-8", period: "December 2025", direction: "Influence",
+    id: 10, client: "Альфа-Банк ТГ", code: "ALF-8", period: "December 2025", direction: "Influence",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -118,7 +118,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 11, client: "Alfa-Bank TG", code: "ALF-9", period: "February 2026", direction: "Influence",
+    id: 11, client: "Альфа-Банк ТГ", code: "ALF-9", period: "February 2026", direction: "Influence",
     kam: { initials: "KP", name: "Кирилл П.", color: "bg-slate-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [
@@ -129,7 +129,7 @@ const RAW_PROJECTS = [
     ],
   },
   {
-    id: 12, client: "Alfa-Bank TG", code: "ALF-10", period: "March 2026", direction: "Media",
+    id: 12, client: "Альфа-Банк ТГ", code: "ALF-10", period: "March 2026", direction: "Media",
     kam: { initials: "PV", name: "Полина В.", color: "bg-neutral-400" },
     doManager: { initials: "IM", name: "Инна М.", color: "bg-stone-400" },
     documents: [

@@ -16,7 +16,7 @@ export const BASE_EMPLOYEES: EmployeeRecord[] = [
   {
     id: "emp-2",
     fullName: "Кирилл Петров",
-    position: "Key Account Manager",
+    position: "КАМ",
     email: "k.petrov@doctrack.ru",
     telegram: "@kpetrov",
     phone: "+7 916 123-45-67",

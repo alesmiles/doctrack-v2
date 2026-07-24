@@ -12,7 +12,7 @@ import { ReceivablesPage } from "./pages/ReceivablesPage"
 import { DocumentEditorPage } from "./pages/DocumentEditorPage"
 import { ClientsDirectoryPage } from "./pages/base/ClientsDirectoryPage"
 import { ContractorsDirectoryPage } from "./pages/base/ContractorsDirectoryPage"
-import { EmployeesDirectoryPage } from "./pages/base/EmployeesDirectoryPage"
+import { EmployeesPage } from "./pages/base/EmployeesPage"
 import { SoglasovanieNaPodpisiPage } from "./pages/SoglasovanieNaPodpisiPage"
 import { PlaceholderPage } from "./pages/PlaceholderPage"
 import { CreateProjectModal } from "./components/CreateProjectModal"
@@ -50,6 +50,7 @@ export default function App() {
   } | null>(null)
   const [cameFromProject, setCameFromProject] = useState(false)
   const [savedClientDocForm, setSavedClientDocForm] = useState<ClientDocFormData | null>(null)
+  const [docContext, setDocContext] = useState<{ project: string } | null>(null)
   // R1/R2: currentUser следует за переключателем роли (см. ROLE_DEMO_USER_ID) —
   // без этого счётчик и видимость "На подписи" не совпадали бы с выбранной ролью.
   const currentUser = DEMO_USERS.find((u) => u.id === ROLE_DEMO_USER_ID[currentRole])!
@@ -95,7 +96,7 @@ export default function App() {
       case "base-contractors":
         return <ContractorsDirectoryPage />
       case "employees":
-        return <EmployeesDirectoryPage />
+        return <EmployeesPage />
       case "document-editor":
         return (
           <DocumentEditorPage
@@ -103,6 +104,7 @@ export default function App() {
               setActivePage(previousPage)
               setShowCreateClientDoc(true)
             }}
+            docContext={docContext ?? undefined}
           />
         )
       default:
@@ -160,9 +162,10 @@ export default function App() {
           setShowCreateClientDoc(false)
           setShowCreateProject(true)
         } : undefined}
-        onNavigate={(page) => {
+        onNavigate={(page, context) => {
           setPreviousPage(activePage)
           setShowCreateClientDoc(false)
+          setDocContext(context ?? null)
           setActivePage(page)
         }}
         onSaveForm={setSavedClientDocForm}

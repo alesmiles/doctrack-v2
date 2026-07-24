@@ -38,7 +38,7 @@ export const KANBAN_STAGES = [
 
 export const kanbanMockDocuments: KanbanDocument[] = [
   // Внутр. согласование
-  { id: '1', docType: 'УПД', docNumber: '45', clientName: 'Yandex', projectCode: 'YAN-1', stage: 'internal_approval', daysInStatus: 3, isOverdue: false, hasEdits: true, linkedAppNumber: 13 },
+  { id: '1', docType: 'УПД', docNumber: '45', clientName: 'Яндекс', projectCode: 'YAN-1', stage: 'internal_approval', daysInStatus: 3, isOverdue: false, hasEdits: true, linkedAppNumber: 13 },
   { id: '2', docType: 'Акт', docNumber: '8', clientName: 'Сбер', projectCode: 'SBR-2', stage: 'internal_approval', daysInStatus: 1, isOverdue: false, hasEdits: false, linkedAppNumber: 27 },
   { id: '3', docType: 'УПД', docNumber: '60', clientName: 'РусТех', projectCode: 'RUS-1', stage: 'internal_approval', daysInStatus: 6, isOverdue: true, hasEdits: true, linkedAppNumber: 33 },
 
@@ -49,14 +49,14 @@ export const kanbanMockDocuments: KanbanDocument[] = [
   { id: '7', docType: 'Договор', docNumber: '77', clientName: 'Яндекс', projectCode: 'YAN-2', stage: 'client_approval', daysInStatus: 7, isOverdue: true, hasEdits: true },
 
   // Мы подписываем
-  { id: '8', docType: 'Счёт', docNumber: '201', clientName: 'Yandex', projectCode: 'YAN-1', stage: 'sign_us', daysInStatus: 1, isOverdue: false, hasEdits: false, linkedAppNumber: 13 },
+  { id: '8', docType: 'Счёт', docNumber: '201', clientName: 'Яндекс', projectCode: 'YAN-1', stage: 'sign_us', daysInStatus: 1, isOverdue: false, hasEdits: false, linkedAppNumber: 13 },
   { id: '9', docType: 'СФ', docNumber: '15', clientName: 'Авито', projectCode: 'AVI-1', stage: 'sign_us', daysInStatus: 8, isOverdue: true, hasEdits: false, linkedAppNumber: 41 },
 
   // Клиент подписывает
-  { id: '10', docType: 'Приложение', docNumber: '13', clientName: 'Yandex', projectCode: 'YAN-1', stage: 'sign_client', daysInStatus: 2, isOverdue: false, hasEdits: false },
+  { id: '10', docType: 'Приложение', docNumber: '13', clientName: 'Яндекс', projectCode: 'YAN-1', stage: 'sign_client', daysInStatus: 2, isOverdue: false, hasEdits: false },
   { id: '11', docType: 'Приложение', docNumber: '27', clientName: 'Сбер', projectCode: 'SBR-2', stage: 'sign_client', daysInStatus: 7, isOverdue: true, hasEdits: false },
 
   // Подписан
-  { id: '12', docType: 'Договор', docNumber: '12', clientName: 'Yandex', projectCode: 'YAN-1', stage: 'signed', daysInStatus: 0, isOverdue: false, hasEdits: false },
+  { id: '12', docType: 'Договор', docNumber: '12', clientName: 'Яндекс', projectCode: 'YAN-1', stage: 'signed', daysInStatus: 0, isOverdue: false, hasEdits: false },
   { id: '13', docType: 'Приложение', docNumber: '41', clientName: 'Авито', projectCode: 'AVI-1', stage: 'signed', daysInStatus: 0, isOverdue: false, hasEdits: false },
 ];

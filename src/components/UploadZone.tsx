@@ -45,7 +45,7 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
         </svg>
-        <span className="text-[12px] text-blue-600">Generating document...</span>
+        <span className="text-[12px] text-blue-600">Генерируем документ...</span>
       </div>
     )
   }
@@ -58,7 +58,7 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           onClick={onOpenDoc}
           className="text-[12px] font-medium text-blue-600 hover:text-blue-700 whitespace-nowrap flex-shrink-0"
         >
-          Open Document →
+          Открыть документ →
         </button>
       </div>
     )
@@ -66,23 +66,30 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
 
   return (
     <div className="flex flex-col gap-2.5">
-      <div
-        onClick={() => fileRef.current?.click()}
+      <label
+        htmlFor="estimate-upload-input"
         onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         className={cn(
-          "border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors",
+          "block border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors",
           dragOver ? "border-blue-400 bg-blue-50" : "border-blue-200 bg-white hover:border-blue-300 hover:bg-blue-50/30"
         )}
       >
-        <p className="text-[12px] text-gray-500 mb-1">📎 Drag a file here or</p>
-        <span className="text-[12px] text-blue-600 font-medium hover:underline">Browse</span>
+        <p className="text-[12px] text-gray-500 mb-1">📎 Перетащите файл сюда или</p>
+        <span className="text-[12px] text-blue-600 font-medium hover:underline">Выберите файл</span>
         <p className="text-[10px] text-gray-400 mt-1">.xlsx .xls .pdf</p>
-        <input ref={fileRef} type="file" accept=".xlsx,.xls,.pdf" className="hidden" onChange={handleFileChange} />
-      </div>
+        <input
+          id="estimate-upload-input"
+          ref={fileRef}
+          type="file"
+          accept=".xlsx,.xls,.pdf"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+      </label>
 
-      <p className="text-[11px] text-blue-800/60">or paste a Google Sheets link:</p>
+      <p className="text-[11px] text-blue-800/60">или вставьте ссылку на Google Таблицы:</p>
       <div className="flex gap-2">
         <input
           type="text"
@@ -98,11 +105,11 @@ export function UploadZone({ uploadState, uploadedFileName, onFile, onLinkUpload
           onClick={handleLinkUpload}
           className="text-[11px] bg-blue-600 text-white rounded-md px-3 py-1.5 hover:bg-blue-700 whitespace-nowrap"
         >
-          Load from link →
+          Загрузить по ссылке →
         </button>
       </div>
       {linkError && (
-        <p className="text-[11px] text-red-500 -mt-1">Please enter a valid Google Sheets link</p>
+        <p className="text-[11px] text-red-500 -mt-1">Введите корректную ссылку на Google Таблицы</p>
       )}
     </div>
   )

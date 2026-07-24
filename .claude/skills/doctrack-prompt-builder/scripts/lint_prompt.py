@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Механический линт черновика промпта DocTrack против шаблона.
-Это НЕ замена смысловому аудиту (см. SKILL.md, шаг 2.2).
+Это НЕ замена смысловому аудиту (см. SKILL.md / таблица самопроверки в
+template.md / template-delta.md).
 
 Использование:
     python3 lint_prompt.py путь/к/черновику.md
@@ -12,7 +13,6 @@
 import re
 import sys
 import difflib
-import subprocess
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -33,10 +33,10 @@ REPO_ROOT = find_repo_root()
 
 SECTION_PATTERNS = [
     (1, r"1\)\s*Заголовок"),
-    (2, r"2\)\s*Контекст"),
+    (2, r"2[ab]?\)\s*(Контекст|Глобальные инварианты|Локальная зона)"),
     (3, r"3\)\s*Описание"),
     (4, r"4\)\s*Definition of Done|4\)\s*DoD"),
-    (5, r"5\)\s*Проверка через Playwright"),
+    (5, r"5\)\s*Проверка"),
     (6, r"6\)\s*Финальная сверка"),
     (7, r"7\)\s*Режим работы"),
 ]
@@ -44,7 +44,11 @@ SECTION_PATTERNS = [
 FILENAME_HINT = re.compile(r"[A-Za-zА-Яа-я0-9_/]+\.(tsx|ts|jsx|js|py|md|json|css)")
 REQUIRED_STATUSES = ["Готово с отклонениями", "Заблокировано", "Готово"]
 
-# --- существующие проверки (без изменений по сути) ---
+TESTING_LIBRARY_MATCHERS = [
+    "toBeInTheDocument", "queryByText", "queryByRole", "getByText",
+    "getByRole", "findByText", "findByRole", "screen.",
+]
+
 
 def find_sections(text):
     found = []
@@ -57,7 +61,7 @@ def find_sections(text):
 
 def check_sections_present_and_ordered(text, issues):
     found = find_sections(text)
-    found_nums = [n for n, _ in found]
+    found_nums = sorted(set(n for n, _ in found))
     missing = [n for n, _ in SECTION_PATTERNS if n not in found_nums]
     if missing:
         issues.append(f"Отсутствуют разделы: {missing}")
@@ -93,6 +97,7 @@ def check_section_7_exact(text, found, issues):
         return
     positions = sorted(found, key=lambda x: x[1])
     section_7_start = None
+    section_7_idx = None
     for i, (num, start) in enumerate(positions):
         if num == 7:
             section_7_start, section_7_idx = start, i
@@ -112,13 +117,23 @@ def check_section_7_exact(text, found, issues):
 
 
 def check_section_6_requirements(text, issues):
-    if "IMPLEMENTATION_REPORT.md" not in text:
+    is_delta = bool(re.search(r"Итерация\s+K|delta-\d", text, re.IGNORECASE))
+    if not is_delta and "IMPLEMENTATION_REPORT.md" not in text:
         issues.append("Не найдено упоминание IMPLEMENTATION_REPORT.md.")
     found_statuses = [s for s in REQUIRED_STATUSES if s in text]
     if len(found_statuses) < 3:
         issues.append(f"Не найдены все три статуса: отсутствуют {set(REQUIRED_STATUSES) - set(found_statuses)}")
-    if "не более 3 попыт" not in text.lower() and "3 попытк" not in text.lower():
+    if "не более 3 попыт" not in text.lower() and "3 попытк" not in text.lower() and "лимит 3" not in text.lower():
         issues.append("Не найден единый лимит в 3 попытки.")
+
+
+def get_section_body(text, found, section_num):
+    positions = sorted(found, key=lambda x: x[1])
+    for i, (num, start) in enumerate(positions):
+        if num == section_num:
+            end = positions[i + 1][1] if i + 1 < len(positions) else len(text)
+            return text[start:end]
+    return None
 
 
 def check_traceability(text, issues):
@@ -129,7 +144,7 @@ def check_traceability(text, issues):
     if not d_ids:
         issues.append("Не найдено ни одного D-id.")
         return
-    if "3a" not in text and "Трассировка" not in text:
+    if "3a" not in text.lower() and "Трассировка" not in text:
         issues.append("Не найден раздел 3a.")
         return
     trace_lines = re.findall(r"R(\d+(?:\.\d+)?)\s*→\s*([^\n]+)", text)
@@ -169,8 +184,6 @@ def check_what_not_to_include(text, issues):
     if "Что НЕ включать" not in text and "Что не включать" not in text:
         issues.append("Отсутствует раздел «Что НЕ включать».")
 
-
-# --- новые проверки ---
 
 def check_code_references_exist(text, issues):
     """
@@ -216,13 +229,7 @@ def check_section_4_binary(text, found, issues):
     между вариантами поведения, скобки с перечислением через "/",
     формулировки "на усмотрение".
     """
-    positions = sorted(found, key=lambda x: x[1])
-    section_4_body = None
-    for i, (num, start) in enumerate(positions):
-        if num == 4:
-            end = positions[i + 1][1] if i + 1 < len(positions) else len(text)
-            section_4_body = text[start:end]
-            break
+    section_4_body = get_section_body(text, found, 4)
     if not section_4_body:
         return
     for line_num, line in enumerate(section_4_body.splitlines(), start=1):
@@ -234,33 +241,26 @@ def check_section_4_binary(text, found, issues):
             issues.append(f"Раздел 4, строка {line_num}: «на усмотрение» — решение не принято в промпте: «{line.strip()[:100]}»")
 
 
-TESTING_LIBRARY_MATCHERS = [
-    "toBeInTheDocument", "queryByText", "queryByRole", "getByText",
-    "getByRole", "findByText", "findByRole", "screen.",
-]
-
-def check_no_testing_library_in_playwright_section(text, found, issues):
-    positions = sorted(found, key=lambda x: x[1])
-    section_5_body = None
-    for i, (num, start) in enumerate(positions):
-        if num == 5:
-            end = positions[i + 1][1] if i + 1 < len(positions) else len(text)
-            section_5_body = text[start:end]
-            break
-    if not section_5_body:
-        return
-    for matcher in TESTING_LIBRARY_MATCHERS:
-        if matcher in section_5_body:
-            issues.append(
-                f"Раздел 5 содержит «{matcher}» — это матчер тестового рантайма "
-                f"(Testing Library), а проверка идёт через Playwright MCP в "
-                f"реальном браузере. Замени на снапшот DOM / скриншот / подсчёт узлов."
-            )
-    # то же самое — проверить D-пункты раздела 4, если они содержат такие матчеры
-    for matcher in TESTING_LIBRARY_MATCHERS:
-        if matcher in text and matcher not in section_5_body:
-            # уже мог сработать в другом разделе — проверим раздел 4 отдельно
-            pass
+def check_no_testing_library_matchers(text, found, issues):
+    """
+    Проект без testing-library/jest/vitest — проверка идёт через Playwright
+    MCP по живому DOM. Матчеры тестового рантайма не должны появляться ни
+    в разделе 5 (шаги проверки), ни в разделе 4 (критерии DoD) — если D
+    сформулирован в терминах testing-library, это тоже нужно переформулировать
+    в терминах DOM/снапшота до того, как задача попадёт к исполнителю.
+    """
+    for section_num in (4, 5):
+        body = get_section_body(text, found, section_num)
+        if not body:
+            continue
+        for matcher in TESTING_LIBRARY_MATCHERS:
+            if matcher in body:
+                issues.append(
+                    f"Раздел {section_num} содержит «{matcher}» — это матчер "
+                    f"тестового рантайма (Testing Library), а проверка идёт "
+                    f"через Playwright MCP в реальном браузере. Замени на "
+                    f"снапшот DOM / скриншот / подсчёт узлов."
+                )
 
 
 def main():
@@ -281,7 +281,7 @@ def main():
         check_sections_nonempty(text, found, issues)
         check_section_7_exact(text, found, issues)
         check_section_4_binary(text, found, issues)
-        check_no_testing_library_in_playwright_section(text, found, issues)
+        check_no_testing_library_matchers(text, found, issues)
 
     check_banned_phrases(text, issues)
     check_section_6_requirements(text, issues)
@@ -297,7 +297,7 @@ def main():
             print(f"{i}. {issue}\n")
         sys.exit(1)
     else:
-        print("Механический линт пройден без замечаний. Не отменяет шаг 2.2 из SKILL.md.")
+        print("Механический линт пройден без замечаний. Не отменяет таблицу самопроверки из template.md/template-delta.md.")
         sys.exit(0)
 
 

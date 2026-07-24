@@ -1,5 +1,5 @@
 import { useState, useRef } from "react"
-import { GripVertical } from "lucide-react"
+import { GripVertical, Check, Minus } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export interface Issue {
@@ -18,6 +18,7 @@ interface IssueCardProps {
   isDragging: boolean
   onToggle: () => void
   onResolve: (issueId: string, text: string) => void
+  onKeepOriginal: (issueId: string) => void
   onDismiss: () => void
   onDragStart: (e: React.DragEvent) => void
   onDragEnd: () => void
@@ -27,7 +28,7 @@ interface IssueCardProps {
 
 export function IssueCard({
   issue, isActive, isResolved, isExpanded, isDragging,
-  onToggle, onResolve, onDismiss, onDragStart, onDragEnd, onDragOver, onDrop,
+  onToggle, onResolve, onKeepOriginal, onDismiss, onDragStart, onDragEnd, onDragOver, onDrop,
 }: IssueCardProps) {
   const [editing, setEditing] = useState(false)
   const [editText, setEditText] = useState(issue.formulation)
@@ -38,6 +39,11 @@ export function IssueCard({
   function handleAccept(text: string) {
     setEditing(false)
     onResolve(issue.id, text)
+  }
+
+  function handleKeepOriginal() {
+    setEditing(false)
+    onKeepOriginal(issue.id)
   }
 
   function handleEdit() {
@@ -75,37 +81,63 @@ export function IssueCard({
         />
         <span className={cn("w-2 h-2 rounded-full flex-shrink-0", dot)} />
         <span className={cn("text-xs text-gray-700 flex-1", isResolved && "line-through")}>{issue.title}</span>
+        {!isResolved && (
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+            <button
+              onClick={(e) => { e.stopPropagation(); onResolve(issue.id, issue.formulation) }}
+              className="w-5 h-5 flex items-center justify-center rounded hover:bg-green-100 text-green-600"
+              title="Принять предложенное"
+            >
+              <Check className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); onKeepOriginal(issue.id) }}
+              className="w-5 h-5 flex items-center justify-center rounded hover:bg-gray-200 text-gray-500"
+              title="Оставить без изменений"
+            >
+              <Minus className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
         <span className={cn("text-[10px] text-gray-400 transition-transform duration-150 inline-block", isExpanded && "rotate-90")}>›</span>
       </div>
 
       {isExpanded && !isResolved && (
         <div className="px-3 pb-3">
           <p className="text-[11px] text-gray-500 leading-relaxed mb-3">{issue.description}</p>
-          <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Suggested text</p>
+          <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wide mb-1.5">Предлагаемая формулировка</p>
 
           {!editing ? (
             <>
               <div className="bg-gray-50 border border-gray-200 rounded-md p-2.5 text-[11px] text-gray-700 mb-3 leading-relaxed">
                 {issue.formulation}
               </div>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <button
-                  onClick={() => handleAccept(issue.formulation)}
-                  className="bg-blue-600 text-white text-[11px] rounded-md px-3 py-1.5 hover:bg-blue-700"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={handleEdit}
-                  className="border border-gray-200 text-gray-600 text-[11px] rounded-md px-3 py-1.5 hover:bg-gray-50"
-                >
-                  Edit
-                </button>
+              <div className="flex flex-col gap-1.5">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <button
+                    onClick={() => handleAccept(issue.formulation)}
+                    className="bg-blue-600 text-white text-[11px] rounded-md px-3 py-1.5 hover:bg-blue-700"
+                  >
+                    Принять
+                  </button>
+                  <button
+                    onClick={handleKeepOriginal}
+                    className="border border-gray-200 text-gray-600 text-[11px] rounded-md px-3 py-1.5 hover:bg-gray-50"
+                  >
+                    Не менять
+                  </button>
+                  <button
+                    onClick={handleEdit}
+                    className="border border-gray-200 text-gray-600 text-[11px] rounded-md px-3 py-1.5 hover:bg-gray-50"
+                  >
+                    Изменить
+                  </button>
+                </div>
                 <button
                   onClick={onDismiss}
-                  className="text-gray-400 text-[11px] px-2 py-1.5 hover:text-gray-600"
+                  className="text-gray-400 text-[11px] hover:text-gray-600 hover:underline self-start"
                 >
-                  Dismiss
+                  Отклонить
                 </button>
               </div>
             </>
@@ -116,7 +148,7 @@ export function IssueCard({
                 value={editText}
                 onChange={(e) => setEditText(e.target.value)}
                 rows={3}
-                placeholder="Enter custom value..."
+                placeholder="Введите свой вариант..."
                 className="w-full text-[11px] border border-blue-300 rounded-md p-2 resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 mb-3"
               />
               <div className="flex items-center gap-1.5">
@@ -124,13 +156,13 @@ export function IssueCard({
                   onClick={() => handleAccept(editText)}
                   className="bg-blue-600 text-white text-[11px] rounded-md px-3 py-1.5 hover:bg-blue-700"
                 >
-                  Apply edit
+                  Применить
                 </button>
                 <button
                   onClick={handleCancelEdit}
                   className="text-gray-400 text-[11px] px-2 py-1.5 hover:text-gray-600"
                 >
-                  Cancel
+                  Отмена
                 </button>
               </div>
             </>

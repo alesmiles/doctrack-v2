@@ -1,23 +1,26 @@
 import { useState, useRef } from "react"
 import { toast } from "sonner"
+import { asBlob } from "html-docx-js-typescript"
 import { cn } from "@/lib/utils"
 import { IssueCard, type Issue } from "@/components/IssueCard"
 import { DocumentBody } from "@/components/DocumentBody"
+import { getSmetaByProject } from "@/mocks/smetaMock"
 
 interface DocumentEditorPageProps {
   onBack: () => void
+  docContext?: { project: string }
 }
 
 const ISSUES: Issue[] = [
-  { id: "rim", type: "error", title: "Ad Format Breakdown Required", description: '"post / repost / story" — specify the count for each type out of 15 placements', formulation: "post — 10, repost — 3, story — 2" },
-  { id: "period", type: "warning", title: "Period Too Broad", description: "Specify an exact period for delivery tracking", formulation: "March — May 2025" },
-  { id: "acceptance", type: "error", title: "Acceptance Criteria Missing", description: "Without criteria the acceptance act can't be signed and the contractor can't be held accountable", formulation: "proof of publication + reach screenshot within 48 hours of posting" },
-  { id: "content", type: "warning", title: "Content Approval", description: "Specify who approves content and how many hours before publishing", formulation: "48 hours before publishing; Client response time — 24 hours; silence = approval" },
+  { id: "rim", type: "error", title: "Необходима разбивка по форматам размещения", description: "«пост / репост / сторис» — укажите количество по каждому типу из 15 размещений", formulation: "пост — 10, репост — 3, сторис — 2" },
+  { id: "period", type: "warning", title: "Слишком широкий период", description: "Укажите точный период для контроля сроков", formulation: "март — май 2025" },
+  { id: "acceptance", type: "error", title: "Отсутствуют критерии приёмки", description: "Без критериев акт приёмки нельзя подписать, а с подрядчика нельзя спросить за результат", formulation: "подтверждение публикации + скриншот охвата в течение 48 часов после размещения" },
+  { id: "content", type: "warning", title: "Согласование контента", description: "Укажите, кто согласовывает контент и за сколько часов до публикации", formulation: "за 48 часов до публикации; срок ответа Заказчика — 24 часа; молчание = согласование" },
 ]
 
 const PROGRESS_W = ["w-0", "w-1/4", "w-1/2", "w-3/4", "w-full"] as const
 
-export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
+export function DocumentEditorPage({ onBack, docContext }: DocumentEditorPageProps) {
   const [issues, setIssues] = useState<Issue[]>(ISSUES)
   const [resolvedIds, setResolvedIds] = useState<Set<string>>(new Set())
   const [resolvedTexts, setResolvedTexts] = useState<Map<string, string>>(new Map())
@@ -29,6 +32,8 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
   const panelRef = useRef<HTMLDivElement>(null)
   const docRef = useRef<HTMLDivElement>(null)
 
+  const smetaData = docContext?.project ? getSmetaByProject(docContext.project) : undefined
+
   const resolved = resolvedIds.size
   const total = issues.length
   const allDone = resolved === total
@@ -36,6 +41,12 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
   function handleResolve(id: string, text: string) {
     setResolvedIds((prev) => new Set([...prev, id]))
     setResolvedTexts((prev) => new Map(prev).set(id, text))
+    setExpandedId(null)
+    setActiveId(null)
+  }
+
+  function handleKeepOriginal(id: string) {
+    setResolvedIds((prev) => new Set([...prev, id]))
     setExpandedId(null)
     setActiveId(null)
   }
@@ -72,17 +83,32 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
     setDragOverId(null)
   }
 
+  async function handleExport() {
+    if (!docRef.current) return
+    const html = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${docRef.current.innerHTML}</body></html>`
+    const blob = await asBlob(html)
+    const url = URL.createObjectURL(blob as Blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "приложение-ALF-9-03.docx"
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
+    toast("Документ экспортирован")
+  }
+
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <div className="h-12 bg-white border-b border-gray-200 flex items-center justify-between px-5 flex-shrink-0">
         <div className="flex items-center gap-3">
           <button onClick={onBack} className="text-sm text-gray-500 hover:text-gray-700">
-            ← Back
+            ← Назад
           </button>
           <span className="text-gray-200 select-none">|</span>
-          <span className="text-sm font-medium text-gray-900">Annex ALF-9-03</span>
+          <span className="text-sm font-medium text-gray-900">Приложение ALF-9-03</span>
           <span className="text-xs bg-blue-50 text-blue-600 border border-blue-200 rounded-full px-2.5 py-0.5">
-            ✦ AI filled
+            ✦ Заполнено ИИ
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -90,23 +116,23 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
             onClick={() => setShowPreview(true)}
             className="h-[30px] px-3.5 text-xs font-medium border border-gray-200 rounded-md bg-white text-gray-600 hover:bg-gray-50"
           >
-            Preview
+            Предпросмотр
           </button>
           <div className="flex flex-col items-end">
-            <span title={!allDone ? "Resolve all issues to export the document" : undefined}>
+            <span title={!allDone ? "Устраните все замечания, чтобы экспортировать документ" : undefined}>
               <button
-                onClick={() => allDone && toast("Document exported")}
+                onClick={() => allDone && handleExport()}
                 className={cn(
                   "h-[30px] px-3.5 text-xs font-medium rounded-md bg-blue-600 text-white border border-blue-600",
                   allDone ? "hover:bg-blue-700" : "opacity-50 cursor-not-allowed pointer-events-none"
                 )}
               >
-                Export .docx
+                Экспорт .docx
               </button>
             </span>
             {!allDone && (
               <p className="text-[10px] text-gray-400 text-right mt-1">
-                Available after all issues are resolved
+                Доступно после устранения всех замечаний
               </p>
             )}
           </div>
@@ -120,14 +146,15 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
             resolvedTexts={resolvedTexts}
             activeMarkId={activeId}
             onMarkClick={handleMarkClick}
+            smetaData={smetaData}
           />
         </div>
 
         <div className="w-[248px] flex-shrink-0 border-l border-gray-200 bg-white flex flex-col">
           <div className="p-4 border-b border-gray-100 flex-shrink-0">
-            <div className="text-[13px] font-semibold text-gray-900">Issues</div>
+            <div className="text-[13px] font-semibold text-gray-900">Замечания</div>
             <div className="text-[11px] text-gray-400 mt-0.5">
-              {total - resolved > 0 ? `${total - resolved} need attention` : "All done"}
+              {total - resolved > 0 ? `${total - resolved} требуют внимания` : "Всё готово"}
             </div>
           </div>
 
@@ -145,6 +172,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
                   isDragging={draggingId === issue.id}
                   onToggle={() => handleCardToggle(issue.id)}
                   onResolve={handleResolve}
+                  onKeepOriginal={handleKeepOriginal}
                   onDismiss={() => { setExpandedId(null); setActiveId(null) }}
                   onDragStart={(e) => { e.dataTransfer.setData("issueId", issue.id); setDraggingId(issue.id) }}
                   onDragEnd={() => { setDraggingId(null); setDragOverId(null) }}
@@ -157,8 +185,8 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
 
           <div className="p-4 border-t border-gray-100 flex-shrink-0">
             <div className="flex justify-between text-[11px] text-gray-400 mb-1.5">
-              <span>Progress</span>
-              <span>{resolved} of {total}</span>
+              <span>Прогресс</span>
+              <span>{resolved} из {total}</span>
             </div>
             <div className="h-1 bg-gray-100 rounded-full overflow-hidden">
               <div className={cn("h-full bg-green-400 rounded-full transition-all duration-300", PROGRESS_W[resolved])} />
@@ -171,7 +199,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg w-full max-w-[680px] max-h-[90vh] flex flex-col overflow-hidden shadow-xl">
             <div className="flex items-center justify-between px-6 py-3 border-b border-gray-100 flex-shrink-0">
-              <span className="text-sm font-medium text-gray-900">Document Preview</span>
+              <span className="text-sm font-medium text-gray-900">Предпросмотр документа</span>
               <button
                 onClick={() => setShowPreview(false)}
                 className="text-gray-400 hover:text-gray-700 text-xl leading-none"
@@ -186,6 +214,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
                 activeMarkId={null}
                 onMarkClick={() => {}}
                 previewMode
+                smetaData={smetaData}
               />
             </div>
             <div className="px-6 py-3 border-t border-gray-100 flex justify-end flex-shrink-0">
@@ -193,7 +222,7 @@ export function DocumentEditorPage({ onBack }: DocumentEditorPageProps) {
                 onClick={() => setShowPreview(false)}
                 className="text-sm text-gray-600 hover:text-gray-800 border border-gray-200 rounded-md px-4 py-1.5 hover:bg-gray-50"
               >
-                Close preview
+                Закрыть
               </button>
             </div>
           </div>

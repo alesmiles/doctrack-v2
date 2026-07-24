@@ -45,7 +45,7 @@ export function AIPanel({ onClose }: { onClose: () => void }) {
       </div>
       <div className="border-t border-gray-100 p-3">
         <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2 border border-gray-200 focus-within:border-blue-300 focus-within:bg-white transition-colors">
-          <input className="flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400" placeholder="Type your question..." value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") send(); }} />
+          <input className="flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400" placeholder="Задайте вопрос..." value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") send(); }} />
           <button onClick={send} className={cn("w-7 h-7 rounded-lg flex items-center justify-center transition-colors", message.trim() ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gray-200 text-gray-400")}>Send</button>
         </div>
         <div className="flex items-center justify-around mt-2.5 text-[11px] text-gray-400">
